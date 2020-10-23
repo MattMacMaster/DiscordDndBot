@@ -12,5 +12,6 @@ client = discord.Client()
 @client.event
 async def on_ready():
     print(f'{client.user} has connected to Discord!')
+    print('This would be a test Push ')
 
 client.run(TOKEN)
