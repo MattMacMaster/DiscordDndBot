@@ -6,6 +6,7 @@ import discord
 from discord.ext import commands
 import requests
 import json
+from datetime import datetime
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -46,6 +47,8 @@ async def help(ctx):
     embed.add_field(name='Mechanics', value='$Mechanics/help', inline=True)
     embed.add_field(name='Rules', value='$Rules/help', inline=True)
     embed.add_field(name='Homebrews', value='$Homebrews/help', inline=True)
+    embed.timestamp = datetime.utcnow()
+    embed.set_footer(text='MattMaster Bots: Dnd')
 
     await ctx.send(embed=embed)
 
@@ -57,10 +60,30 @@ async def Character_info_help(ctx):
         description = ResponseManager.Response.character_def_help(),
         colour = discord.Colour.red()
     )
-    embed.add_field(name='Ability Scores', value=str(ResponseManager.Response.Character_Data["Ability Scores"]), inline=True)
-    embed.add_field(name='Skills', value=ResponseManager.Response.Character_Data["Skills"], inline=True)
-    embed.add_field(name='Proficiencies', value=ResponseManager.Response.Character_Data["Proficiencies"], inline=True)
-    embed.add_field(name='Languages', value=ResponseManager.Response.Character_Data["Languages"], inline=True)
+    embed.add_field(name='Ability Scores', value=str(ResponseManager.Response.Character_Data["Ability Scores"]).strip('[]'), inline=False)
+    embed.add_field(name='Skills', value=str(ResponseManager.Response.Character_Data["Skills"]).strip('[]'), inline=False)
+    embed.add_field(name='Proficiencies', value=str(ResponseManager.Response.Character_Data["Proficiencies"]).strip('[]'), inline=False)
+    embed.add_field(name='Languages', value=str(ResponseManager.Response.Character_Data["Languages"]).strip('[]'), inline=False)
+    embed.timestamp = datetime.utcnow()
+    embed.set_footer(text='MattMaster Bots: Dnd')
+
+    await ctx.send(embed=embed)
+
+
+@client.command(name='Races/help')
+async def Race_help(ctx):
+    embed = discord.Embed(
+        title = 'Character Info Help',
+        description = ResponseManager.Response.character_def_help(),
+        colour = discord.Colour.red()
+    )
+    embed.add_field(name='Ability Scores', value='', inline=False)
+    embed.add_field(name='Skills', value='', inline=False)
+    embed.add_field(name='Proficiencies', value='', inline=False)
+    embed.add_field(name='Languages', value='', inline=False)
+    embed.timestamp = datetime.utcnow()
+    embed.set_footer(text='MattMaster Bots: Dnd')
+
     await ctx.send(embed=embed)
 
            

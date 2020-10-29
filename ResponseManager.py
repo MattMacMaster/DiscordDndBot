@@ -28,12 +28,17 @@ class Response:
             "$Race/{RaceName}/Size",
             "$Race/{RaceName}/Alignment",
     ]
+    Race_Data = {
 
+    }
+
+
+    #Please god find a better way to format this in the embed tool
     Character_Data = {
         "Ability Scores": "$Character_info/ability-scores/con \n $Character_info/ability-scores/dex \n $Character_info/ability-scores/str \n $Character_info/ability-scores/int \n $Character_info/ability-scores/wis \n $Character_info/ability-scores/cha",
-        "Skills":"",
-        "Proficiencies":"",
-        "Languages":""
+        "Skills":"Ex:($Character_info/skills/Arcana) \n $Character_info/skills/{name} \n $Character_info/skills/{name}/ability-score \n $Character_info/skills/{name}/desc",
+        "Proficiencies":"Ex:($Character_info/proficiencies/medium-armor) \n $Character_info/proficiencies/{name} \n $Character_info/proficiencies/{name}/classes \n $Character_info/proficiencies/{name}/races",
+        "Languages":"Ex:($Character_info/languanges/common) \n $Character_info/languanges/{name} \n $Character_info/languanges/{name}/type \n $Character_info/languanges/{name}/speakers"
     }
 
 
