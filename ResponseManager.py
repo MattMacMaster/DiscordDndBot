@@ -3,6 +3,9 @@
 
 class Response:
 
+    def __init__(self):
+        print("Initializing Response Manager")
+
     Race_Data = {
         "General": """
         $Race {RaceName}
@@ -205,7 +208,7 @@ class Response:
     }
 
     @staticmethod
-    def intro():
+    def intro(self):
         return """
         Hello,
          I am D&D bot.
@@ -218,11 +221,11 @@ class Response:
                my creater to fix my ways.
                """
     @staticmethod
-    def help():
+    def help(self):
         return """Here is are the all the beginning level commands that are currently available,
          follow their respective helpers for more information!"""
     @staticmethod
-    def character_def_help(value):
+    def com_help(self, value):
         return 'Here are the currently known commands for {} Information!'.format(value)
 
 

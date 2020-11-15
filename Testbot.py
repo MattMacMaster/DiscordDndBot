@@ -1,172 +1,203 @@
 # bot.py
 import os
 import random
-import ResponseManager
+from ResponseManager import Response
+from CommManager import CommsManager
 import discord
 from discord.ext import commands
-import requests
 import json
 from datetime import datetime
 from dotenv import load_dotenv
 
-load_dotenv()
-TOKEN = os.getenv('DISCORD_TOKEN')
 
-client = commands.Bot(command_prefix='$')
-client.remove_command('help')
+class BotMain:
+    def main(self):
+        load_dotenv()
+        TOKEN = os.getenv('DISCORD_TOKEN')
 
-    #r =requests.get('https://www.dnd5eapi.co/api/ability-scores/cha')   
-    #print(r.text)
+        client = commands.Bot(command_prefix='$')
+        client.remove_command('help')
 
-@client.event
-async def on_ready():
-    print('Bot is connected and working.')
+        ResponseManager = Response()
+        ComManager = CommsManager()
 
-@client.command()
-async def DnD(ctx):
-    embed = discord.Embed(
-        title = 'Greetings',
-        description = ResponseManager.Response.intro(),
-        colour = discord.Colour.red()
-    )
-    await ctx.send(embed=embed)
-
-@client.command()
-async def help(ctx):
-
-    embed = discord.Embed(
-        title = 'Help - $help',
-        description = ResponseManager.Response.help(),
-        colour = discord.Colour.red()
-    )
-    embed.add_field(name='Character Info', value="$Character_info/help", inline=True)
-    embed.add_field(name='Classes', value='$Classes/help', inline=True)
-    embed.add_field(name='Races', value='$Races/help', inline=True)
-    embed.add_field(name='Equipment', value='$Equipment/help', inline=True)
-    embed.add_field(name='Spells', value='$Spell/help', inline=True)
-    embed.add_field(name='Monsters', value='$Monsters/help', inline=True)
-    embed.add_field(name='Mechanics', value='$Mechanics/help', inline=True)
-    embed.add_field(name='Rules', value='$Rules/help', inline=True)
-    embed.add_field(name='Homebrews', value='$Homebrews/help', inline=True)
-    embed.timestamp = datetime.utcnow()
-    embed.set_footer(text='MattMaster Bots: Dnd')
-
-    await ctx.send(embed=embed)
+        #TODO Need to have a means to place all these commands and import them in
+        #TODO Needs a System to layer the commands out
+        #TODO Data base built with two migration scripts
+        #TODO Flesh out database and homebrew interaction
 
 
-@client.command(name='Character_info/help')
-async def Character_info_help(ctx):
-    embed = discord.Embed(
-        title = 'Character Info Help - $Character_info/help',
-        description = ResponseManager.Response.character_def_help('Character Info'),
-        colour = discord.Colour.red()
-    )
-    embed.add_field(name='Ability Scores', value=str(ResponseManager.Response.Character_Data["Ability Scores"]).strip('[]'), inline=False)
-    embed.add_field(name='Skills', value=str(ResponseManager.Response.Character_Data["Skills"]).strip('[]'), inline=False)
-    embed.add_field(name='Proficiencies', value=str(ResponseManager.Response.Character_Data["Proficiencies"]).strip('[]'), inline=False)
-    embed.add_field(name='Languages', value=str(ResponseManager.Response.Character_Data["Languages"]).strip('[]'), inline=False)
-    embed.timestamp = datetime.utcnow()
-    embed.set_footer(text='MattMaster Bots: Dnd')
+        @client.event
+        async def on_ready():
+            print('Bot is connected.')
 
-    await ctx.send(embed=embed)
+        @client.command()
+        async def DnD(ctx):
+            embed = discord.Embed(
+            title = 'Greetings',
+            description = Response.intro(self),
+            colour = discord.Colour.red()
+            )
+            await ctx.send(embed=embed)
+
+        @client.command()
+        async def help(ctx):
+
+            embed = discord.Embed(
+            title = 'Help - $help',
+            description = Response.help(self),
+            colour = discord.Colour.red()
+            )
+            embed.add_field(name='Character Info', value="$Character_info/help", inline=True)
+            embed.add_field(name='Classes', value='$Classes/help', inline=True)
+            embed.add_field(name='Races', value='$Races/help', inline=True)
+            embed.add_field(name='Equipment', value='$Equipment/help', inline=True)
+            embed.add_field(name='Spells', value='$Spell/help', inline=True)
+            embed.add_field(name='Monsters', value='$Monsters/help', inline=True)
+            embed.add_field(name='Mechanics', value='$Mechanics/help', inline=True)
+            embed.add_field(name='Rules', value='$Rules/help', inline=True)
+            embed.add_field(name='Homebrews', value='$Homebrews/help', inline=True)
+            embed.timestamp = datetime.utcnow()
+            embed.set_footer(text='MattMaster Bots: Dnd')
+
+            await ctx.send(embed=embed)
 
 
-@client.command(name='Races/help')
-async def Race_help(ctx):
-    embed = discord.Embed(
-        title = 'Race Info Help - $Races/help',
-        description = ResponseManager.Response.character_def_help('Race'),
-        colour = discord.Colour.red()
-    )
-    embed.add_field(name='General', value=ResponseManager.Response.Race_Data["General"], inline=False)
-    embed.add_field(name='Specific', value=ResponseManager.Response.Race_Data["Specific"], inline=False)
-    embed.timestamp = datetime.utcnow()
-    embed.set_footer(text='MattMaster Bots: Dnd')
+        @client.command(name='Character_info/help')
+        async def Character_info_help(ctx):
+            embed = discord.Embed(
+            title = 'Character Info Help - $Character_info/help',
+            description = Response.com_help(self,'Character Info'),
+            colour = discord.Colour.red()
+            )
+            embed.add_field(name='Ability Scores', value=str(Response.Character_Data["Ability Scores"]).strip('[]'), inline=False)
+            embed.add_field(name='Skills', value=str(Response.Character_Data["Skills"]).strip('[]'), inline=False)
+            embed.add_field(name='Proficiencies', value=str(Response.Character_Data["Proficiencies"]).strip('[]'), inline=False)
+            embed.add_field(name='Languages', value=str(Response.Character_Data["Languages"]).strip('[]'), inline=False)
+            embed.timestamp = datetime.utcnow()
+            embed.set_footer(text='MattMaster Bots: Dnd')
 
-    await ctx.send(embed=embed)
+            await ctx.send(embed=embed)
 
-@client.command(name='Monsters/help')
-async def Monster_help(ctx):
-    embed = discord.Embed(
-        title = 'Monster Info Help - $Monsters/help',
-        description = ResponseManager.Response.character_def_help('Monster'),
-        colour = discord.Colour.red()
-    )
-    embed.add_field(name='General', value=ResponseManager.Response.Monster_Data["General"], inline=False)
-    embed.add_field(name='Main', value=ResponseManager.Response.Monster_Data["Main"], inline=False)
-    embed.add_field(name='Specific', value=ResponseManager.Response.Monster_Data["Specific"], inline=False)
-    embed.timestamp = datetime.utcnow()
-    embed.set_footer(text='MattMaster Bots: Dnd')
 
-    await ctx.send(embed=embed)
+        @client.command(name='Races/help')
+        async def Race_help(ctx):
+            embed = discord.Embed(
+            title = 'Race Info Help - $Races/help',
+            description = Response.com_help(self,'Race'),
+            colour = discord.Colour.red()
+            )
+            embed.add_field(name='General', value=Response.Race_Data["General"], inline=False)
+            embed.add_field(name='Specific', value=Response.Race_Data["Specific"], inline=False)
+            embed.timestamp = datetime.utcnow()
+            embed.set_footer(text='MattMaster Bots: Dnd')
 
-@client.command(name='Classes/help')
-async def Monster_help(ctx):
-    embed = discord.Embed(
-        title = 'Classes Info Help - $Classes/help',
-        description = ResponseManager.Response.character_def_help('Class'),
-        colour = discord.Colour.red()
-    )
-    embed.add_field(name='General', value=ResponseManager.Response.Class_Data["General"], inline=False)
-    embed.add_field(name='Main', value=ResponseManager.Response.Class_Data["Main"], inline=False)
-    embed.timestamp = datetime.utcnow()
-    embed.set_footer(text='MattMaster Bots: Dnd')
-    await ctx.send(embed=embed)
+            await ctx.send(embed=embed)
 
-@client.command(name='Equipment/help')
-async def Equipment_help(ctx):
-    embed = discord.Embed(
-        title = 'Equipment Info Help - $Equipment/help',
-        description = ResponseManager.Response.character_def_help('Equipment'),
-        colour = discord.Colour.red()
-    )
-    embed.add_field(name='General', value=ResponseManager.Response.Equipment_Data["General"], inline=False)
-    embed.add_field(name='Armor', value=ResponseManager.Response.Equipment_Data["Armor"], inline=False)
-    embed.add_field(name='Weapon', value=ResponseManager.Response.Equipment_Data["Weapon"], inline=False)
-    embed.add_field(name='Magic Items', value=ResponseManager.Response.Equipment_Data["Magic Items"], inline=False)
-    embed.add_field(name='Adventuring Gear', value=ResponseManager.Response.Equipment_Data["Adventuring Gear"], inline=False)
-    embed.add_field(name='Equipment Packs', value=ResponseManager.Response.Equipment_Data["Equipment Packs"], inline=False)
-    embed.add_field(name='Weapon Properties', value=ResponseManager.Response.Equipment_Data["Weapon Properties"], inline=False)
-    embed.timestamp = datetime.utcnow()
-    embed.set_footer(text='MattMaster Bots: Dnd')
-    await ctx.send(embed=embed)
+        @client.command(name='Monsters/help')
+        async def Monster_help(ctx):
+            embed = discord.Embed(
+            title = 'Monster Info Help - $Monsters/help',
+            description = Response.com_help(self,'Monster'),
+            colour = discord.Colour.red()
+            )
+            embed.add_field(name='General', value=Response.Monster_Data["General"], inline=False)
+            embed.add_field(name='Main', value=Response.Monster_Data["Main"], inline=False)
+            embed.add_field(name='Specific', value=Response.Monster_Data["Specific"], inline=False)
+            embed.timestamp = datetime.utcnow()
+            embed.set_footer(text='MattMaster Bots: Dnd')
 
-@client.command(name='Spell/help')
-async def Spell_help(ctx):
-    embed = discord.Embed(
-        title = 'Spell Info Help - $Spell/help',
-        description = ResponseManager.Response.character_def_help('Spell'),
-        colour = discord.Colour.red()
-    )
-    embed.add_field(name='General', value=ResponseManager.Response.Spell_Data["General"], inline=False)
-    embed.add_field(name='Main', value=ResponseManager.Response.Spell_Data["Main"], inline=False)
-    embed.timestamp = datetime.utcnow()
-    embed.set_footer(text='MattMaster Bots: Dnd')
-    await ctx.send(embed=embed)
+            await ctx.send(embed=embed)
 
-@client.command(name='Rules/help')
-async def Rules_help(ctx):
-    embed = discord.Embed(
-        title = 'Rules Info Help - $Rules/help',
-        description = ResponseManager.Response.character_def_help('Rule'),
-        colour = discord.Colour.red()
-    )
-    embed.add_field(name='General', value=ResponseManager.Response.Rules_Data["General"], inline=False)
-    embed.timestamp = datetime.utcnow()
-    embed.set_footer(text='MattMaster Bots: Dnd')
-    await ctx.send(embed=embed)
+        @client.command(name='Classes/help')
+        async def Classes_help(ctx):
+            embed = discord.Embed(
+            title = 'Classes Info Help - $Classes/help',
+            description = Response.com_help(self,'Class'),
+            colour = discord.Colour.red()
+            )
+            embed.add_field(name='General', value=Response.Class_Data["General"], inline=False)
+            embed.add_field(name='Main', value=Response.Class_Data["Main"], inline=False)
+            embed.timestamp = datetime.utcnow()
+            embed.set_footer(text='MattMaster Bots: Dnd')
+            await ctx.send(embed=embed)
 
-@client.command(name='Mechanics/help')
-async def Rules_help(ctx):
-    embed = discord.Embed(
-        title = 'Mechanics Info Help - $Mechanics/help',
-        description = ResponseManager.Response.character_def_help('Mechanics'),
-        colour = discord.Colour.red()
-    )
-    embed.add_field(name='General', value=ResponseManager.Response.Mechanic_Data["General"], inline=False)
-    embed.timestamp = datetime.utcnow()
-    embed.set_footer(text='MattMaster Bots: Dnd')
-    await ctx.send(embed=embed)
+        @client.command(name='Equipment/help')
+        async def Equipment_help(ctx):
+            embed = discord.Embed(
+            title = 'Equipment Info Help - $Equipment/help',
+            description = Response.com_help(self,'Equipment'),
+            colour = discord.Colour.red()
+            )
+            embed.add_field(name='General', value=Response.Equipment_Data["General"], inline=False)
+            embed.add_field(name='Armor', value=Response.Equipment_Data["Armor"], inline=False)
+            embed.add_field(name='Weapon', value=Response.Equipment_Data["Weapon"], inline=False)
+            embed.add_field(name='Magic Items', value=Response.Equipment_Data["Magic Items"], inline=False)
+            embed.add_field(name='Adventuring Gear', value=Response.Equipment_Data["Adventuring Gear"], inline=False)
+            embed.add_field(name='Equipment Packs', value=Response.Equipment_Data["Equipment Packs"], inline=False)
+            embed.add_field(name='Weapon Properties', value=Response.Equipment_Data["Weapon Properties"], inline=False)
+            embed.timestamp = datetime.utcnow()
+            embed.set_footer(text='MattMaster Bots: Dnd')
+            await ctx.send(embed=embed)
 
-           
-client.run(TOKEN)
+        @client.command(name='Spell/help')
+        async def Spell_help(ctx):
+            embed = discord.Embed(
+            title = 'Spell Info Help - $Spell/help',
+            description = Response.com_help(self,'Spell'),
+            colour = discord.Colour.red()
+            )
+            embed.add_field(name='General', value=Response.Spell_Data["General"], inline=False)
+            embed.add_field(name='Main', value=Response.Spell_Data["Main"], inline=False)
+            embed.timestamp = datetime.utcnow()
+            embed.set_footer(text='MattMaster Bots: Dnd')
+            await ctx.send(embed=embed)
+
+        @client.command(name='Rules/help')
+        async def Rules_help(ctx):
+            embed = discord.Embed(
+            title = 'Rules Info Help - $Rules/help',
+            description = Response.com_help(self,'Rule'),
+            colour = discord.Colour.red()
+            )
+            embed.add_field(name='General', value=Response.Rules_Data["General"], inline=False)
+            embed.timestamp = datetime.utcnow()
+            embed.set_footer(text='MattMaster Bots: Dnd')
+            await ctx.send(embed=embed)
+
+        @client.command(name='Mechanics/help')
+        async def Mechanics_help(ctx):
+            embed = discord.Embed(
+            title = 'Mechanics Info Help - $Mechanics/help',
+            description = Response.com_help(self,'Mechanics'),
+            colour = discord.Colour.red()
+            )
+            embed.add_field(name='General', value=Response.Mechanic_Data["General"], inline=False)
+            embed.timestamp = datetime.utcnow()
+            embed.set_footer(text='MattMaster Bots: Dnd')
+            await ctx.send(embed=embed)
+
+        @client.command(name='Homebrews/help')
+        async def Homebrew_help(ctx):
+            embed = discord.Embed(
+            title = 'Homebrew Info Help - $Homebrews/help',
+            description = 'Coming Soon',
+            colour = discord.Colour.red()
+            )
+            embed.timestamp = datetime.utcnow()
+            embed.set_footer(text='MattMaster Bots: Dnd')
+            await ctx.send(embed=embed)
+
+        @client.command(name='Test')
+        async def Test(ctx, *arg):
+            #CommManager.CommsManager.GeneralRace(name=arg1)
+            ComManager.GeneralSpell(name=arg)
+            await ctx.send('pong')
+
+        client.run(TOKEN)
+
+
+if __name__ == "__main__":
+    objName = BotMain()
+    objName.main()
+    
