@@ -18,14 +18,21 @@ class BotMain:
         client = commands.Bot(command_prefix='$')
         client.remove_command('help')
 
+
         ResponseManager = Response()
         ComManager = CommsManager()
 
         #TODO Need to have a means to place all these commands and import them in
-        #TODO Needs a System to layer the commands out
+        #TODO Needs a System to layer the commands out and their sub commands
         #TODO Data base built with two migration scripts
         #TODO Flesh out database and homebrew interaction
+        #TODO Error handling
+        #TODO Spell Check, recommendations
+        #TODO Command Cooldowns
 
+        """
+        General Basic greeting commands that may be run on boot, add, etc...
+        """
 
         @client.event
         async def on_ready():
@@ -40,6 +47,12 @@ class BotMain:
             )
             await ctx.send(embed=embed)
 
+
+        """
+        This section is for the varying help commands for all functions of the bot
+        References: This section references response managers help lists for all help commands
+                    any new commands will need to be added to their respoctive list
+        """
         @client.command()
         async def help(ctx):
 
@@ -188,16 +201,15 @@ class BotMain:
             embed.set_footer(text='MattMaster Bots: Dnd')
             await ctx.send(embed=embed)
 
-        @client.command(name='Test')
-        async def Test(ctx, *arg):
-            #CommManager.CommsManager.GeneralRace(name=arg1)
-            ComManager.GeneralSpell(name=arg)
-            await ctx.send('pong')
+        @client.command(name='Race')
+        async def Test(ctx, arg):
+            embed = ComManager.GeneralRace(name=arg)
+            await ctx.send(embed=embed)
+
 
         client.run(TOKEN)
 
-
 if __name__ == "__main__":
-    objName = BotMain()
-    objName.main()
+    bot = BotMain()
+    bot.main()
     
