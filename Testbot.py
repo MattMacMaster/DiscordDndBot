@@ -200,12 +200,45 @@ class BotMain:
             embed.timestamp = datetime.utcnow()
             embed.set_footer(text='MattMaster Bots: Dnd')
             await ctx.send(embed=embed)
+        """
+        This section will be the general argument call, with their respective sub commands
+        First will be race
+        """
 
         @client.command(name='Race')
-        async def Test(ctx, arg):
+        async def Main_Race(ctx, arg):
             embed = ComManager.GeneralRace(name=arg)
             await ctx.send(embed=embed)
 
+        @client.command(name='Subrace')
+        async def Main_Subrace(ctx, *arg):
+            embed = ComManager.Subrace(name=' '.join(arg))
+            await ctx.send(embed=embed)
+
+        @client.command(name='Trait')
+        async def Main_Trait(ctx, *arg):
+            embed = ComManager.Traits(name=' '.join(arg))
+            await ctx.send(embed=embed)
+
+        @client.command(name='Language')
+        async def Main_Language(ctx, *arg):
+            embed = ComManager.Languages(name=' '.join(arg))
+            await ctx.send(embed=embed)
+
+        @client.command(name='AbilityScore')
+        async def Main_Score(ctx, *arg):
+            embed = ComManager.AbilityScores(name=' '.join(arg))
+            await ctx.send(embed=embed)
+
+        @client.command(name='Skill')
+        async def Main_Skill(ctx, *arg):
+            embed = ComManager.Skills(name=' '.join(arg))
+            await ctx.send(embed=embed)
+
+        @client.command(name='Proficiencies')
+        async def Main_Prof(ctx, *arg):
+            embed = ComManager.Proficiencies(name=' '.join(arg))
+            await ctx.send(embed=embed)
 
         client.run(TOKEN)
 

@@ -61,3 +61,79 @@ class RaceHandler:
             SubRace += x['name'] + '\n'
 
         return SubRace
+
+    @staticmethod
+    def DescHandler(arg):
+        if not arg:
+            return []
+        SubRace = ''
+        Raw_SubRace = arg
+        for x in Raw_SubRace:
+            SubRace += x + '\n'
+
+        return SubRace
+
+    @staticmethod
+    def SkillHandler(arg):
+        if not arg:
+            return []
+        SubRace = ''
+        Raw_SubRace = arg
+        for x in Raw_SubRace:
+            SubRace += x['name'] + '\n'
+
+        return SubRace
+
+class SubRaceHandler(RaceHandler):
+
+    @staticmethod
+    def proficienciesHandler(arg):
+        if not arg:
+            return []
+        SubRace = ''
+        Raw_SubRace = arg
+        for x in Raw_SubRace:
+            SubRace += x['name'] + '\n'
+
+        return SubRace
+
+
+class TraitHandler(RaceHandler):
+    @staticmethod
+    def raceHandler(arg):
+        if not arg:
+            return []
+        SubRace = ''
+        Raw_SubRace = arg
+        for x in Raw_SubRace:
+            SubRace += x['name'] + '\n'
+
+        return SubRace
+
+class LanguageHandler:
+
+    @staticmethod
+    def raceHandler(arg):
+        if not arg:
+            return []
+        SubRace = ''
+        Raw_SubRace = arg
+        for x in Raw_SubRace:
+            SubRace += x + '\n'
+
+        return SubRace
+
+class ProficienciesHandler:
+
+    @staticmethod
+    def classHandler(arg):
+        if not arg:
+            return []
+        SubRace = ''
+        Raw_SubRace = arg
+        for x in Raw_SubRace:
+            SubRace += x['name'] + '\n'
+
+        return SubRace
+
+
