@@ -11,16 +11,9 @@ class Response:
         $Race {RaceName}
         """,
         "Specific": """
-        $Race/Speed {RaceName},
-          $Race/Ability_Bonuses {RaceName},
-           $Race/Starting_Proficiencies {RaceName},
-            $Race/Languages {RaceName},
+           $Race/Proficiencies {RaceName},
              $Race/Traits {RaceName},
-              $Race/Sub_Classes {RaceName},
                $Race/SubRaces {RaceName},
-                $Race/Age {RaceName},
-                 $Race/Size {RaceName},
-                  $Race/Alignment {RaceName}
                   """
     }
 

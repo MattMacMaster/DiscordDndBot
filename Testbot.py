@@ -1,13 +1,22 @@
 # bot.py
 import os
 import random
-from ResponseManager import Response
-from CommManager import CommsManager
+
 import discord
 from discord.ext import commands
 import json
 from datetime import datetime
 from dotenv import load_dotenv
+from Managers.RaceManager import RaceManager
+from Managers.TraitManager import TraitManager
+from Managers.ResponseManager import Response
+from Managers.CommManager import CommsManager
+from Managers.ProfManager import ProfManager
+from Managers.LanguageManager import LanguageManager
+from Managers.Ab_ScoreManager import AbilityScoreManager
+from Managers.SkillManger import Skills
+from Managers.SubraceManager import Subrace
+
 
 
 class BotMain:
@@ -200,44 +209,59 @@ class BotMain:
             embed.timestamp = datetime.utcnow()
             embed.set_footer(text='MattMaster Bots: Dnd')
             await ctx.send(embed=embed)
-        """
-        This section will be the general argument call, with their respective sub commands
-        First will be race
-        """
-
         @client.command(name='Race')
         async def Main_Race(ctx, arg):
-            embed = ComManager.GeneralRace(name=arg)
+            embed = RaceManager.GeneralRace(name=arg)
             await ctx.send(embed=embed)
 
         @client.command(name='Subrace')
         async def Main_Subrace(ctx, *arg):
-            embed = ComManager.Subrace(name=' '.join(arg))
+            embed = Subrace.Subrace(name=' '.join(arg))
             await ctx.send(embed=embed)
 
         @client.command(name='Trait')
         async def Main_Trait(ctx, *arg):
-            embed = ComManager.Traits(name=' '.join(arg))
+            embed = TraitManager.Traits(name=' '.join(arg))
             await ctx.send(embed=embed)
 
         @client.command(name='Language')
         async def Main_Language(ctx, *arg):
-            embed = ComManager.Languages(name=' '.join(arg))
+            embed = LanguageManager.Languages(name=' '.join(arg))
             await ctx.send(embed=embed)
 
         @client.command(name='AbilityScore')
         async def Main_Score(ctx, *arg):
-            embed = ComManager.AbilityScores(name=' '.join(arg))
+            embed = AbilityScoreManager.AbilityScores(name=' '.join(arg))
             await ctx.send(embed=embed)
 
         @client.command(name='Skill')
         async def Main_Skill(ctx, *arg):
-            embed = ComManager.Skills(name=' '.join(arg))
+            embed = Skills.Skills(name=' '.join(arg))
             await ctx.send(embed=embed)
 
         @client.command(name='Proficiencies')
         async def Main_Prof(ctx, *arg):
-            embed = ComManager.Proficiencies(name=' '.join(arg))
+            embed = ProfManager.Proficiencies(name=' '.join(arg))
+            await ctx.send(embed=embed)
+
+        """
+        This section will be the general argument call, with their respective sub commands
+        First will be race and its sub commands
+        """
+
+        @client.command(name='Race/Proficiencies')
+        async def Race_Prof(ctx, arg):
+            embed = RaceManager.Proficiencies(name=arg)
+            await ctx.send(embed=embed)
+
+        @client.command(name='Race/Traits')
+        async def Race_Trait(ctx, arg):
+            embed = RaceManager.Traits(name=arg)
+            await ctx.send(embed=embed)
+
+        @client.command(name='Race/SubRaces')
+        async def Race_Subrace(ctx, arg):
+            embed = RaceManager.Subraces(name=arg)
             await ctx.send(embed=embed)
 
         client.run(TOKEN)
