@@ -136,4 +136,29 @@ class ProficienciesHandler:
 
         return SubRace
 
+class SpellsHandler:
 
+    @staticmethod
+    def spellHandler(arg):
+        if not arg:
+            return []
+        SubRace = ''
+        Raw_SubRace = arg
+        for x in Raw_SubRace:
+            SubRace += x['name'] + '\n'
+
+        return SubRace
+
+    @staticmethod
+    def damageHandler(arg):
+        if not arg:
+            return []
+        Ability_Bonuses = ''
+        Raw_Ability_Bonuses = arg
+        counter = 9
+        i = 1
+        while(i < counter):
+            if(str(i) in Raw_Ability_Bonuses):
+                Ability_Bonuses += str(i) + ': ' + Raw_Ability_Bonuses[str(i)] + '\n'
+            i = i + 1
+        return Ability_Bonuses

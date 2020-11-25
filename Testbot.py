@@ -16,6 +16,8 @@ from Managers.LanguageManager import LanguageManager
 from Managers.Ab_ScoreManager import AbilityScoreManager
 from Managers.SkillManger import Skills
 from Managers.SubraceManager import Subrace
+from Managers.SpellManager import Spells
+
 
 
 
@@ -35,7 +37,7 @@ class BotMain:
         #TODO Needs a System to layer the commands out and their sub commands
         #TODO Data base built with two migration scripts
         #TODO Flesh out database and homebrew interaction
-        #TODO Error handling
+        #TODO Error handling/ coverage
         #TODO Spell Check, recommendations
         #TODO Command Cooldowns
 
@@ -170,7 +172,6 @@ class BotMain:
             colour = discord.Colour.red()
             )
             embed.add_field(name='General', value=Response.Spell_Data["General"], inline=False)
-            embed.add_field(name='Main', value=Response.Spell_Data["Main"], inline=False)
             embed.timestamp = datetime.utcnow()
             embed.set_footer(text='MattMaster Bots: Dnd')
             await ctx.send(embed=embed)
@@ -244,6 +245,11 @@ class BotMain:
             embed = ProfManager.Proficiencies(name=' '.join(arg))
             await ctx.send(embed=embed)
 
+        @client.command(name='Spell')
+        async def Main_Spell(ctx, *arg):
+            embed = Spells.GeneralSpell(name=' '.join(arg))
+            await ctx.send(embed=embed)
+
         """
         This section will be the general argument call, with their respective sub commands
         First will be race and its sub commands
@@ -263,6 +269,23 @@ class BotMain:
         async def Race_Subrace(ctx, arg):
             embed = RaceManager.Subraces(name=arg)
             await ctx.send(embed=embed)
+
+        """
+        Spells Subsiduaries
+        """
+
+        @client.command(name='Spell/Level')
+        async def Spell_Level(ctx, arg):
+            embed = Spells.Level(name=arg)
+            await ctx.send(embed=embed)
+
+            
+        @client.command(name='Spell/School')
+        async def Spell_School(ctx, arg):
+            embed = Spells.School(name=arg)
+            await ctx.send(embed=embed)
+
+        
 
         client.run(TOKEN)
 

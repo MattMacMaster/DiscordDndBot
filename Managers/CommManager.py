@@ -14,14 +14,10 @@ class CommsManager():
     #print(r.text)
     @staticmethod
     def paramHandler(arg):
-        print(arg)
         value = ''.join(arg)
         value = value.replace('\'', "")
-        print(value)
         value = value.lower()
-        print(value)
         value = value.replace(' ','-')
-        print(value)
         return value
 
     @staticmethod
@@ -34,9 +30,3 @@ class CommsManager():
         return embed
 
 
-    @staticmethod
-    def GeneralSpell(name):
-        name =  CommsManager.paramHandler(name)
-        print(name)
-
-        value = requests.get('https://www.dnd5eapi.co/api/spells/{}'.format(name))
