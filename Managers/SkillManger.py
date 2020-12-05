@@ -1,19 +1,19 @@
 
-from RaceClass import RaceHandler
-from RaceClass import TraitHandler
-from RaceClass import SubRaceHandler
-from RaceClass import LanguageHandler
-from RaceClass import ProficienciesHandler
+from Parser import RaceHandler
+from Parser import TraitHandler
+from Parser import SubRaceHandler
+from Parser import LanguageHandler
+from Parser import ProficienciesHandler
 from Managers.CommManager import CommsManager
 import discord
 import requests
 from datetime import datetime
 
 
-class Skills:
+class SkillsManager:
 
     @staticmethod
-    def Skills(name):
+    def GeneralSkills(name):
         name = CommsManager.paramHandler(name)
         value = requests.get('https://www.dnd5eapi.co/api/skills/{}'.format(name))
         value = eval(value.text)

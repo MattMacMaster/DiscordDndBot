@@ -1,7 +1,6 @@
 # bot.py
 import os
 import random
-
 import discord
 from discord.ext import commands
 import json
@@ -14,11 +13,10 @@ from Managers.CommManager import CommsManager
 from Managers.ProfManager import ProfManager
 from Managers.LanguageManager import LanguageManager
 from Managers.Ab_ScoreManager import AbilityScoreManager
-from Managers.SkillManger import Skills
-from Managers.SubraceManager import Subrace
-from Managers.SpellManager import Spells
-
-
+from Managers.SkillManger import SkillsManager
+from Managers.SubraceManager import SubraceManger
+from Managers.SpellManager import SpellsManager
+from Managers.ClassManager import ClassManager
 
 
 class BotMain:
@@ -210,6 +208,10 @@ class BotMain:
             embed.timestamp = datetime.utcnow()
             embed.set_footer(text='MattMaster Bots: Dnd')
             await ctx.send(embed=embed)
+        """
+        General Statements
+        """
+            
         @client.command(name='Race')
         async def Main_Race(ctx, arg):
             embed = RaceManager.GeneralRace(name=arg)
@@ -217,7 +219,7 @@ class BotMain:
 
         @client.command(name='Subrace')
         async def Main_Subrace(ctx, *arg):
-            embed = Subrace.Subrace(name=' '.join(arg))
+            embed = SubraceManger.Subrace(name=' '.join(arg))
             await ctx.send(embed=embed)
 
         @client.command(name='Trait')
@@ -237,7 +239,7 @@ class BotMain:
 
         @client.command(name='Skill')
         async def Main_Skill(ctx, *arg):
-            embed = Skills.Skills(name=' '.join(arg))
+            embed = SkillsManager.GeneralSkills(name=' '.join(arg))
             await ctx.send(embed=embed)
 
         @client.command(name='Proficiencies')
@@ -247,8 +249,14 @@ class BotMain:
 
         @client.command(name='Spell')
         async def Main_Spell(ctx, *arg):
-            embed = Spells.GeneralSpell(name=' '.join(arg))
+            embed = SpellsManager.GeneralSpell(name=' '.join(arg))
             await ctx.send(embed=embed)
+
+        @client.command(name='Class')
+        async def Main_Spell(ctx, arg):
+            embed = ClassManager.GeneralClass(name=arg)
+            await ctx.send(embed=embed)
+
 
         """
         This section will be the general argument call, with their respective sub commands
@@ -276,16 +284,19 @@ class BotMain:
 
         @client.command(name='Spell/Level')
         async def Spell_Level(ctx, arg):
-            embed = Spells.Level(name=arg)
+            embed = SpellsManager.Level(name=arg)
             await ctx.send(embed=embed)
 
             
         @client.command(name='Spell/School')
         async def Spell_School(ctx, arg):
-            embed = Spells.School(name=arg)
+            embed = SpellsManager.School(name=arg)
             await ctx.send(embed=embed)
 
-        
+        """
+        Classes Subsiduaries
+
+        """
 
         client.run(TOKEN)
 

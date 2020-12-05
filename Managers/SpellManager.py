@@ -1,15 +1,15 @@
 from Managers.CommManager import CommsManager
 import discord
 import requests
-from RaceClass import RaceHandler
-from RaceClass import SpellsHandler
+from Parser import RaceHandler
+from Parser import SpellsHandler
 import json
 from datetime import datetime
 
 
 
 
-class Spells:
+class SpellsManager:
     @staticmethod
     def GeneralSpell(name):
         name =  CommsManager.paramHandler(name)

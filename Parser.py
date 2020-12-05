@@ -136,6 +136,18 @@ class ProficienciesHandler:
 
         return SubRace
 
+    @staticmethod
+    def prof_choices(arg):
+        if not arg:
+            return []
+        SubRace = ''
+        Raw_SubRace = arg[0]
+        SubRace += 'Choose {}'.format(Raw_SubRace['choose']) + '\n'
+        for x in Raw_SubRace['from']:
+            SubRace += x['name'] + '\n'
+
+        return SubRace
+
 class SpellsHandler:
 
     @staticmethod
@@ -161,4 +173,18 @@ class SpellsHandler:
             if(str(i) in Raw_Ability_Bonuses):
                 Ability_Bonuses += str(i) + ': ' + Raw_Ability_Bonuses[str(i)] + '\n'
             i = i + 1
+        return Ability_Bonuses
+
+    @staticmethod
+    def dcHandler(arg):
+        if not arg:
+            return []
+        Ability_Bonuses = ''
+        Raw_Ability_Bonuses = arg
+        for x in Raw_Ability_Bonuses:
+            if(x['name'] == 'Spellcasting Ability'):
+                print(x)
+                for y in x['desc']:
+                    Ability_Bonuses += y + '\n'
+
         return Ability_Bonuses

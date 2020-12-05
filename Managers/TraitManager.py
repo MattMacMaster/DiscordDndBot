@@ -2,11 +2,11 @@ from Managers.CommManager import CommsManager
 import discord
 import requests
 from datetime import datetime
-from RaceClass import RaceHandler
-from RaceClass import TraitHandler
-from RaceClass import SubRaceHandler
-from RaceClass import LanguageHandler
-from RaceClass import ProficienciesHandler
+from Parser import RaceHandler
+from Parser import TraitHandler
+from Parser import SubRaceHandler
+from Parser import LanguageHandler
+from Parser import ProficienciesHandler
 
 
 class TraitManager:
