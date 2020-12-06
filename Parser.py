@@ -183,8 +183,47 @@ class SpellsHandler:
         Raw_Ability_Bonuses = arg
         for x in Raw_Ability_Bonuses:
             if(x['name'] == 'Spellcasting Ability'):
-                print(x)
                 for y in x['desc']:
                     Ability_Bonuses += y + '\n'
 
         return Ability_Bonuses
+
+class start_equip(RaceHandler):
+
+    @staticmethod
+    def equipmentHandler(arg):
+        if not arg:
+            return []
+        SubRace = ''
+        Raw_SubRace = arg
+        for x in Raw_SubRace:
+            SubRace += '\n' + 'Equipment Set:' + '\n'
+            if(isinstance(x['from'],list)):
+                for y in x['from']:
+                    if(isinstance(y,list)):
+                        for z in y:
+                            if('equipment' in z):
+                                SubRace += z['equipment']['name'] + '\n'
+                            if('equipment_option' in z):
+                                 SubRace += z['equipment_option']['from']['equipment_category']['name'] + '\n'
+                    else:
+                        if('equipment_option' in y):
+                            SubRace += y['equipment_option']['from']['equipment_category']['name'] + '\n'
+                        if('equipment' in y):
+                            SubRace += y['equipment']['name'] + '\n'
+                            
+            else:
+                SubRace += x['from']['equipment_category']['name'] + '\n'
+                    
+        return SubRace
+
+    @staticmethod
+    def startEquipmentHandler(arg):
+        if not arg:
+            return []
+        SubRace = ''
+        Raw_SubRace = arg
+        for x in Raw_SubRace:
+            SubRace += x['equipment']['name'] + '\n'
+
+        return SubRace
