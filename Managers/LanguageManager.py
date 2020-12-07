@@ -27,7 +27,7 @@ class LanguageManager:
             #value['starting_proficiencies']
             embed.add_field(name='Name', value= value['name'], inline=False)
             embed.add_field(name='Type', value= value['type'], inline=False)
-            embed.add_field(name='typical_speakers - $Race {value}', value= LanguageHandler.raceHandler(value['typical_speakers']), inline=False)
+            embed.add_field(name='Typical Speakers - $Race {value}', value= LanguageHandler.raceHandler(value['typical_speakers']), inline=False)
             embed.timestamp = datetime.utcnow()
             embed.set_footer(text='MattMaster Bots: Dnd')
 

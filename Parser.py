@@ -23,7 +23,6 @@ class RaceHandler:
             return []
         Proficiencies = ''
         Raw_Proficiencies = arg
-        print(Raw_Proficiencies)
         for x in Raw_Proficiencies:
             Proficiencies += x['name'] + '\n'
 

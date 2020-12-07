@@ -60,14 +60,9 @@ class Response:
         """,
         "Main": 
         """
-        $Class/Hit_Die {ClassName},
-        $Class/Proficiencies {ClassName},
         $Class/Spells {ClassName},
-        $Class/Class_Levels {ClassName},
-        $Class/Proficiency_Choices {ClassName},
-        $Class/Saving_Throws {ClassName},
-        $Class/Starting_Equipment {ClassName},
         $Class/SubClasses {ClassName},
+        $Class/Features {ClassName},
         """
     }
     Equipment_Data = {

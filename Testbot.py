@@ -210,6 +210,7 @@ class BotMain:
             await ctx.send(embed=embed)
         """
         General Statements
+        TODO Update Character data calls to this info, cause its done via this
         """
             
         @client.command(name='Race')
@@ -253,7 +254,7 @@ class BotMain:
             await ctx.send(embed=embed)
 
         @client.command(name='Class')
-        async def Main_Spell(ctx, arg):
+        async def Main_Class(ctx, arg):
             embed = ClassManager.GeneralClass(name=arg)
             await ctx.send(embed=embed)
 
@@ -295,8 +296,38 @@ class BotMain:
 
         """
         Classes Subsiduaries
+        TODO Subclasses gets about all of these
+        TODO Finsih features and further
 
         """
+        @client.command(name='Class/SubClasses')
+        async def Class_Sub(ctx, *arg):
+            embed = ClassManager.SubClass(name=arg)
+            await ctx.send(embed=embed)
+
+            
+        @client.command(name='Class/Spells')
+        async def Class_Spell(ctx, *arg):
+            embed = ClassManager.ClassSpell(name=arg)
+            await ctx.send(embed=embed)
+
+
+        @client.command(name='Class/Features')
+        async def Class_Features(ctx, *arg):
+            embed = ClassManager.ClassFeat(name=arg)
+            await ctx.send(embed=embed)
+
+            
+        @client.command(name='Class/Prof')
+        async def Class_Prof(ctx, *arg):
+            embed = ClassManager.ClassProf(name=arg)
+            await ctx.send(embed=embed)
+
+
+        @client.command(name='Class/Start-Equip')
+        async def Class_Start_Equip(ctx, *arg):
+            embed = ClassManager.ClassSpell(name=arg)
+            await ctx.send(embed=embed)
 
         client.run(TOKEN)
 
