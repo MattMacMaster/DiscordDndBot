@@ -130,6 +130,27 @@ class ClassManager:
 
         return embed
 
+
+    @staticmethod
+    def ClassEquip(name):
+        name = CommsManager.paramHandler(name)
+
+        value = requests.get('https://www.dnd5eapi.co/api/classes/{}/starting-equipment/'.format(name))
+        value = eval(value.text)
+        print(value)
+
+        embed = discord.Embed(
+           title = 'Class Starting Equipment - {}'.format(name),
+           colour = discord.Colour.red()
+        )
+        embed.add_field(name='Starting Equipment', value=start_equip.startEquipmentHandler(value['starting_equipment']), inline=False)
+        embed.add_field(name='Starting Equipment Options', value=start_equip.equipmentHandler(value['starting_equipment_options']), inline=False)
+        embed.timestamp = datetime.utcnow()
+        embed.set_footer(text='MattMaster Bots: Dnd')
+
+
+        return embed
+
     @staticmethod
     def ClassFeat(name):
         name = CommsManager.paramHandler(name)

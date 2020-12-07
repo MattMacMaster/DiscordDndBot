@@ -63,6 +63,8 @@ class Response:
         $Class/Spells {ClassName},
         $Class/SubClasses {ClassName},
         $Class/Features {ClassName},
+        $Class/Prof {ClassName},
+        $Class/Start-Equip {ClassName},
         """
     }
     Equipment_Data = {

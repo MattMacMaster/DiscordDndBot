@@ -326,7 +326,7 @@ class BotMain:
 
         @client.command(name='Class/Start-Equip')
         async def Class_Start_Equip(ctx, *arg):
-            embed = ClassManager.ClassSpell(name=arg)
+            embed = ClassManager.ClassEquip(name=arg)
             await ctx.send(embed=embed)
 
         client.run(TOKEN)
