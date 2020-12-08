@@ -16,6 +16,7 @@ from Managers.Ab_ScoreManager import AbilityScoreManager
 from Managers.SkillManger import SkillsManager
 from Managers.SubraceManager import SubraceManger
 from Managers.SpellManager import SpellsManager
+from Managers.EquipManager import EquipManager
 from Managers.ClassManager import ClassManager
 
 
@@ -259,6 +260,18 @@ class BotMain:
             await ctx.send(embed=embed)
 
 
+        @client.command(name='Equip')
+        async def Main_Equip(ctx, *arg):
+            embed = EquipManager.Equipment(name=arg)
+            await ctx.send(embed=embed)
+
+        @client.command(name='MagicItem')
+        async def Main_MagicItem(ctx, *arg):
+            embed = EquipManager.MagicItem(name=arg)
+            await ctx.send(embed=embed)
+
+        client.run(TOKEN)
+
         """
         This section will be the general argument call, with their respective sub commands
         First will be race and its sub commands
@@ -329,7 +342,13 @@ class BotMain:
             embed = ClassManager.ClassEquip(name=arg)
             await ctx.send(embed=embed)
 
-        client.run(TOKEN)
+
+
+        """
+        Equipment - {} being item name
+        """
+
+        
 
 if __name__ == "__main__":
     bot = BotMain()

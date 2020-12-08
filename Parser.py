@@ -226,3 +226,51 @@ class start_equip(RaceHandler):
             SubRace += x['equipment']['name'] + '\n'
 
         return SubRace
+
+    @staticmethod
+    def acHandler(arg):
+        if not arg:
+            return []
+        SubRace = ''
+        Raw_SubRace = arg
+        SubRace += 'Base AC: ' + str(Raw_SubRace['base']) + '\n'
+        SubRace += 'Dex Bonus Applied: ' + str(Raw_SubRace['dex_bonus']) + '\n'
+        SubRace += 'Max Bonus: ' + str(Raw_SubRace['max_bonus']) + '\n'
+        return SubRace
+
+    @staticmethod
+    def rangeHandler(arg):
+        if not arg:
+            return []
+        SubRace = ''
+        Raw_SubRace = arg
+
+        SubRace += 'Normal Range: ' + str(Raw_SubRace['normal']) + '\n'
+        SubRace += 'Long Range: ' + str(Raw_SubRace['long']) + '\n'
+
+        return SubRace
+
+
+    @staticmethod
+    def damageHandler(arg):
+        if not arg:
+            return []
+        SubRace = ''
+        Raw_SubRace = arg
+
+        SubRace += 'Damage Die: ' + str(Raw_SubRace['damage_dice']) + '\n'
+        SubRace += 'Damage Type: ' + str(Raw_SubRace['damage_type']['name']) + '\n'
+
+        return SubRace
+
+    @staticmethod
+    def contentHandler(arg):
+        if not arg:
+            return []
+        SubRace = ''
+        Raw_Contents = arg
+
+        for x in Raw_Contents:
+            SubRace += 'Quantity: ' + str(x['quantity']) + ' - ' + x['item']['name'] + '\n'
+
+        return SubRace
