@@ -25,9 +25,7 @@ class EquipManager:
         title = 'Equipment Information - {}'.format(name),
         colour = discord.Colour.red()
         )
-        if('error' in value):
-            embed = CommsManager.failedRequest(name)
-        else:
+        if('error' not in value):
             if(value['equipment_category']['name'] == 'Weapon'):
                 embed.add_field(name='Equipment Category', value= value['equipment_category']['name'], inline=False)
                 embed.add_field(name='Weapon Category', value= value['weapon_category'], inline=False)
@@ -48,6 +46,8 @@ class EquipManager:
                 embed.add_field(name='Cost', value= str(value['cost']['unit']) + ': ' + str(value['cost']['quantity']), inline=False)
             if('contents' in value):
                 embed.add_field(name='Contents', value= start_equip.contentHandler(value['contents']), inline=False)
+        else:
+            embed = CommsManager.failedRequest(name)
         embed.timestamp = datetime.utcnow()
         embed.set_footer(text='MattMaster Bots: Dnd')
         return embed
@@ -59,14 +59,13 @@ class EquipManager:
         name = CommsManager.paramHandler(name)
         value = requests.get('https://www.dnd5eapi.co/api/magic-items/{}'.format(name))
         value = eval(value.text)
-        print(value)
+
+
         embed = discord.Embed(
         title = 'Magic Item Information - {}'.format(name),
         colour = discord.Colour.red()
         )
-        if('error' in value):
-            embed = CommsManager.failedRequest(name)
-        else:
+        if('error' not in value):
             if(value['equipment_category']['name'] == 'Weapon'):
                 embed.add_field(name='Equipment Category', value= value['equipment_category']['name'], inline=False)
                 embed.add_field(name='Weapon Category', value= value['weapon_category'], inline=False)
@@ -90,5 +89,8 @@ class EquipManager:
                 embed.add_field(name='Cost', value= str(value['cost']['unit']) + ': ' + str(value['cost']['quantity']), inline=False)
             if('contents' in value):
                 embed.add_field(name='Contents', value= start_equip.contentHandler(value['contents']), inline=False)
+
+        else:
+            embed = CommsManager.failedRequest(name)
 
         return embed

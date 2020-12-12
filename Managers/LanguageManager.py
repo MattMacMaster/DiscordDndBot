@@ -18,7 +18,7 @@ class LanguageManager:
         name = CommsManager.paramHandler(name)
         value = requests.get('https://www.dnd5eapi.co/api/languages/{}'.format(name))
         value = eval(value.text)
-        if('name' in value):
+        if('error' not in value):
             embed = discord.Embed(
            title = 'Language Information - {}'.format(value['name']),
            colour = discord.Colour.red()

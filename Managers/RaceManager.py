@@ -22,7 +22,7 @@ class RaceManager:
         name = CommsManager.paramHandler(name)
         value = requests.get('https://www.dnd5eapi.co/api/races/{}'.format(name))
         value = eval(value.text)
-        if('name' in value):
+        if('error' not in value):
             embed = discord.Embed(
            title = 'Race Information - {}'.format(value['name']),
            colour = discord.Colour.red()
@@ -56,8 +56,7 @@ class RaceManager:
         name = CommsManager.paramHandler(name)
         value = requests.get('https://www.dnd5eapi.co/api/races/{}/subraces/'.format(name))
         value = eval(value.text)
-        print(value)
-        if('results' in value):
+        if('error' not in value):
             embed = discord.Embed(
            title = '{} Subraces'.format(name) + ' - $Subrace {value}',
            colour = discord.Colour.red()
@@ -76,7 +75,7 @@ class RaceManager:
         name = CommsManager.paramHandler(name)
         value = requests.get('https://www.dnd5eapi.co/api/races/{}/traits/'.format(name))
         value = eval(value.text)
-        if('results' in value):
+        if('error' not in value):
             embed = discord.Embed(
            title = '{} Traits '.format(name) + '- $Traits {value}',
            colour = discord.Colour.red()
@@ -96,7 +95,7 @@ class RaceManager:
         name = CommsManager.paramHandler(name)
         value = requests.get('https://www.dnd5eapi.co/api/races/{}/proficiencies/'.format(name))
         value = eval(value.text)
-        if('results' in value):
+        if('error' not in value):
             embed = discord.Embed(
            title = '{} Proficiencies '.format(name) + '- $Proficiencies {value}',
            colour = discord.Colour.red()

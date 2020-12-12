@@ -17,7 +17,7 @@ class SpellsManager:
         value = requests.get('https://www.dnd5eapi.co/api/spells/{}'.format(name))
         value = json.loads(value.text)
         print(value)
-        if('name' in value):
+        if('error' not in value):
             embed = discord.Embed(
            title = 'Spell Information - {}'.format(value['name']),
            colour = discord.Colour.red()
@@ -61,8 +61,7 @@ class SpellsManager:
         name = CommsManager.paramHandler(name)
         value = requests.get('https://www.dnd5eapi.co/api/spells?school={}'.format(name))
         value = eval(value.text)
-        print(value)
-        if('results' in value):
+        if('error' not in value):
             embed = discord.Embed(
            title = '{} School '.format(name) + '- $Spell {value}',
            colour = discord.Colour.red()
@@ -80,8 +79,7 @@ class SpellsManager:
         name = CommsManager.paramHandler(name)
         value = requests.get('https://www.dnd5eapi.co/api/spells?level={}'.format(name))
         value = eval(value.text)
-        print(value)
-        if('results' in value):
+        if('error' not in value):
             embed = discord.Embed(
            title = '{} Level Spells '.format(name) + '- $Spell {value}',
            colour = discord.Colour.red()

@@ -16,12 +16,11 @@ class TraitManager:
         name = CommsManager.paramHandler(name)
         value = requests.get('https://www.dnd5eapi.co/api/traits/{}'.format(name))
         value = eval(value.text)
-        if('name' in value):
+        if('error' not in value):
             embed = discord.Embed(
-           title = 'Subrace Information - {}'.format(value['name']),
-           colour = discord.Colour.red()
-           )
-            print(value)
+                title = 'Subrace Information - {}'.format(value['name']),
+                colour = discord.Colour.red()
+            )
             #value['starting_proficiencies']
             embed.add_field(name='Name', value= value['name'], inline=False)
             embed.add_field(name='Description', value= value['desc'][0], inline=False)

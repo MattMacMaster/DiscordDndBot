@@ -65,14 +65,15 @@ class MonsterManager:
         name = CommsManager.paramHandler(name)
         value = requests.get('https://www.dnd5eapi.co/api//monsters?challenge_rating={}'.format(name))
         value = eval(value.text)
-        print(value)
-        embed = discord.Embed(
-           title = 'Monsters by CR List - CR {}'.format(name),
-           colour = discord.Colour.red()
-           )
-        embed.add_field(name='Monsters', value= RaceHandler.proficienciesHandler(value['results']), inline=False)
-        embed.timestamp = datetime.utcnow()
-        embed.set_footer(text='MattMaster Bots: Dnd')
-
+        if('error' not in value):
+            embed = discord.Embed(
+                title = 'Monsters by CR List - CR {}'.format(name),
+                colour = discord.Colour.red()
+            )
+            embed.add_field(name='Monsters', value= RaceHandler.proficienciesHandler(value['results']), inline=False)
+            embed.timestamp = datetime.utcnow()
+            embed.set_footer(text='MattMaster Bots: Dnd')
+        else:
+            embed = CommsManager.failedRequest(name)
 
         return embed

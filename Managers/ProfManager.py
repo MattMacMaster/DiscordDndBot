@@ -16,7 +16,7 @@ class ProfManager:
         name = CommsManager.paramHandler(name)
         value = requests.get('https://www.dnd5eapi.co/api/proficiencies/{}'.format(name))
         value = eval(value.text)
-        if('name' in value):
+        if('error' not in value):
             embed = discord.Embed(
            title = 'Proficiencies Information - {}'.format(value['name']),
            colour = discord.Colour.red()

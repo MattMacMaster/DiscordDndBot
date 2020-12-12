@@ -21,7 +21,7 @@ class ClassManager:
         value2 = eval(value2.text)
 
 
-        if('name' in value):
+        if('error' not in value):
             embed = discord.Embed(
            title = 'Class Information - {}'.format(value['name']),
            colour = discord.Colour.red()
@@ -52,21 +52,24 @@ class ClassManager:
 
         value = requests.get('https://www.dnd5eapi.co/api/classes/{}/spells/'.format(name))
         value = eval(value.text)
-        print(value)
 
-        embed = discord.Embed(
-           title = 'Class Spell Information - {}'.format(name),
-           colour = discord.Colour.red()
-        )
-        if(len(RaceHandler.proficienciesHandler(value['results'])) >= 1024):
-            embed.add_field(name='Spells', value=RaceHandler.proficienciesHandler(value['results'])[0:1000], inline=False)
-            embed.add_field(name='Cont...', value=RaceHandler.proficienciesHandler(value['results'])[1001:2000], inline=False)
-            embed.add_field(name='Cont....', value=RaceHandler.proficienciesHandler(value['results'])[2001:], inline=False)
+        if('error' not in value):
+            embed = discord.Embed(
+                title = 'Class Spell Information - {}'.format(name),
+                colour = discord.Colour.red()
+            )
+            if(len(RaceHandler.proficienciesHandler(value['results'])) >= 1024):
+                embed.add_field(name='Spells', value=RaceHandler.proficienciesHandler(value['results'])[0:1000], inline=False)
+                embed.add_field(name='Cont...', value=RaceHandler.proficienciesHandler(value['results'])[1001:2000], inline=False)
+                embed.add_field(name='Cont....', value=RaceHandler.proficienciesHandler(value['results'])[2001:], inline=False)
+            else:
+                embed.add_field(name='Spells', value=RaceHandler.proficienciesHandler(value['results']), inline=False)
         else:
-             embed.add_field(name='Spells', value=RaceHandler.proficienciesHandler(value['results']), inline=False)
+            embed = CommsManager.failedRequest(name)
         embed.timestamp = datetime.utcnow()
         embed.set_footer(text='MattMaster Bots: Dnd')
 
+        
 
         return embed
 
@@ -76,13 +79,15 @@ class ClassManager:
 
         value = requests.get('https://www.dnd5eapi.co/api/classes/{}/subclasses'.format(name))
         value = eval(value.text)
-        print(value)
 
-        embed = discord.Embed(
-           title = 'Class SubClass List - {}'.format(name),
-           colour = discord.Colour.red()
-        )
-        embed.add_field(name='SubClasses', value=RaceHandler.proficienciesHandler(value['results']), inline=False)
+        if('error' not in value):
+            embed = discord.Embed(
+                title = 'Class SubClass List - {}'.format(name),
+                colour = discord.Colour.red()
+            )
+            embed.add_field(name='SubClasses', value=RaceHandler.proficienciesHandler(value['results']), inline=False)
+        else:
+            embed = CommsManager.failedRequest(name)
         embed.timestamp = datetime.utcnow()
         embed.set_footer(text='MattMaster Bots: Dnd')
 
@@ -97,7 +102,7 @@ class ClassManager:
         value = eval(value.text)
 
 
-        if('name' in value):
+        if('error' not in value):
             embed = discord.Embed(
            title = 'Class Casting Information - {}'.format(value['name']),
            colour = discord.Colour.red()
@@ -118,12 +123,14 @@ class ClassManager:
         value = requests.get('https://www.dnd5eapi.co/api/classes/{}/proficiencies/'.format(name))
         value = eval(value.text)
 
-
-        embed = discord.Embed(
-           title = 'Class Proficiencies - {}'.format(name),
-           colour = discord.Colour.red()
-        )
-        embed.add_field(name='Proficiencies', value=RaceHandler.proficienciesHandler(value['results']), inline=False)
+        if('error' not in value):
+            embed = discord.Embed(
+                title = 'Class Proficiencies - {}'.format(name),
+                colour = discord.Colour.red()
+            )
+            embed.add_field(name='Proficiencies', value=RaceHandler.proficienciesHandler(value['results']), inline=False)
+        else:
+            embed = CommsManager.failedRequest(name)
         embed.timestamp = datetime.utcnow()
         embed.set_footer(text='MattMaster Bots: Dnd')
 
@@ -137,13 +144,15 @@ class ClassManager:
 
         value = requests.get('https://www.dnd5eapi.co/api/classes/{}/starting-equipment/'.format(name))
         value = eval(value.text)
-
-        embed = discord.Embed(
-           title = 'Class Starting Equipment - {}'.format(name),
-           colour = discord.Colour.red()
-        )
-        embed.add_field(name='Starting Equipment', value=start_equip.startEquipmentHandler(value['starting_equipment']), inline=False)
-        embed.add_field(name='Starting Equipment Options', value=start_equip.equipmentHandler(value['starting_equipment_options']), inline=False)
+        if('error' not in value):
+            embed = discord.Embed(
+                title = 'Class Starting Equipment - {}'.format(name),
+                colour = discord.Colour.red()
+            )
+            embed.add_field(name='Starting Equipment', value=start_equip.startEquipmentHandler(value['starting_equipment']), inline=False)
+            embed.add_field(name='Starting Equipment Options', value=start_equip.equipmentHandler(value['starting_equipment_options']), inline=False)
+        else:
+            embed = CommsManager.failedRequest(name)
         embed.timestamp = datetime.utcnow()
         embed.set_footer(text='MattMaster Bots: Dnd')
 
@@ -157,18 +166,21 @@ class ClassManager:
         value = requests.get('https://www.dnd5eapi.co/api/classes/{}/features/'.format(name))
         value = eval(value.text)
 
-        print(value)
-        embed = discord.Embed(
-           title = 'Class Features Information - {}'.format(name),
-           colour = discord.Colour.red()
-        )
-        embed.add_field(name='General Command', value='$Feature {Name}')
-        if(len(RaceHandler.proficienciesHandler(value['results'])) >= 1024):
-            embed.add_field(name='Features - $Feature {name}', value=RaceHandler.proficienciesHandler(value['results'])[0:1000], inline=False)
-            embed.add_field(name='Cont...', value=RaceHandler.proficienciesHandler(value['results'])[1001:2000], inline=False)
-            embed.add_field(name='Cont....', value=RaceHandler.proficienciesHandler(value['results'])[2001:], inline=False)
+
+        if('error' not in value):
+            embed = discord.Embed(
+                title = 'Class Features Information - {}'.format(name),
+                colour = discord.Colour.red()
+            )
+            embed.add_field(name='General Command', value='$Feature {Name}')
+            if(len(RaceHandler.proficienciesHandler(value['results'])) >= 1024):
+                embed.add_field(name='Features - $Feature {name}', value=RaceHandler.proficienciesHandler(value['results'])[0:1000], inline=False)
+                embed.add_field(name='Cont...', value=RaceHandler.proficienciesHandler(value['results'])[1001:2000], inline=False)
+                embed.add_field(name='Cont....', value=RaceHandler.proficienciesHandler(value['results'])[2001:], inline=False)
+            else:
+                embed.add_field(name='Features', value=RaceHandler.proficienciesHandler(value['results']), inline=False)
         else:
-             embed.add_field(name='Features', value=RaceHandler.proficienciesHandler(value['results']), inline=False)
+            embed = CommsManager.failedRequest(name)
         embed.timestamp = datetime.utcnow()
         embed.set_footer(text='MattMaster Bots: Dnd')
 
