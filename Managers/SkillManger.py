@@ -22,7 +22,6 @@ class SkillsManager:
            title = 'Skill Information - {}'.format(value['name']),
            colour = discord.Colour.red()
            )
-            print(value)
             #value['starting_proficiencies']
             embed.add_field(name='Name', value= value['name'], inline=False)
             embed.add_field(name='Description', value= RaceHandler.DescHandler(value['desc']), inline=False)

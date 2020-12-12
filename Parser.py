@@ -196,6 +196,7 @@ class start_equip(RaceHandler):
         SubRace = ''
         Raw_SubRace = arg
         for x in Raw_SubRace:
+            print(x)
             SubRace += '\n' + 'Equipment Set:' + '\n'
             if(isinstance(x['from'],list)):
                 for y in x['from']:
@@ -208,6 +209,8 @@ class start_equip(RaceHandler):
                     else:
                         if('equipment_option' in y):
                             SubRace += y['equipment_option']['from']['equipment_category']['name'] + '\n'
+                        if('equipment_category' in y):
+                            SubRace += y['equipment_category']['name'] + '\n'
                         if('equipment' in y):
                             SubRace += y['equipment']['name'] + '\n'
                             
@@ -273,4 +276,73 @@ class start_equip(RaceHandler):
         for x in Raw_Contents:
             SubRace += 'Quantity: ' + str(x['quantity']) + ' - ' + x['item']['name'] + '\n'
 
+        return SubRace
+class monster(RaceHandler):
+    @staticmethod
+    def profHandler(arg):
+        if not arg:
+            return []
+        SubRace = ''
+        Raw_SubRace = arg
+        for x in Raw_SubRace:
+            SubRace += x['proficiency']['name'] + ': '+ '+' +str(x['value'])+ '\n'
+
+        return SubRace
+
+    @staticmethod
+    def moveHandler(arg):
+        if not arg:
+            return []
+        SubRace = ''
+        Raw_SubRace = arg
+        if('walk' in Raw_SubRace):
+            SubRace += 'Walking Speed: ' + Raw_SubRace['walk'] + '\n'
+        if('swim' in Raw_SubRace):
+            SubRace += 'Swim Speed: ' + Raw_SubRace['walk'] + '\n'
+        if('fly' in Raw_SubRace):
+            SubRace += 'Fly Speed: ' + Raw_SubRace['walk'] + '\n'
+
+        return SubRace
+
+    @staticmethod
+    def specialHandler(arg):
+        if not arg:
+            return []
+        SubRace = ''
+        Raw_SubRace = arg
+        for x in Raw_SubRace:
+            SubRace += x['name'] + ': ' + '\n'
+            SubRace += x['desc'] + '\n'+ '\n'
+        return SubRace
+
+
+    @staticmethod
+    def sensesHandler(arg):
+        if not arg:
+            return []
+        SubRace = ''
+        Raw_SubRace = arg
+        keyList = list(Raw_SubRace.keys())
+        for x in keyList:
+            SubRace += x + ': ' +  str(Raw_SubRace[x]) + '\n'
+        return SubRace
+
+
+    @staticmethod
+    def attackHandler(arg):
+        if not arg:
+            return []
+        SubRace = ''
+        Raw_SubRace = arg
+        print(Raw_SubRace)
+        #Per Attack, name, desc, bonus, damage:[]
+        for z in Raw_SubRace:
+            SubRace += 'Attack Name: ' + z['name'] + '\n'
+            SubRace += 'Desc: ' + z['desc'] + '\n'
+            SubRace += 'Attack Bonus: ' + str(z['attack_bonus']) + '\n'
+            for x in z['damage']:
+                SubRace += 'Damage Type: ' + x['damage_type']['name'] + '\n'
+                SubRace += 'Damage: ' + x['damage_dice'] + '\n' + '\n'
+
+            
         return SubRace

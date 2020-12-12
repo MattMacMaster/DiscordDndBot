@@ -137,7 +137,6 @@ class ClassManager:
 
         value = requests.get('https://www.dnd5eapi.co/api/classes/{}/starting-equipment/'.format(name))
         value = eval(value.text)
-        print(value)
 
         embed = discord.Embed(
            title = 'Class Starting Equipment - {}'.format(name),
@@ -163,8 +162,9 @@ class ClassManager:
            title = 'Class Features Information - {}'.format(name),
            colour = discord.Colour.red()
         )
+        embed.add_field(name='General Command', value='$Feature {Name}')
         if(len(RaceHandler.proficienciesHandler(value['results'])) >= 1024):
-            embed.add_field(name='Features', value=RaceHandler.proficienciesHandler(value['results'])[0:1000], inline=False)
+            embed.add_field(name='Features - $Feature {name}', value=RaceHandler.proficienciesHandler(value['results'])[0:1000], inline=False)
             embed.add_field(name='Cont...', value=RaceHandler.proficienciesHandler(value['results'])[1001:2000], inline=False)
             embed.add_field(name='Cont....', value=RaceHandler.proficienciesHandler(value['results'])[2001:], inline=False)
         else:

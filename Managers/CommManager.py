@@ -14,11 +14,20 @@ class CommsManager():
     #print(r.text)
     @staticmethod
     def paramHandler(arg):
-        value = ''.join(arg)
-        value = value.replace('\'', "")
-        value = value.lower()
-        value = value.replace(' ','-')
-        return value
+        if(type(arg) is tuple):
+            print('tuple')
+            value = ' '.join(arg)
+            value = value.replace('\'', "")
+            value = value.lower()
+            value = value.replace(' ','-')
+            return value
+        else:
+            print('nah')
+            value = ''.join(arg)
+            value = value.replace('\'', "")
+            value = value.lower()
+            value = value.replace(' ','-')
+            return value
 
     @staticmethod
     def failedRequest(arg):

@@ -14,6 +14,8 @@ class Response:
            $Race/Proficiencies {RaceName},
              $Race/Traits {RaceName},
                $Race/SubRaces {RaceName},
+
+               $Subrace {SubRaceName}
                   """
     }
 
@@ -23,35 +25,7 @@ class Response:
         """,
         "Main": 
         """
-        $Monster/Speed {MonsterName},
-        $Monster/Type {MonsterName},
-        $Monster/Subtype {MonsterName},
-        $Monster/Armor_Class {MonsterName},
-        $Monster/Hit_Points {MonsterName},
-        $Monster/Hit_Dice {MonsterName},
-        $Monster/Ability_Scores {MonsterName},
-        $Monster/Strength {MonsterName},
-        $Monster/Dexterity {MonsterName},
-        $Monster/Constitution {MonsterName},
-        $Monster/Intelligence	 {MonsterName},
-        $Monster/Wisdom {MonsterName},
-        $Monster/Charisma {MonsterName},
-    
-        """,
-        "Specific": 
-        """ 
-        $Monster/Proficiencies {MonsterName},
-        $Monster/Size {MonsterName},
-        $Monster/Alignment {MonsterName}
-        $Monster/Damage_Vulnerabilities {MonsterName},
-        $Monster/Damage_Immunities {MonsterName},
-        $Monster/Damage_Resistances {MonsterName},
-        $Monster/Condition_Immunities {MonsterName},
-        $Monster/Senses {MonsterName},
-        $Monster/Languages {MonsterName},
-        $Monster/Legendary_Actions {MonsterName},
-        $Monster/Special_Abilities {MonsterName},
-        $Monster/Challenge_Rating {MonsterName},
+        $Monsters/CR {CR}
         """
     }
     Class_Data = {
@@ -70,58 +44,10 @@ class Response:
     Equipment_Data = {
         "General": 
         """
-        $Equipment {Name}
-        """,
+        $Equip {Name},
+        $MagicItem {Name},
 
-
-        "Armor": """ 
-        $Armor {name},
-        $Armor/Equipment_Category {name},
-        $Armor/Armor_Category {name},
-        $Armor/Armor_Class {name},
-        $Armor/Str_Minimum {name},
-        $Armor/Stealth_Disadvantage {name},
-        $Armor/Weight {name},
-        $Armor/Cost {name},
-         """,
-
-
-        "Weapon": 
-        """ 
-        $Weapon {name},
-        $Weapon/Equipment_Category {name},
-        $Weapon/Weapon_Category {name},
-        $Weapon/Weapon_Range {name},
-        $Weapon/Category_Range {name},
-        $Weapon/Range {name},
-        $Weapon/Cost {name},
-        $Weapon/Damage {name},
-        $Weapon/Weight {name},
-        $Weapon/Properties {name},
-        """,
-        "Magic Items": 
-        """ 
-        $Magic_Item {name},
-        $Magic_Item/Equipment_Category {name},
-        $Magic_Item/Desc {name},
-        """,
-        "Adventuring Gear": 
         """
-        $Adv_Gear {name},
-        $Adv_Gear/Equipment_Category {name},
-        $Adv_Gear/Gear_Category {name},
-        $Adv_Gear/Cost {name},
-        $Adv_Gear/Weight {name},
-        """,
-        "Equipment Packs": 
-        """ 
-        $Equip_Pack {name},
-        $Equip_Pack/Equipment_Category {name},
-        $Equip_Pack/Gear_Category {name},
-        $Equip_Pack/Cost {name},
-        $Equip_Pack/Contents {name},
-        """,
-        "Weapon Properties": "SOON"
  
     }
     Spell_Data = {
@@ -170,30 +96,29 @@ class Response:
     #Please god find a better way to format this in the embed tool
     Character_Data = {
         "Ability Scores": """
-        Ex: ($Character_info/ability-scores con),
-        $Character_info/ability-scores {name},
-         $Character_info/ability-scores/skills {name}
+        Ex: ($Ability-scores con),
+         $Ability-scores {name},
         """,
         "Skills":
         """
-        Ex: ($Character_info/skills/ Arcana),
-        $Character_info/skills {name},
-        $Character_info/skills/ability-score {name},
-        $Character_info/skills/desc {name},
+        Ex: ($Skills Arcana),
+        $Skills {name},
            """,
         "Proficiencies":
         """
-        Ex: ($Character_info/proficiencies medium-armor),
-        $Character_info/proficiencies {name},
-        $Character_info/proficiencies/classes {name},
-        $Character_info/proficiencies/races {name},
+        Ex: ($Proficiencies medium-armor),
+        $Proficiencies {name},
            """,
         "Languages":
         """
-        Ex: ($Character_info/languanges common),
-         $Character_info/languanges {name},
-         $Character_info/languanges/type {name} ,
-         $Character_info/languanges/speakers {name},
+        Ex: ($Language common),
+         $Language {name},
+
+        Ex: ($Trait tinker),
+        $Trait {name},
+
+        Ex: ($Feature Divine Sense),
+        $Feature {name},
         """
     }
 

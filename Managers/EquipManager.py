@@ -74,9 +74,16 @@ class EquipManager:
                 embed.add_field(name='Category', value= value['equipment_category']['name'], inline=False)
                 embed.add_field(name='Cost', value= str(value['cost']['unit']) + ': ' + str(value['cost']['quantity']), inline=False)
                 embed.add_field(name='Damage', value= start_equip.damageHandler(value['damage']), inline=False)
+            if(value['equipment_category']['name'] == 'Wondrous Item'):
+                embed.add_field(name='Type', value= value['equipment_category']['name'], inline=False)
+                if(len(RaceHandler.DescHandler(value['desc']))  >= 1024):
+                    embed.add_field(name='Desc', value= RaceHandler.DescHandler(value['desc'])[1:1024], inline=False)
+                    embed.add_field(name='Cont..', value= RaceHandler.DescHandler(value['desc'])[1024:], inline=False)
+                else:
+                    embed.add_field(name='Desc', value= RaceHandler.DescHandler(value['desc']), inline=False)
             if(value['equipment_category']['name'] == 'Armor'):
                 embed.add_field(name='Equipment Category', value= value['equipment_category']['name'], inline=False)
-                embed.add_field(name='Equipment Category', value= RaceHandler.DescHandler(value['desc']), inline=False)
+                embed.add_field(name='Equipment Category', value= RaceHandler.DescHandler(value['equipment_category']['desc']), inline=False)
             if(value['equipment_category']['name'] == 'Adventuring Gear'):
                 embed.add_field(name='Equipment Category', value= value['equipment_category']['name'], inline=False)
                 embed.add_field(name='Gear Category', value= value['gear_category']['name'], inline=False)

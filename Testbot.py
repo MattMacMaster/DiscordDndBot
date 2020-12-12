@@ -18,7 +18,8 @@ from Managers.SubraceManager import SubraceManger
 from Managers.SpellManager import SpellsManager
 from Managers.EquipManager import EquipManager
 from Managers.ClassManager import ClassManager
-
+from Managers.MonsterManager import MonsterManager
+from Managers.FeatureManager import FeatureManager
 
 class BotMain:
     def main(self):
@@ -29,16 +30,13 @@ class BotMain:
         client.remove_command('help')
 
 
-        ResponseManager = Response()
-        ComManager = CommsManager()
-
         #TODO Need to have a means to place all these commands and import them in
-        #TODO Needs a System to layer the commands out and their sub commands
-        #TODO Data base built with two migration scripts
+        #TODO Data base built with two migration scripts, windows and ubuntu
         #TODO Flesh out database and homebrew interaction
         #TODO Error handling/ coverage
         #TODO Spell Check, recommendations
         #TODO Command Cooldowns
+        #TODO Clean up command help sheets and naming conventions, consistancy
 
         """
         General Basic greeting commands that may be run on boot, add, etc...
@@ -77,9 +75,9 @@ class BotMain:
             embed.add_field(name='Equipment', value='$Equipment/help', inline=True)
             embed.add_field(name='Spells', value='$Spell/help', inline=True)
             embed.add_field(name='Monsters', value='$Monsters/help', inline=True)
-            embed.add_field(name='Mechanics', value='$Mechanics/help', inline=True)
-            embed.add_field(name='Rules', value='$Rules/help', inline=True)
-            embed.add_field(name='Homebrews', value='$Homebrews/help', inline=True)
+            embed.add_field(name='Mechanics', value='Coming Soon', inline=True)
+            embed.add_field(name='Rules', value='Coming Soon', inline=True)
+            embed.add_field(name='Homebrews', value='Coming Soon', inline=True)
             embed.timestamp = datetime.utcnow()
             embed.set_footer(text='MattMaster Bots: Dnd')
 
@@ -126,7 +124,6 @@ class BotMain:
             )
             embed.add_field(name='General', value=Response.Monster_Data["General"], inline=False)
             embed.add_field(name='Main', value=Response.Monster_Data["Main"], inline=False)
-            embed.add_field(name='Specific', value=Response.Monster_Data["Specific"], inline=False)
             embed.timestamp = datetime.utcnow()
             embed.set_footer(text='MattMaster Bots: Dnd')
 
@@ -153,12 +150,6 @@ class BotMain:
             colour = discord.Colour.red()
             )
             embed.add_field(name='General', value=Response.Equipment_Data["General"], inline=False)
-            embed.add_field(name='Armor', value=Response.Equipment_Data["Armor"], inline=False)
-            embed.add_field(name='Weapon', value=Response.Equipment_Data["Weapon"], inline=False)
-            embed.add_field(name='Magic Items', value=Response.Equipment_Data["Magic Items"], inline=False)
-            embed.add_field(name='Adventuring Gear', value=Response.Equipment_Data["Adventuring Gear"], inline=False)
-            embed.add_field(name='Equipment Packs', value=Response.Equipment_Data["Equipment Packs"], inline=False)
-            embed.add_field(name='Weapon Properties', value=Response.Equipment_Data["Weapon Properties"], inline=False)
             embed.timestamp = datetime.utcnow()
             embed.set_footer(text='MattMaster Bots: Dnd')
             await ctx.send(embed=embed)
@@ -179,10 +170,10 @@ class BotMain:
         async def Rules_help(ctx):
             embed = discord.Embed(
             title = 'Rules Info Help - $Rules/help',
-            description = Response.com_help(self,'Rule'),
+            description = 'Coming Soon',
             colour = discord.Colour.red()
             )
-            embed.add_field(name='General', value=Response.Rules_Data["General"], inline=False)
+            #embed.add_field(name='General', value=Response.Rules_Data["General"], inline=False)
             embed.timestamp = datetime.utcnow()
             embed.set_footer(text='MattMaster Bots: Dnd')
             await ctx.send(embed=embed)
@@ -191,10 +182,9 @@ class BotMain:
         async def Mechanics_help(ctx):
             embed = discord.Embed(
             title = 'Mechanics Info Help - $Mechanics/help',
-            description = Response.com_help(self,'Mechanics'),
+            description = 'Coming Soon',
             colour = discord.Colour.red()
             )
-            embed.add_field(name='General', value=Response.Mechanic_Data["General"], inline=False)
             embed.timestamp = datetime.utcnow()
             embed.set_footer(text='MattMaster Bots: Dnd')
             await ctx.send(embed=embed)
@@ -213,7 +203,36 @@ class BotMain:
         General Statements
         TODO Update Character data calls to this info, cause its done via this
         """
-            
+        @client.command(name='Language')
+        async def Main_Language(ctx, *arg):
+            embed = LanguageManager.Languages(name=' '.join(arg))
+            await ctx.send(embed=embed)
+
+        @client.command(name='Ability-scores')
+        async def Main_Score(ctx, *arg):
+            embed = AbilityScoreManager.AbilityScores(name=' '.join(arg))
+            await ctx.send(embed=embed)
+
+        @client.command(name='Skill')
+        async def Main_Skill(ctx, *arg):
+            embed = SkillsManager.GeneralSkills(name=' '.join(arg))
+            await ctx.send(embed=embed)
+
+        @client.command(name='Proficiencies')
+        async def Main_Prof(ctx, *arg):
+            embed = ProfManager.Proficiencies(name=' '.join(arg))
+            await ctx.send(embed=embed)
+        """
+        Classified as Character Data ^
+        Still Genereal Statements
+        """
+
+        @client.command(name='Monster')
+        async def Main_Monster(ctx, *arg):
+            embed = MonsterManager.GeneralMonster(name=arg)
+            await ctx.send(embed=embed)
+
+
         @client.command(name='Race')
         async def Main_Race(ctx, arg):
             embed = RaceManager.GeneralRace(name=arg)
@@ -229,25 +248,11 @@ class BotMain:
             embed = TraitManager.Traits(name=' '.join(arg))
             await ctx.send(embed=embed)
 
-        @client.command(name='Language')
-        async def Main_Language(ctx, *arg):
-            embed = LanguageManager.Languages(name=' '.join(arg))
+        @client.command(name='Feature')
+        async def Main_Feature(ctx, *arg):
+            embed = FeatureManager.GeneralFeature(name=' '.join(arg))
             await ctx.send(embed=embed)
-
-        @client.command(name='AbilityScore')
-        async def Main_Score(ctx, *arg):
-            embed = AbilityScoreManager.AbilityScores(name=' '.join(arg))
-            await ctx.send(embed=embed)
-
-        @client.command(name='Skill')
-        async def Main_Skill(ctx, *arg):
-            embed = SkillsManager.GeneralSkills(name=' '.join(arg))
-            await ctx.send(embed=embed)
-
-        @client.command(name='Proficiencies')
-        async def Main_Prof(ctx, *arg):
-            embed = ProfManager.Proficiencies(name=' '.join(arg))
-            await ctx.send(embed=embed)
+        
 
         @client.command(name='Spell')
         async def Main_Spell(ctx, *arg):
@@ -270,7 +275,6 @@ class BotMain:
             embed = EquipManager.MagicItem(name=arg)
             await ctx.send(embed=embed)
 
-        client.run(TOKEN)
 
         """
         This section will be the general argument call, with their respective sub commands
@@ -342,11 +346,22 @@ class BotMain:
             embed = ClassManager.ClassEquip(name=arg)
             await ctx.send(embed=embed)
 
-
+        """
+        One subset for monsters, filter by CR value
+        """
+        @client.command(name='Monsters/CR')
+        async def Monster_CR(ctx, *arg):
+            embed = MonsterManager.MonsterCR(name=arg)
+            await ctx.send(embed=embed)
 
         """
-        Equipment - {} being item name
+        General Error Handle
         """
+        @Class_Start_Equip.error
+        async def info_error(ctx, error):
+            await ctx.send('Something went horribly wrong: {}'.format(error))
+
+        client.run(TOKEN)
 
         
 

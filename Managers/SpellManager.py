@@ -25,8 +25,8 @@ class SpellsManager:
             embed.add_field(name='Level - $Spell/Level {value}', value= value['level'], inline=False)
             embed.add_field(name='Name', value= value['name'], inline=False)
             if(len(RaceHandler.DescHandler(value['desc'])) >= 1024):
-                print('greater')
                 embed.add_field(name='Description', value= RaceHandler.DescHandler(value['desc'])[0:1024], inline=False)
+                embed.add_field(name='Description', value= RaceHandler.DescHandler(value['desc'])[1025:], inline=False)
             else:
                  embed.add_field(name='Description', value= RaceHandler.DescHandler(value['desc']), inline=False)
             if('damage' in value):
