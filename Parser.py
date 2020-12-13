@@ -337,9 +337,16 @@ class monster(RaceHandler):
         print(Raw_SubRace)
         #Per Attack, name, desc, bonus, damage:[]
         for z in Raw_SubRace:
+            if(z['name'] == 'Multiattack'):
+                SubRace += z['name'] + ' Options: \n'
+                #SubRace += z['name'] + ' Options: \n'
+                for y in z['options']['from']:
+                     SubRace += z['name'] + '\n'
+
             SubRace += 'Attack Name: ' + z['name'] + '\n'
             SubRace += 'Desc: ' + z['desc'] + '\n'
-            SubRace += 'Attack Bonus: ' + str(z['attack_bonus']) + '\n'
+            if('attack_bonus' in z):
+                SubRace += 'Attack Bonus: ' + str(z['attack_bonus']) + '\n'
             for x in z['damage']:
                 SubRace += 'Damage Type: ' + x['damage_type']['name'] + '\n'
                 SubRace += 'Damage: ' + x['damage_dice'] + '\n' + '\n'
