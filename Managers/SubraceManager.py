@@ -16,7 +16,7 @@ class SubraceManger:
         value = eval(value.text)
         if('error' not in value):
             embed = discord.Embed(
-           title = 'Trait Information - {}'.format(value['name']),
+           title = 'SubRace Information - {}'.format(value['name']),
            colour = discord.Colour.red()
            )
             print(value)

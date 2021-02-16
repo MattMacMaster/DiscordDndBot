@@ -143,4 +143,8 @@ class Response:
     def com_help(self, value):
         return 'Here are the currently known commands for {} Information!'.format(value)
 
+    @staticmethod
+    def guild_join(value):
+        return 'Hello {}! \n I am in version 1.0.0. \n I am officially ready to be usefull but please be nice cause I\'m new here. \n For my command information type $help in your designated bot channel!'.format(value)
+
 

@@ -1,8 +1,5 @@
 
 
-
-
-
 class RaceHandler:
 
     @staticmethod
@@ -12,8 +9,8 @@ class RaceHandler:
         Ability_Bonuses = ''
         Raw_Ability_Bonuses = arg
         for x in Raw_Ability_Bonuses:
-            Ability_Bonuses += x['ability_score']['name'] + ': ' + str(x['bonus']) + '\n'
-
+            Ability_Bonuses += x['ability_score']['name'] + \
+                ': ' + str(x['bonus']) + '\n'
 
         return Ability_Bonuses
 
@@ -83,6 +80,7 @@ class RaceHandler:
 
         return SubRace
 
+
 class SubRaceHandler(RaceHandler):
 
     @staticmethod
@@ -109,6 +107,7 @@ class TraitHandler(RaceHandler):
 
         return SubRace
 
+
 class LanguageHandler:
 
     @staticmethod
@@ -121,6 +120,7 @@ class LanguageHandler:
             SubRace += x + '\n'
 
         return SubRace
+
 
 class ProficienciesHandler:
 
@@ -147,6 +147,7 @@ class ProficienciesHandler:
 
         return SubRace
 
+
 class SpellsHandler:
 
     @staticmethod
@@ -170,7 +171,8 @@ class SpellsHandler:
         i = 1
         while(i < counter):
             if(str(i) in Raw_Ability_Bonuses):
-                Ability_Bonuses += str(i) + ': ' + Raw_Ability_Bonuses[str(i)] + '\n'
+                Ability_Bonuses += str(i) + ': ' + \
+                    Raw_Ability_Bonuses[str(i)] + '\n'
             i = i + 1
         return Ability_Bonuses
 
@@ -187,6 +189,7 @@ class SpellsHandler:
 
         return Ability_Bonuses
 
+
 class start_equip(RaceHandler):
 
     @staticmethod
@@ -196,16 +199,15 @@ class start_equip(RaceHandler):
         SubRace = ''
         Raw_SubRace = arg
         for x in Raw_SubRace:
-            print(x)
             SubRace += '\n' + 'Equipment Set:' + '\n'
-            if(isinstance(x['from'],list)):
+            if(isinstance(x['from'], list)):
                 for y in x['from']:
-                    if(isinstance(y,list)):
+                    if(isinstance(y, list)):
                         for z in y:
                             if('equipment' in z):
                                 SubRace += z['equipment']['name'] + '\n'
                             if('equipment_option' in z):
-                                 SubRace += z['equipment_option']['from']['equipment_category']['name'] + '\n'
+                                SubRace += z['equipment_option']['from']['equipment_category']['name'] + '\n'
                     else:
                         if('equipment_option' in y):
                             SubRace += y['equipment_option']['from']['equipment_category']['name'] + '\n'
@@ -213,10 +215,10 @@ class start_equip(RaceHandler):
                             SubRace += y['equipment_category']['name'] + '\n'
                         if('equipment' in y):
                             SubRace += y['equipment']['name'] + '\n'
-                            
+
             else:
                 SubRace += x['from']['equipment_category']['name'] + '\n'
-                    
+
         return SubRace
 
     @staticmethod
@@ -253,7 +255,6 @@ class start_equip(RaceHandler):
 
         return SubRace
 
-
     @staticmethod
     def damageHandler(arg):
         if not arg:
@@ -262,7 +263,8 @@ class start_equip(RaceHandler):
         Raw_SubRace = arg
 
         SubRace += 'Damage Die: ' + str(Raw_SubRace['damage_dice']) + '\n'
-        SubRace += 'Damage Type: ' + str(Raw_SubRace['damage_type']['name']) + '\n'
+        SubRace += 'Damage Type: ' + \
+            str(Raw_SubRace['damage_type']['name']) + '\n'
 
         return SubRace
 
@@ -274,9 +276,12 @@ class start_equip(RaceHandler):
         Raw_Contents = arg
 
         for x in Raw_Contents:
-            SubRace += 'Quantity: ' + str(x['quantity']) + ' - ' + x['item']['name'] + '\n'
+            SubRace += 'Quantity: ' + \
+                str(x['quantity']) + ' - ' + x['item']['name'] + '\n'
 
         return SubRace
+
+
 class monster(RaceHandler):
     @staticmethod
     def profHandler(arg):
@@ -285,7 +290,8 @@ class monster(RaceHandler):
         SubRace = ''
         Raw_SubRace = arg
         for x in Raw_SubRace:
-            SubRace += x['proficiency']['name'] + ': '+ '+' +str(x['value'])+ '\n'
+            SubRace += x['proficiency']['name'] + \
+                ': ' + '+' + str(x['value']) + '\n'
 
         return SubRace
 
@@ -312,9 +318,8 @@ class monster(RaceHandler):
         Raw_SubRace = arg
         for x in Raw_SubRace:
             SubRace += x['name'] + ': ' + '\n'
-            SubRace += x['desc'] + '\n'+ '\n'
+            SubRace += x['desc'] + '\n' + '\n'
         return SubRace
-
 
     @staticmethod
     def sensesHandler(arg):
@@ -324,9 +329,8 @@ class monster(RaceHandler):
         Raw_SubRace = arg
         keyList = list(Raw_SubRace.keys())
         for x in keyList:
-            SubRace += x + ': ' +  str(Raw_SubRace[x]) + '\n'
+            SubRace += x + ': ' + str(Raw_SubRace[x]) + '\n'
         return SubRace
-
 
     @staticmethod
     def attackHandler(arg):
@@ -334,16 +338,15 @@ class monster(RaceHandler):
             return []
         SubRace = ''
         Raw_SubRace = arg
-        print(Raw_SubRace)
-        #Per Attack, name, desc, bonus, damage:[]
+        # Per Attack, name, desc, bonus, damage:[]
         for z in Raw_SubRace:
             if(z['name'] == 'Multiattack'):
                 SubRace += z['name'] + ' Options: \n'
                 #SubRace += z['name'] + ' Options: \n'
                 for y in z['options']['from']:
-                     SubRace += z['name'] + '\n'
+                    SubRace += z['name'] + '\n'
 
-            SubRace += 'Attack Name: ' + z['name'] + '\n'
+            SubRace += '\n Attack Name: ' + z['name'] + '\n'
             SubRace += 'Desc: ' + z['desc'] + '\n'
             if('attack_bonus' in z):
                 SubRace += 'Attack Bonus: ' + str(z['attack_bonus']) + '\n'
@@ -351,5 +354,4 @@ class monster(RaceHandler):
                 SubRace += 'Damage Type: ' + x['damage_type']['name'] + '\n'
                 SubRace += 'Damage: ' + x['damage_dice'] + '\n' + '\n'
 
-            
         return SubRace

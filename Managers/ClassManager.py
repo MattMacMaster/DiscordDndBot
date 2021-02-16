@@ -176,7 +176,7 @@ class ClassManager:
             if(len(RaceHandler.proficienciesHandler(value['results'])) >= 1024):
                 embed.add_field(name='Features - $Feature {name}', value=RaceHandler.proficienciesHandler(value['results'])[0:1000], inline=False)
                 embed.add_field(name='Cont...', value=RaceHandler.proficienciesHandler(value['results'])[1001:2000], inline=False)
-                embed.add_field(name='Cont....', value=RaceHandler.proficienciesHandler(value['results'])[2001:], inline=False)
+                embed.add_field(name='Cont....', value=RaceHandler.proficienciesHandler(value['results'])[2000:], inline=False)
             else:
                 embed.add_field(name='Features', value=RaceHandler.proficienciesHandler(value['results']), inline=False)
         else:
