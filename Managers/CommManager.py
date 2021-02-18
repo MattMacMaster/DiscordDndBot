@@ -4,6 +4,8 @@ import requests
 import discord
 from datetime import datetime
 
+# Note - Discord embed will show nothing if a value is ''
+
 
 class CommsManager():
     def __init__(self):
@@ -35,7 +37,8 @@ class CommsManager():
         # This needs to iterate through all options and associate keys->to data
         # Recursive to get through all options
         # Prints endpoint types, being NOT arrays and dictionaries
-
+        # Also need a blacklist to ignore things like url,and index
+        blacklist = ['index', 'url']
         # Check if args is a list first otherwise assume its a dictionary
         if((type(arg) == type([]))):
             # Can be further arrays or objects, or data types
@@ -48,6 +51,8 @@ class CommsManager():
                     # Keep working way down until a bottom is reached
                     CommsManager.jsonHandler(b)
                 else:
+                    # Data type is non nestable
+                    # Need a way to take this point and have it usable into the embed system with discord
                     print(b)
         # Assumed object furthuring
         else:
@@ -61,6 +66,8 @@ class CommsManager():
                     # Keep working way down until a bottom is reached
                     CommsManager.jsonHandler(arg[i])
                 else:
+                    # Data type is non nestable
+                    print(i)
                     print(arg[i])
 
     @staticmethod

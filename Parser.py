@@ -1,3 +1,10 @@
+class GeneralHandler:
+    @staticmethod
+    def emptyHandler(arg):
+        if arg == '':
+            return 'None'
+        else:
+            return arg
 
 
 class RaceHandler:
@@ -169,7 +176,7 @@ class SpellsHandler:
         Raw_Ability_Bonuses = arg
         counter = 9
         i = 1
-        while(i < counter):
+        while(i <= counter):
             if(str(i) in Raw_Ability_Bonuses):
                 Ability_Bonuses += str(i) + ': ' + \
                     Raw_Ability_Bonuses[str(i)] + '\n'
@@ -341,10 +348,12 @@ class monster(RaceHandler):
         # Per Attack, name, desc, bonus, damage:[]
         for z in Raw_SubRace:
             if(z['name'] == 'Multiattack'):
-                SubRace += z['name'] + ' Options: \n'
-                #SubRace += z['name'] + ' Options: \n'
+                SubRace += z['name'] + ' - Choose ' + \
+                    str(z['options']['choose'])
+                SubRace += ' Options: \n'
                 for y in z['options']['from']:
-                    SubRace += z['name'] + '\n'
+                    for w in y:
+                        SubRace += w['name'] + '\n'
 
             SubRace += '\n Attack Name: ' + z['name'] + '\n'
             SubRace += 'Desc: ' + z['desc'] + '\n'

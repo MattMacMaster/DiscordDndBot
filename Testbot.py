@@ -36,19 +36,28 @@ class BotMain:
         # TODO Need to have a means to place all these commands and import them in
         # TODO Data base built with two migration scripts, windows and ubuntu
         # TODO Flesh out database and homebrew interaction
+
         # TODO Error handling/ coverage
+
         # TODO Spell Check, recommendations
         # TODO Command Cooldowns
-        # TODO Clean up command help sheets and naming conventions, consistancy
 
-        # TODO Multiattack actions are fucky prints
-        # TODO Some monsters are not getting through
-        # TODO DMG res and immunities in arrays
+        # TODO Clean up command help sheets and naming conventions, consistancy
+        # TODO Update Readme for easy setup, most likely without a database - or sqlite setup
+
+        # TODO - Check a bunch of monsters and make sure they work
         # TODO Move to pi for 24/7 activity
-        # TODO $Spell fireball isnt showing 9th level dmg
         # TODO Class spell list filtering
-        # $spell Antipathy/Sympathy broke
-        # $monster Giant Wasp nothing returns wtf
+
+        # TODO $spell Antipathy/Sympathy broke
+
+        # TODO Clean up codebase to be less monolithic
+
+        # Notes
+        """
+        Discord api will most of the time just not throw errors for embed issues
+        Usually is a missing key or the length goes past 1024 characters
+        """
 
         """
         General Basic greeting commands that may be run on boot, add, etc...
@@ -265,6 +274,7 @@ class BotMain:
         @client.command(name='Monster')
         async def Main_Monster(ctx, *arg):
             embed = MonsterManager.GeneralMonster(name=arg)
+            print('completed embeding')
             await ctx.send(embed=embed)
 
         @client.command(name='Race')
