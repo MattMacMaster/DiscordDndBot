@@ -15,7 +15,6 @@ class SpellsManager:
         value = requests.get(
             'https://www.dnd5eapi.co/api/spells/{}'.format(name))
         value = json.loads(value.text)
-        print(value)
         if('error' not in value):
             embed = discord.Embed(
                 title='Spell Information - {}'.format(value['name']),
@@ -28,7 +27,7 @@ class SpellsManager:
                 embed.add_field(name='Description', value=RaceHandler.DescHandler(
                     value['desc'])[0:1024], inline=False)
                 embed.add_field(name='Description', value=RaceHandler.DescHandler(
-                    value['desc'])[1025:], inline=False)
+                    value['desc'])[1024:], inline=False)
             else:
                 embed.add_field(name='Description', value=RaceHandler.DescHandler(
                     value['desc']), inline=False)
@@ -63,7 +62,6 @@ class SpellsManager:
 
             embed.timestamp = datetime.utcnow()
             embed.set_footer(text='MattMaster Bots: Dnd')
-            print('PASSED')
         else:
             embed = CommsManager.failedRequest(name)
 
