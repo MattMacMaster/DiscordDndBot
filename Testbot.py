@@ -45,13 +45,14 @@ class BotMain:
         # TODO Clean up command help sheets and naming conventions, consistancy
         # TODO Update Readme for easy setup, most likely without a database - or sqlite setup
 
-        # TODO - Check a bunch of monsters and make sure they work
         # TODO Move to pi for 24/7 activity
         # TODO Class spell list filtering
 
         # TODO $spell Antipathy/Sympathy broke
 
         # TODO Clean up codebase to be less monolithic
+
+        # TODO make dmg immunites/resistances not array
 
         # Notes
         """

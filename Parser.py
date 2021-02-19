@@ -291,6 +291,17 @@ class start_equip(RaceHandler):
 
 class monster(RaceHandler):
     @staticmethod
+    def arrayhandle(arg):
+        if not arg:
+            return []
+        Proficiencies = ''
+        Raw_Proficiencies = arg
+        for x in Raw_Proficiencies:
+            Proficiencies += x + '\n'
+
+        return Proficiencies
+
+    @staticmethod
     def profHandler(arg):
         if not arg:
             return []
@@ -319,6 +330,7 @@ class monster(RaceHandler):
 
     @staticmethod
     def specialHandler(arg):
+
         if not arg:
             return []
         SubRace = ''
@@ -348,10 +360,10 @@ class monster(RaceHandler):
         # Per Attack, name, desc, bonus, damage:[]
         for z in Raw_SubRace:
             if(z['name'] == 'Multiattack'):
-                SubRace += z['name'] + ' - Choose ' + \
-                    str(z['options']['choose'])
+
                 SubRace += ' Options: \n'
                 for y in z['options']['from']:
+
                     for w in y:
                         SubRace += w['name'] + '\n'
 
@@ -360,7 +372,14 @@ class monster(RaceHandler):
             if('attack_bonus' in z):
                 SubRace += 'Attack Bonus: ' + str(z['attack_bonus']) + '\n'
             for x in z['damage']:
-                SubRace += 'Damage Type: ' + x['damage_type']['name'] + '\n'
-                SubRace += 'Damage: ' + x['damage_dice'] + '\n' + '\n'
-
+                if('choose' not in x):
+                    # Run normally
+                    SubRace += 'Damage Type: ' + \
+                        x['damage_type']['name'] + '\n'
+                    SubRace += 'Damage: ' + x['damage_dice'] + '\n' + '\n'
+                else:
+                    SubRace += ' Options: \n'
+                    for v in x['from']:
+                        SubRace += v['damage_type']['name'] + '\n'
+                        SubRace += v['damage_dice'] + '\n'
         return SubRace
