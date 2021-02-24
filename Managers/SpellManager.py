@@ -3,6 +3,7 @@ import discord
 import requests
 from Parser import RaceHandler
 from Parser import SpellsHandler
+from Parser import GeneralHandler
 import json
 from datetime import datetime
 
@@ -15,6 +16,8 @@ class SpellsManager:
         value = requests.get(
             'https://www.dnd5eapi.co/api/spells/{}'.format(name))
         value = json.loads(value.text)
+        print(value)
+
         if('error' not in value):
             embed = discord.Embed(
                 title='Spell Information - {}'.format(value['name']),
@@ -23,14 +26,8 @@ class SpellsManager:
             embed.add_field(
                 name='Level - $Spell/Level {value}', value=value['level'], inline=False)
             embed.add_field(name='Name', value=value['name'], inline=False)
-            if(len(RaceHandler.DescHandler(value['desc'])) >= 1024):
-                embed.add_field(name='Description', value=RaceHandler.DescHandler(
-                    value['desc'])[0:1024], inline=False)
-                embed.add_field(name='Description', value=RaceHandler.DescHandler(
-                    value['desc'])[1024:], inline=False)
-            else:
-                embed.add_field(name='Description', value=RaceHandler.DescHandler(
-                    value['desc']), inline=False)
+            embed = GeneralHandler.Desc_Handler(embed, RaceHandler.DescHandler(
+                value['desc']), name)
             if('higher_level' in value):
                 embed.add_field(name='Increased Level', value=RaceHandler.DescHandler(
                     value['higher_level']), inline=False)

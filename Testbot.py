@@ -36,6 +36,7 @@ class BotMain:
         # TODO Need to have a means to place all these commands and import them in
         # TODO Data base built with two migration scripts, windows and ubuntu
         # TODO Flesh out database and homebrew interaction
+        # TODO Clean up codebase to be less monolithic
 
         # TODO Error handling/ coverage
 
@@ -46,13 +47,8 @@ class BotMain:
         # TODO Update Readme for easy setup, most likely without a database - or sqlite setup
 
         # TODO Move to pi for 24/7 activity
-        # TODO Class spell list filtering
 
-        # TODO $spell Antipathy/Sympathy broke
-
-        # TODO Clean up codebase to be less monolithic
-
-        # TODO make dmg immunites/resistances not array
+        # TODO having certian characters fuckls the query EX: $Class/Start-Equip warlock,
 
         # Notes
         """
@@ -253,7 +249,7 @@ class BotMain:
             embed = LanguageManager.Languages(name=' '.join(arg))
             await ctx.send(embed=embed)
 
-        @client.command(name='Ability-scores')
+        @client.command(name='AbilityScore')
         async def Main_Score(ctx, *arg):
             embed = AbilityScoreManager.AbilityScores(name=' '.join(arg))
             await ctx.send(embed=embed)
@@ -396,7 +392,7 @@ class BotMain:
         """
         @client.command(name='Test')
         async def Test_Func(ctx, *arg):
-            embed = Tester.Test_Func(name=arg)
+            embed = Tester.Desc_FuncTest(name=arg)
             await ctx.send(embed=embed)
 
         """

@@ -1,3 +1,6 @@
+import math
+
+
 class GeneralHandler:
     @staticmethod
     def emptyHandler(arg):
@@ -5,6 +8,39 @@ class GeneralHandler:
             return 'None'
         else:
             return arg
+
+    # Expecting 3 arguments, embed object, the text after formatting, and the name
+    @staticmethod
+    def Desc_Handler(embed, description, name):
+        text_length = 1024
+        json_length = len(description)
+        # Total needed embeds to fit the text
+        total_embeds = math.ceil(json_length / text_length)
+
+        if(json_length >= text_length):
+            counter = 0
+            # Need to account for one embed, many, and the last
+            while total_embeds > counter:
+
+                if(counter == 0):
+                    embed.add_field(
+                        name='Description', value=description[0:text_length*(counter+1)],
+                        inline=False
+                    )
+
+                    counter = counter + 1
+                else:
+                    embed.add_field(
+                        name='Cont..', value=description[text_length*counter:text_length*(counter+1)],
+                        inline=False
+                    )
+                    counter = counter + 1
+            return embed
+        else:
+            embed.add_field(
+                name='Description', value=description
+            )
+            return embed
 
 
 class RaceHandler:
@@ -72,6 +108,7 @@ class RaceHandler:
         SubRace = ''
         Raw_SubRace = arg
         for x in Raw_SubRace:
+
             SubRace += x + '\n'
 
         return SubRace
