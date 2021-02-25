@@ -1,11 +1,22 @@
 # DiscordDndBot
-Just a personal project and the first of many discord bots to come.
+A personal Project dreamt up from transistioning from hosting DnD in person to online
+over discord to help with the difficulties of online.This project uses two major api's to assist in the development of this project.
 
-Using python and the discord library, as well as git and guthub for version management.
+# Discordpy
+I use this library as this projects goal is a bot that is available for use on discord and is publicly available for use to anyone with the ability to add it to their respective servers
 
-#TODO going to add migration scripts to create a no_SQL database that hosts all homebrew creations and allows them to be requested via the command system
-Also add a comprehensive means of starting it up and maybye have a way to easily add it
+# D&D 5e API
+I utilized this public API(http://www.dnd5eapi.co/) for the minimum core game data that the bot could use.
 
-For Deployment, will be porting this over to a raspberry pi that will host this bot 24/7
+# Technology Summary
+Windows 10, VSCode, Python - Version(3.8.2), Discordpy(https://discordpy.readthedocs.io/en/latest/api.html), and the 5e API(http://www.dnd5eapi.co/)
 
-Need a way of iterating through layered json and displaying it cleanly
+# Future Additions
+- Add a did you mean clause on failed requests
+- Further Error Handling
+- Add Command Cooldowns
+- Make codebase less monolithic and more reuseable
+- Add Homebrew manager/handler with local database?
+
+
+# Local Setup

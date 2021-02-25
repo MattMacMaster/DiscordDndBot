@@ -35,7 +35,7 @@ class BotMain:
         client = commands.Bot(command_prefix='$', case_insensitive=True)
         client.remove_command('help')
 
-        # TODO Rules and rules sections - rules
+        # TODO Update Read me, explain how it works - setup, env needs
 
         # TODO Error handling/ coverage
         # TODO Spell Check, recommendations
