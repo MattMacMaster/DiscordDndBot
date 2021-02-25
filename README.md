@@ -1,6 +1,6 @@
 # DiscordDndBot
 A personal Project dreamt up from transistioning from hosting DnD in person to online
-over discord to help with the difficulties of online.This project uses two major api's to assist in the development of this project.You can add the bot [here](https://discord.com/api/oauth2/authorize?client_id=769265469306830898&permissions=0&scope=bot)
+over discord to help with the difficulties of online.This project uses two major api's to assist in the development of this project.You can add the bot [here](https://discord.com/api/oauth2/authorize?client_id=769265469306830898&permissions=0&scope=bot).
 
 # Discordpy
 I use this library as this projects goal is a bot that is available for use on discord and is publicly available for use to anyone with the ability to add it to their respective servers
