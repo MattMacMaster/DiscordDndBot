@@ -24,6 +24,7 @@ from Managers.MonsterManager import MonsterManager
 from Managers.FeatureManager import FeatureManager
 from Managers.TestManager import Tester
 from Managers.MechanicManager import MechanicManager
+from Managers.RulesManager import RulesHandler
 
 
 class BotMain:
@@ -34,7 +35,6 @@ class BotMain:
         client = commands.Bot(command_prefix='$', case_insensitive=True)
         client.remove_command('help')
 
-        # TODO add conditions,damagetypes,schools - Mechanics
         # TODO Rules and rules sections - rules
 
         # TODO Error handling/ coverage
@@ -109,7 +109,7 @@ class BotMain:
                             value='$Monsters/help', inline=True)
             embed.add_field(name='Mechanics',
                             value='$Mechanic/help', inline=True)
-            embed.add_field(name='Rules', value='Coming Soon', inline=True)
+            embed.add_field(name='Rules', value='$Rules/help', inline=True)
             embed.add_field(name='Homebrews', value='Coming Soon', inline=True)
             embed.timestamp = datetime.utcnow()
             embed.set_footer(text='MattMaster Bots: Dnd')
@@ -213,10 +213,14 @@ class BotMain:
         async def Rules_help(ctx):
             embed = discord.Embed(
                 title='Rules Info Help - $Rules/help',
-                description='Coming Soon',
+                description='Rules that are core set only',
                 colour=discord.Colour.red()
             )
-            #embed.add_field(name='General', value=Response.Rules_Data["General"], inline=False)
+            embed.add_field(
+                name='Rules', value=Response.Rules_Data["Rules"], inline=False)
+            embed.add_field(
+                name='Rules Section', value=Response.Rules_Data["Rules-Sections"], inline=False)
+
             embed.timestamp = datetime.utcnow()
             embed.set_footer(text='MattMaster Bots: Dnd')
             await ctx.send(embed=embed)
@@ -412,6 +416,19 @@ class BotMain:
         @client.command(name='Mechanic/School')
         async def Mech_School(ctx, *arg):
             embed = MechanicManager.GeneralSchool(name=arg)
+            await ctx.send(embed=embed)
+
+        """
+        Rules Subset
+        """
+        @client.command(name='Rules')
+        async def Rules(ctx, *arg):
+            embed = RulesHandler.GeneralRule(name=arg)
+            await ctx.send(embed=embed)
+
+        @client.command(name='Rules_Sec')
+        async def Rules_Sec(ctx, *arg):
+            embed = RulesHandler.RuleSec(name=arg)
             await ctx.send(embed=embed)
 
         """

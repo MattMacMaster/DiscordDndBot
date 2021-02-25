@@ -92,9 +92,13 @@ class Response:
         """
     }
     Rules_Data = {
-        "General":
+        "Rules":
         """
-        Soon
+        $Rules {name}
+        """,
+        "Rules-Sections":
+        """
+        $Rules_Sec {name}
         """
     }
 
