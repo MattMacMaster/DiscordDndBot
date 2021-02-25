@@ -30,5 +30,5 @@ DISCORD_GUILD= {Server Name}
 ```
 Then simply run in your respective command line
 ```
-python 
+python DnDBot.py
 ```
