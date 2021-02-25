@@ -44,9 +44,14 @@ class MechanicManager:
                 title='Damage Type Information - {}'.format(value['name']),
                 colour=discord.Colour.red()
             )
+            embed.add_field(name='Name',
+                            value=value['name'], inline=False)
+
+            embed = GeneralHandler.Desc_Handler(
+                embed, RaceHandler.DescHandler(value['desc']), name)
         else:
             embed = CommsManager.failedRequest(name)
-            return embed
+        return embed
 
     @staticmethod
     def GeneralSchool(name):
@@ -60,6 +65,11 @@ class MechanicManager:
                 title='Magic School Information - {}'.format(value['name']),
                 colour=discord.Colour.red()
             )
+            embed.add_field(name='Name',
+                            value=value['name'], inline=False)
+
+            embed = GeneralHandler.Desc_Handler(
+                embed, value['desc'], name)
         else:
             embed = CommsManager.failedRequest(name)
-            return embed
+        return embed
