@@ -19,6 +19,7 @@ class CommsManager():
             value = value.replace('\'', "")
             value = value.lower()
             value = value.replace(' ', '-')
+            value = value.replace(',', '')
             return value
         else:
             value = ''.join(arg)

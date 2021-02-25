@@ -1,5 +1,5 @@
-#This file will be the central point for all messages from the dnd Bot
-#This may include simply strings or api calls if necessary
+# This file will be the central point for all messages from the dnd Bot
+# This may include simply strings or api calls if necessary
 
 class Response:
 
@@ -23,7 +23,7 @@ class Response:
         "General": """
         $Monster {MonsterName}
         """,
-        "Main": 
+        "Main":
         """
         $Monsters/CR {CR}
         """
@@ -32,7 +32,7 @@ class Response:
         "General": """
         $Class {ClassName}
         """,
-        "Main": 
+        "Main":
         """
         $Class/Spells {ClassName},
         $Class/SubClasses {ClassName},
@@ -42,13 +42,13 @@ class Response:
         """
     }
     Equipment_Data = {
-        "General": 
+        "General":
         """
         $Equip {Name},
         $MagicItem {Name},
 
         """
- 
+
     }
     Spell_Data = {
         "General":
@@ -57,8 +57,8 @@ class Response:
         $Spell/School {Schoolname}
         $Spell/Level {Level}
         """,
-    
-        "Main": 
+
+        "Main":
         """ 
          $Spell/Desc {Spellname},
          $Spell/Range {Spellname},
@@ -78,11 +78,17 @@ class Response:
         """
     }
     Mechanic_Data = {
-        "General":
+        "Conditions":
         """
-        $Mechanics/Conditions {name},
-        $Mechanics/Damage_Types {name},
-        $Mechanics/Schools {name},
+        $Mechanic/Condition {name}
+        """,
+        "Damage_Types":
+        """
+        $Mechanic/Damage_Type {name}
+        """,
+        "Schools":
+        """
+        $Mechanic/School {name}
         """
     }
     Rules_Data = {
@@ -91,9 +97,8 @@ class Response:
         Soon
         """
     }
-    
 
-    #Please god find a better way to format this in the embed tool
+    # Please god find a better way to format this in the embed tool
     Character_Data = {
         "Ability Scores": """
         Ex: ($Ability-scores con),
@@ -135,10 +140,12 @@ class Response:
               If you think my information is incorrect or outdated please message
                my creater to fix my ways.
                """
+
     @staticmethod
     def help(self):
         return """Here is are the all the beginning level commands that are currently available,
          follow their respective helpers for more information!"""
+
     @staticmethod
     def com_help(self, value):
         return 'Here are the currently known commands for {} Information!'.format(value)
@@ -146,5 +153,3 @@ class Response:
     @staticmethod
     def guild_join(value):
         return 'Hello {}! \n I am in version 1.0.0. \n I am officially ready to be usefull but please be nice cause I\'m new here. \n For my command information type $help in your designated bot channel!'.format(value)
-
-

@@ -23,6 +23,7 @@ from Managers.ClassManager import ClassManager
 from Managers.MonsterManager import MonsterManager
 from Managers.FeatureManager import FeatureManager
 from Managers.TestManager import Tester
+from Managers.MechanicManager import MechanicManager
 
 
 class BotMain:
@@ -33,22 +34,22 @@ class BotMain:
         client = commands.Bot(command_prefix='$', case_insensitive=True)
         client.remove_command('help')
 
-        # TODO Need to have a means to place all these commands and import them in
-        # TODO Data base built with two migration scripts, windows and ubuntu
-        # TODO Flesh out database and homebrew interaction
-        # TODO Clean up codebase to be less monolithic
+        # TODO add conditions,damagetypes,schools - Mechanics
+        # TODO Rules and rules sections - rules
 
         # TODO Error handling/ coverage
-
         # TODO Spell Check, recommendations
-        # TODO Command Cooldowns
 
         # TODO Clean up command help sheets and naming conventions, consistancy
+        # TODO Command Cooldowns
+
+        # TODO Clean up codebase to be less monolithic
+        # TODO Flesh out database and homebrew interaction
+
         # TODO Update Readme for easy setup, most likely without a database - or sqlite setup
-
+        # TODO Data base built with two migration scripts, windows and ubuntu
+        # TODO Test out web scraper for missing dataw
         # TODO Move to pi for 24/7 activity
-
-        # TODO having certian characters fuckls the query EX: $Class/Start-Equip warlock,
 
         # Notes
         """
@@ -106,7 +107,8 @@ class BotMain:
             embed.add_field(name='Spells', value='$Spell/help', inline=True)
             embed.add_field(name='Monsters',
                             value='$Monsters/help', inline=True)
-            embed.add_field(name='Mechanics', value='Coming Soon', inline=True)
+            embed.add_field(name='Mechanics',
+                            value='$Mechanic/help', inline=True)
             embed.add_field(name='Rules', value='Coming Soon', inline=True)
             embed.add_field(name='Homebrews', value='Coming Soon', inline=True)
             embed.timestamp = datetime.utcnow()
@@ -219,13 +221,19 @@ class BotMain:
             embed.set_footer(text='MattMaster Bots: Dnd')
             await ctx.send(embed=embed)
 
-        @client.command(name='Mechanics/help')
+        @client.command(name='Mechanic/help')
         async def Mechanics_help(ctx):
             embed = discord.Embed(
                 title='Mechanics Info Help - $Mechanics/help',
-                description='Coming Soon',
+                description='This Section Covers Game Mechanics - Conditions, Damage Types, and Schools',
                 colour=discord.Colour.red()
             )
+            embed.add_field(
+                name='Condition', value=Response.Mechanic_Data["Conditions"], inline=False)
+            embed.add_field(
+                name='Dmg_Type', value=Response.Mechanic_Data["Damage_Types"], inline=False)
+            embed.add_field(
+                name='School', value=Response.Mechanic_Data["Schools"], inline=False)
             embed.timestamp = datetime.utcnow()
             embed.set_footer(text='MattMaster Bots: Dnd')
             await ctx.send(embed=embed)
@@ -388,7 +396,26 @@ class BotMain:
             await ctx.send(embed=embed)
 
         """
-        Test Function - Used to test json algorithm
+        Mechanics Subset 
+        Condition, school, and damage type
+        """
+        @client.command(name='Mechanic/Condition')
+        async def Mech_Con(ctx, *arg):
+            embed = MechanicManager.GeneralCondition(name=arg)
+            await ctx.send(embed=embed)
+
+        @client.command(name='Mechanic/Damage_Type')
+        async def Mech_Type(ctx, *arg):
+            embed = MechanicManager.GeneralDamageType(name=arg)
+            await ctx.send(embed=embed)
+
+        @client.command(name='Mechanic/School')
+        async def Mech_School(ctx, *arg):
+            embed = MechanicManager.GeneralSchool(name=arg)
+            await ctx.send(embed=embed)
+
+        """
+        Test Function - Used to test json 
         """
         @client.command(name='Test')
         async def Test_Func(ctx, *arg):
