@@ -20,3 +20,15 @@ Windows 10, VSCode, Python - Version(3.8.2), [Discordpy](https://discordpy.readt
 
 
 # Local Setup
+Ensure that Python is enabled on your machine
+
+There is a env file utilized in the bot, which can be made in the root directory.
+```
+# .env
+DISCORD_TOKEN= {Discord Token}
+DISCORD_GUILD= {Server Name}
+```
+Then simply run in your respective command line
+```
+python 
+```
