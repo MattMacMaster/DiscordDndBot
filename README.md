@@ -1,6 +1,6 @@
 # DiscordDndBot
 A personal Project dreamt up from transistioning from hosting DnD in person to online
-over discord to help with the difficulties of online.This project uses two major api's to assist in the development of this project.
+over discord to help with the difficulties of online.This project uses two major api's to assist in the development of this project.You can add the bot [here](https://discord.com/api/oauth2/authorize?client_id=769265469306830898&permissions=0&scope=bot)
 
 # Discordpy
 I use this library as this projects goal is a bot that is available for use on discord and is publicly available for use to anyone with the ability to add it to their respective servers
@@ -23,6 +23,8 @@ Windows 10, VSCode, Python - Version(3.8.2), [Discordpy](https://discordpy.readt
 Ensure that Python is enabled on your machine
 
 There is a env file utilized in the bot, which can be made in the root directory.
+The discord token credential can be found [here](https://discord.com/developers/docs/intro) on appplications and General information.
+
 ```
 # .env
 DISCORD_TOKEN= {Discord Token}
