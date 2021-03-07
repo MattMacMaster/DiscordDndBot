@@ -3,6 +3,7 @@ from datetime import datetime
 from Parser import RaceHandler
 import math
 import requests
+from Parser import GeneralHandler
 from Managers.CommManager import CommsManager
 import json
 
@@ -45,7 +46,7 @@ class Tester:
     def Desc_FuncTest(name):
         name = CommsManager.paramHandler(name)
         value = requests.get(
-            'https://www.dnd5eapi.co/api/magic-items/{}'.format(name))
+            'https://www.dnd5eapi.co/api/proficiencies/')
 
         # Needs to use one or the other sometimes, -annoying
         # value = eval(value.text)
@@ -54,15 +55,17 @@ class Tester:
         # Actual Call of discord
         if('error' not in value):
             embed = discord.Embed(
-                title='Test Function {}'.format(name),
+                title='Proficiencies - {}'.format(name),
                 colour=discord.Colour.red()
             )
-            embed = Tester.Test_Func(
-                embed, RaceHandler.DescHandler(value['desc']), name)
+            embed.add_field(name='Entries Found',
+                            value=value['count'], inline=False)
+
+            embed = GeneralHandler.index_Handler2(
+                embed, value['results'], name)
 
             embed.timestamp = datetime.utcnow()
             embed.set_footer(text='MattMaster Bots: Dnd')
-            print("SENT")
         else:
             embed = CommsManager.failedRequest(name)
 

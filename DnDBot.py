@@ -40,6 +40,7 @@ class BotMain:
         # TODO Error handling/ coverage
         # TODO Spell Check, recommendations
 
+        # TODO Add a means to show all potions of a command
         # TODO Clean up command help sheets and naming conventions, consistancy
         # TODO Command Cooldowns
 
@@ -263,17 +264,26 @@ class BotMain:
 
         @client.command(name='AbilityScore')
         async def Main_Score(ctx, *arg):
-            embed = AbilityScoreManager.AbilityScores(name=' '.join(arg))
+            if(len(arg) == 0):
+                embed = AbilityScoreManager.AbilityScoresIndex(name=arg)
+            else:
+                embed = AbilityScoreManager.AbilityScores(name=' '.join(arg))
             await ctx.send(embed=embed)
 
         @client.command(name='Skill')
         async def Main_Skill(ctx, *arg):
-            embed = SkillsManager.GeneralSkills(name=' '.join(arg))
+            if(len(arg) == 0):
+                embed = SkillsManager.SkillsIndex(name=arg)
+            else:
+                embed = SkillsManager.GeneralSkills(name=' '.join(arg))
             await ctx.send(embed=embed)
 
         @client.command(name='Proficiencies')
         async def Main_Prof(ctx, *arg):
-            embed = ProfManager.Proficiencies(name=' '.join(arg))
+            if(len(arg) == 0):
+                embed = ProfManager.ProficienciesIndex(name='index')
+            else:
+                embed = ProfManager.Proficiencies(name=' '.join(arg))
             await ctx.send(embed=embed)
         """
         Classified as Character Data ^
@@ -436,7 +446,11 @@ class BotMain:
         """
         @client.command(name='Test')
         async def Test_Func(ctx, *arg):
-            embed = Tester.Desc_FuncTest(name=arg)
+            print(arg)
+            if(len(arg) == 0):
+                embed = Tester.Desc_FuncTest(name='Index')
+            else:
+                embed = Tester.Desc_FuncTest(name=arg)
             await ctx.send(embed=embed)
 
         """

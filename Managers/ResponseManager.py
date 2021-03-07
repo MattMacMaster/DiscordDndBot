@@ -105,13 +105,13 @@ class Response:
     # Please god find a better way to format this in the embed tool
     Character_Data = {
         "Ability Scores": """
-        Ex: ($Ability-scores con),
-         $Ability-scores {name},
+        Ex: ($AbilityScore con),
+         $AbilityScore {name},
         """,
         "Skills":
         """
-        Ex: ($Skills Arcana),
-        $Skills {name},
+        Ex: ($Skill Arcana),
+        $Skill {name},
            """,
         "Proficiencies":
         """

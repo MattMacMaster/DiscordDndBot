@@ -9,7 +9,62 @@ class GeneralHandler:
         else:
             return arg
 
+    @staticmethod
+    def indexHandler(arg):
+        Results = ''
+        for x in arg:
+            Results += x['name'] + '\n'
+        print(len(Results))
+        return Results
+    # Passing array of objects with {index:'',name:'', url:''}
+    # Need to iterate through each and add embeds if it hits the limit
+
+    @staticmethod
+    def index_Handler2(embed, arg, name):
+        text_length = 1024
+        Results = ''
+
+        for x in arg:
+            Results += x['name'] + '\n'
+        json_length = len(Results)
+        # Total needed embeds to fit the text
+        total_embeds = math.ceil(json_length / text_length)
+
+        if(json_length >= text_length):
+            counter = 0
+            # Need to account for one embed, many, and the last
+            while total_embeds > counter:
+                if(counter == 0):
+                    print('first')
+                    embed.add_field(
+                        name=name, value=Results[counter:text_length*(
+                            counter+1)],
+                        inline=False
+                    )
+                    counter = counter + 1
+                elif(counter == total_embeds):
+                    print('last')
+                    embed.add_field(
+                        name='Cont..', value=Results[text_length*counter:],
+                        inline=False
+                    )
+                    counter = counter + 1
+                else:
+                    print('Mid')
+                    embed.add_field(
+                        name='Cont..', value=Results[text_length*counter:text_length*(counter+1)],
+                        inline=False
+                    )
+                    counter = counter + 1
+            return embed
+        else:
+            embed.add_field(
+                name='Results', value=Results
+            )
+            return embed
+
     # Expecting 3 arguments, embed object, the text after formatting, and the name
+
     @staticmethod
     def Desc_Handler(embed, description, name):
         text_length = 1024
@@ -24,7 +79,8 @@ class GeneralHandler:
 
                 if(counter == 0):
                     embed.add_field(
-                        name='Description', value=description[0:text_length*(counter+1)],
+                        name=name, value=description[counter:text_length*(
+                            counter+1)],
                         inline=False
                     )
 
