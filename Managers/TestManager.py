@@ -46,7 +46,7 @@ class Tester:
     def Desc_FuncTest(name):
         name = CommsManager.paramHandler(name)
         value = requests.get(
-            'https://www.dnd5eapi.co/api/proficiencies/')
+            'https://www.dnd5eapi.co/api/languages/')
 
         # Needs to use one or the other sometimes, -annoying
         # value = eval(value.text)

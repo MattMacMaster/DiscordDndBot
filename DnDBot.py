@@ -259,7 +259,10 @@ class BotMain:
         """
         @client.command(name='Language')
         async def Main_Language(ctx, *arg):
-            embed = LanguageManager.Languages(name=' '.join(arg))
+            if(len(arg) == 0):
+                embed = LanguageManager.LanguageIndex(name='Index')
+            else:
+                embed = LanguageManager.Languages(name=arg)
             await ctx.send(embed=embed)
 
         @client.command(name='AbilityScore')
