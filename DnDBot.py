@@ -36,6 +36,7 @@ class BotMain:
         client.remove_command('help')
 
         # TODO Update Read me, explain how it works - setup, env needs
+        # TODO Features Index is not working for some reason
 
         # TODO Error handling/ coverage
         # TODO Spell Check, recommendations
@@ -311,7 +312,10 @@ class BotMain:
 
         @client.command(name='Trait')
         async def Main_Trait(ctx, *arg):
-            embed = TraitManager.Traits(name=' '.join(arg))
+            if(len(arg) == 0):
+                embed = TraitManager.TraitIndex(name='Index')
+            else:
+                embed = TraitManager.Traits(name=' '.join(arg))
             await ctx.send(embed=embed)
 
         @client.command(name='Feature')

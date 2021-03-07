@@ -23,34 +23,34 @@ class GeneralHandler:
     def index_Handler2(embed, arg, name):
         text_length = 1024
         Results = ''
-
         for x in arg:
             Results += x['name'] + '\n'
         json_length = len(Results)
+
         # Total needed embeds to fit the text
         total_embeds = math.ceil(json_length / text_length)
-
         if(json_length >= text_length):
             counter = 0
+            print(json_length)
+            print(total_embeds)
             # Need to account for one embed, many, and the last
             while total_embeds > counter:
                 if(counter == 0):
-                    print('first')
                     embed.add_field(
                         name=name, value=Results[counter:text_length*(
                             counter+1)],
                         inline=False
                     )
                     counter = counter + 1
-                elif(counter == total_embeds):
+                elif(counter == total_embeds - 1):
                     print('last')
+                    print(text_length*counter)
                     embed.add_field(
                         name='Cont..', value=Results[text_length*counter:],
                         inline=False
                     )
                     counter = counter + 1
                 else:
-                    print('Mid')
                     embed.add_field(
                         name='Cont..', value=Results[text_length*counter:text_length*(counter+1)],
                         inline=False

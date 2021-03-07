@@ -46,7 +46,7 @@ class Tester:
     def Desc_FuncTest(name):
         name = CommsManager.paramHandler(name)
         value = requests.get(
-            'https://www.dnd5eapi.co/api/languages/')
+            'https://www.dnd5eapi.co/api/features/')
 
         # Needs to use one or the other sometimes, -annoying
         # value = eval(value.text)
@@ -55,7 +55,7 @@ class Tester:
         # Actual Call of discord
         if('error' not in value):
             embed = discord.Embed(
-                title='Proficiencies - {}'.format(name),
+                title='Test - {}'.format(name),
                 colour=discord.Colour.red()
             )
             embed.add_field(name='Entries Found',
