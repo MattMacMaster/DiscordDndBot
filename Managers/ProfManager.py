@@ -59,7 +59,7 @@ class ProfManager:
             embed.add_field(name='Entries Found',
                             value=value['count'], inline=False)
 
-            embed = GeneralHandler.index_Handler2(
+            embed = GeneralHandler.index_Handler3(
                 embed, value['results'], name)
 
             embed.timestamp = datetime.utcnow()

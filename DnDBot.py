@@ -37,6 +37,7 @@ class BotMain:
 
         # TODO Update Read me, explain how it works - setup, env needs
         # TODO Features Index is not working for some reason
+        # TODO Feature options dont all work - fix is show index's
 
         # TODO Error handling/ coverage
         # TODO Spell Check, recommendations
@@ -335,12 +336,21 @@ class BotMain:
 
         @client.command(name='Equip')
         async def Main_Equip(ctx, *arg):
-            embed = EquipManager.Equipment(name=arg)
+            if(len(arg) == 0):
+                embed = EquipManager.EquipmentIndex(name='Index')
+
+            else:
+                embed = EquipManager.Equipment(name=arg)
+
             await ctx.send(embed=embed)
 
         @client.command(name='MagicItem')
         async def Main_MagicItem(ctx, *arg):
-            embed = EquipManager.MagicItem(name=arg)
+            if(len(arg) == 0):
+                embed = EquipManager.MagicItemIndex(name='Index')
+            else:
+                embed = EquipManager.MagicItem(name=arg)
+
             await ctx.send(embed=embed)
 
         """
@@ -453,7 +463,16 @@ class BotMain:
         """
         @client.command(name='Test')
         async def Test_Func(ctx, *arg):
-            print(arg)
+            """
+            # This is for trying to get Features index to work - TODO fix it
+            if(len(arg) == 0):
+                print("This one")
+                embed = Tester.Desc_FuncTest(name='Index')
+            else:
+                embed = Tester.Desc_FuncTest(name=arg)
+            for x in embed:
+                await ctx.send(embed=x)
+            """
             if(len(arg) == 0):
                 embed = Tester.Desc_FuncTest(name='Index')
             else:

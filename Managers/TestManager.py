@@ -42,11 +42,43 @@ class Tester:
             )
             return embed
 
+    """
+    # This is DEEMED legacy and should remain untouched till features is resolved
     @staticmethod
     def Desc_FuncTest(name):
         name = CommsManager.paramHandler(name)
         value = requests.get(
             'https://www.dnd5eapi.co/api/features/')
+
+        # Needs to use one or the other sometimes, -annoying
+        # value = eval(value.text)
+        value = json.loads(value.text)
+        # CommsManager.jsonHandler(value)
+        # Actual Call of discord
+        print(value)
+        if('error' not in value):
+            embed = discord.Embed(
+                title='Test - {}'.format(name),
+                colour=discord.Colour.red()
+            )
+            embed.add_field(name='Entries Found',
+                            value=value['count'], inline=False)
+
+            embed.timestamp = datetime.utcnow()
+            embed.set_footer(text='MattMaster Bots: Dnd')
+            embed = GeneralHandler.index_Handler3(
+                embed, value['results'], name)
+            print(embed)
+        else:
+            embed = CommsManager.failedRequest(name)
+
+        return embed
+    """
+    @staticmethod
+    def Desc_FuncTest(name):
+        name = CommsManager.paramHandler(name)
+        value = requests.get(
+            'https://www.dnd5eapi.co/api/equipment/')
 
         # Needs to use one or the other sometimes, -annoying
         # value = eval(value.text)
@@ -60,10 +92,8 @@ class Tester:
             )
             embed.add_field(name='Entries Found',
                             value=value['count'], inline=False)
-
             embed = GeneralHandler.index_Handler2(
                 embed, value['results'], name)
-
             embed.timestamp = datetime.utcnow()
             embed.set_footer(text='MattMaster Bots: Dnd')
         else:

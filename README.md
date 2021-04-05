@@ -17,6 +17,8 @@ Windows 10, VSCode, Python - Version(3.8.2), [Discordpy](https://discordpy.readt
 - Add Command Cooldowns
 - Make codebase less monolithic and more reuseable
 - Add Homebrew manager/handler with local database?
+- Unit Testing
+- Hardcore Code thinning and optimizing
 
 
 # Local Setup

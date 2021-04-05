@@ -18,6 +18,54 @@ For some reason this is empty
 
 class EquipManager:
     @staticmethod
+    def MagicItemIndex(name):
+        name = CommsManager.paramHandler(name)
+        value = requests.get(
+            'https://www.dnd5eapi.co/api/magic-items/')
+        value = json.loads(value.text)
+        # CommsManager.jsonHandler(value)
+        # Actual Call of discord
+        if('error' not in value):
+            embed = discord.Embed(
+                title='MagicItems - {}'.format(name),
+                colour=discord.Colour.red()
+            )
+            embed.add_field(name='Entries Found',
+                            value=value['count'], inline=False)
+            embed = GeneralHandler.index_Handler2(
+                embed, value['results'], name)
+            embed.timestamp = datetime.utcnow()
+            embed.set_footer(text='MattMaster Bots: Dnd')
+        else:
+            embed = CommsManager.failedRequest(name)
+
+        return embed
+
+    @staticmethod
+    def EquipmentIndex(name):
+        name = CommsManager.paramHandler(name)
+        value = requests.get(
+            'https://www.dnd5eapi.co/api/equipment/')
+        value = json.loads(value.text)
+        # CommsManager.jsonHandler(value)
+        # Actual Call of discord
+        if('error' not in value):
+            embed = discord.Embed(
+                title='Equipments - {}'.format(name),
+                colour=discord.Colour.red()
+            )
+            embed.add_field(name='Entries Found',
+                            value=value['count'], inline=False)
+            embed = GeneralHandler.index_Handler2(
+                embed, value['results'], name)
+            embed.timestamp = datetime.utcnow()
+            embed.set_footer(text='MattMaster Bots: Dnd')
+        else:
+            embed = CommsManager.failedRequest(name)
+
+        return embed
+
+    @staticmethod
     def Equipment(name):
         name = CommsManager.paramHandler(name)
         value = requests.get(

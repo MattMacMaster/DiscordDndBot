@@ -14,7 +14,6 @@ class GeneralHandler:
         Results = ''
         for x in arg:
             Results += x['name'] + '\n'
-        print(len(Results))
         return Results
     # Passing array of objects with {index:'',name:'', url:''}
     # Need to iterate through each and add embeds if it hits the limit
@@ -24,17 +23,25 @@ class GeneralHandler:
         text_length = 1024
         Results = ''
         for x in arg:
-            Results += x['name'] + '\n'
+            Results += x['index'] + '\n'
         json_length = len(Results)
 
         # Total needed embeds to fit the text
         total_embeds = math.ceil(json_length / text_length)
         if(json_length >= text_length):
             counter = 0
+
             print(json_length)
             print(total_embeds)
             # Need to account for one embed, many, and the last
+            # 5>counter is fine
+            # total_embeds > 6
+            # Entry 5 is fucked?
             while total_embeds > counter:
+                if(counter == 6):
+                    print(Results[counter:text_length*(
+                        counter+1)])
+                    counter = counter + 1
                 if(counter == 0):
                     embed.add_field(
                         name=name, value=Results[counter:text_length*(
@@ -56,6 +63,45 @@ class GeneralHandler:
                         inline=False
                     )
                     counter = counter + 1
+            return embed
+        else:
+            embed.add_field(
+                name='Results', value=Results
+            )
+            return embed
+
+    @staticmethod
+    def index_Handler3(embed, arg, name, counter=0):
+        # There is a hard limit to 6000 characters or u need another embed
+        text_length = 1024
+        to_be_tupled = []
+        Results = ''
+        for x in arg:
+            Results += x['index'] + '\n'
+        json_length = len(Results)
+        total_embeds = math.ceil(json_length / text_length)
+
+        print(json_length)
+        if(json_length > 6000):
+            # Return a tuple of embeds and send them all
+            while total_embeds > counter:
+                if(counter % 5 == 0):
+                    to_be_tupled.append(embed)
+                    embed = embed
+                embed.add_field(
+                    name='Cont..', value=Results[text_length*counter:text_length*(counter+1)],
+                    inline=False
+                )
+                counter = counter + 1
+            return tuple(to_be_tupled)
+            # Total needed embeds to fit the text
+        elif(json_length >= text_length):
+            while total_embeds > counter:
+                embed.add_field(
+                    name='Cont..', value=Results[text_length*counter:text_length*(counter+1)],
+                    inline=False
+                )
+                counter = counter + 1
             return embed
         else:
             embed.add_field(
