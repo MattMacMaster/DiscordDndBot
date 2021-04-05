@@ -222,6 +222,7 @@ class ClassManager:
         value = json.loads(value.text)
         # CommsManager.jsonHandler(value)
         # Actual Call of discord
+        print(value)
         if('error' not in value):
             embed = discord.Embed(
                 title='Classes - {}'.format(name),

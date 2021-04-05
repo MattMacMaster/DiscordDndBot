@@ -103,7 +103,7 @@ class BotMain:
             )
             embed.add_field(name='Character Info',
                             value="$Character_info/help", inline=True)
-            embed.add_field(name='Classes', value='$Classes/help', inline=True)
+            embed.add_field(name='Class', value='$Class/help', inline=True)
             embed.add_field(name='Races', value='$Races/help', inline=True)
             embed.add_field(name='Equipment',
                             value='$Equipment/help', inline=True)
@@ -171,7 +171,7 @@ class BotMain:
 
             await ctx.send(embed=embed)
 
-        @client.command(name='Classes/help')
+        @client.command(name='Class/help')
         async def Classes_help(ctx):
             embed = discord.Embed(
                 title='Classes Info Help - $Classes/help',
@@ -326,12 +326,20 @@ class BotMain:
 
         @client.command(name='Spell')
         async def Main_Spell(ctx, *arg):
-            embed = SpellsManager.GeneralSpell(name=' '.join(arg))
+            if(len(arg) == 0):
+                embed = SpellsManager.IndexSpell(name='Index')
+            else:
+                embed = SpellsManager.GeneralSpell(name=' '.join(arg))
             await ctx.send(embed=embed)
 
         @client.command(name='Class')
-        async def Main_Class(ctx, arg):
-            embed = ClassManager.GeneralClass(name=arg)
+        async def Main_Class(ctx, *arg):
+            if(len(arg) == 0):
+                print('reaeeee')
+                embed = ClassManager.IndexClasses(name='Index')
+            else:
+                print('ran')
+                embed = ClassManager.GeneralClass(name=arg)
             await ctx.send(embed=embed)
 
         @client.command(name='Equip')
@@ -385,7 +393,10 @@ class BotMain:
 
         @client.command(name='Spell/School')
         async def Spell_School(ctx, arg):
-            embed = SpellsManager.School(name=arg)
+            if(len(arg) == 0):
+                embed = MechanicManager.IndexSchools(name='Index')
+            else:
+                embed = SpellsManager.School(' '.join(arg))
             await ctx.send(embed=embed)
 
         """
@@ -396,12 +407,18 @@ class BotMain:
         """
         @client.command(name='Class/SubClasses')
         async def Class_Sub(ctx, *arg):
-            embed = ClassManager.SubClass(name=arg)
+            if(len(arg) == 0):
+                embed = ClassManager.IndexSubClasses(name='Index')
+            else:
+                embed = ClassManager.SubClass(' '.join(arg))
             await ctx.send(embed=embed)
 
         @client.command(name='Class/Spells')
         async def Class_Spell(ctx, *arg):
-            embed = ClassManager.ClassSpell(name=arg)
+            if(len(arg) == 0):
+                embed = SpellsManager.IndexSpell(name='Index')
+            else:
+                embed = ClassManager.ClassSpell(' '.join(arg))
             await ctx.send(embed=embed)
 
         @client.command(name='Class/Features')
