@@ -21,6 +21,12 @@ Windows 10, VSCode, Python - Version(3.8.2), [Discordpy](https://discordpy.readt
 - Hardcore Code thinning and optimizing
 
 
+# Issues
+Due to inconsistoncies from the data source some entries break the bot - Noting here
+Magic Items - Sun Blade
+ - Needs Wand Query
+
+
 # Local Setup
 Ensure that Python is enabled on your machine
 

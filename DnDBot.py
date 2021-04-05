@@ -294,16 +294,21 @@ class BotMain:
         Classified as Character Data ^
         Still Genereal Statements
         """
-
         @client.command(name='Monster')
         async def Main_Monster(ctx, *arg):
-            embed = MonsterManager.GeneralMonster(name=arg)
-            print('completed embeding')
+            if(len(arg) == 0):
+                embed = MonsterManager.IndexMonster(name='Index')
+            else:
+                embed = MonsterManager.GeneralMonster(name=' '.join(arg))
             await ctx.send(embed=embed)
 
         @client.command(name='Race')
-        async def Main_Race(ctx, arg):
-            embed = RaceManager.GeneralRace(name=arg)
+        async def Main_Race(ctx, *arg):
+            if(len(arg) == 0):
+                embed = RaceManager.IndexRaces(name='Index')
+            else:
+                embed = RaceManager.GeneralRace(name=' '.join(arg))
+
             await ctx.send(embed=embed)
 
         @client.command(name='Subrace')
@@ -369,7 +374,10 @@ class BotMain:
 
         @client.command(name='Race/Proficiencies')
         async def Race_Prof(ctx, arg):
-            embed = RaceManager.Proficiencies(name=arg)
+            if(len(arg) == 0):
+                embed = ProfManager.ProficienciesIndex(name='index')
+            else:
+                embed = RaceManager.Proficiencies(name=' '.join(arg))
             await ctx.send(embed=embed)
 
         @client.command(name='Race/Traits')
@@ -428,7 +436,10 @@ class BotMain:
 
         @client.command(name='Class/Prof')
         async def Class_Prof(ctx, *arg):
-            embed = ClassManager.ClassProf(name=arg)
+            if(len(arg) == 0):
+                embed = ProfManager.ProficienciesIndex(name='index')
+            else:
+                embed = ClassManager.ClassProf(name=' '.join(arg))
             await ctx.send(embed=embed)
 
         @client.command(name='Class/Start-Equip')
