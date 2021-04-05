@@ -480,12 +480,20 @@ class BotMain:
         """
         @client.command(name='Rules')
         async def Rules(ctx, *arg):
-            embed = RulesHandler.GeneralRule(name=arg)
+            if(len(arg) == 0):
+                embed = RulesHandler.RuleIndex(name='Index')
+            else:
+                embed = RulesHandler.GeneralRule(name=' '.join(arg))
+
             await ctx.send(embed=embed)
 
         @client.command(name='Rules_Sec')
         async def Rules_Sec(ctx, *arg):
-            embed = RulesHandler.RuleSec(name=arg)
+            if(len(arg) == 0):
+                embed = RulesHandler.RuleSecIndex(name='Index')
+            else:
+                embed = RulesHandler.RuleSec(name=' '.join(arg))
+
             await ctx.send(embed=embed)
 
         """
