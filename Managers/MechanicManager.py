@@ -73,3 +73,85 @@ class MechanicManager:
         else:
             embed = CommsManager.failedRequest(name)
         return embed
+    # Indexes
+
+    @staticmethod
+    def IndexDamageType(name):
+        name = CommsManager.paramHandler(name)
+        value = requests.get(
+            'https://www.dnd5eapi.co/api/damage-types/')
+
+        # Needs to use one or the other sometimes, -annoying
+        # value = eval(value.text)
+        value = json.loads(value.text)
+        # CommsManager.jsonHandler(value)
+        # Actual Call of discord
+        if('error' not in value):
+            embed = discord.Embed(
+                title='Dmg Types - {}'.format(name),
+                colour=discord.Colour.red()
+            )
+            embed.add_field(name='Entries Found',
+                            value=value['count'], inline=False)
+            embed = GeneralHandler.index_Handler2(
+                embed, value['results'], name)
+            embed.timestamp = datetime.utcnow()
+            embed.set_footer(text='MattMaster Bots: Dnd')
+        else:
+            embed = CommsManager.failedRequest(name)
+
+        return embed
+
+    @staticmethod
+    def IndexSchools(name):
+        name = CommsManager.paramHandler(name)
+        value = requests.get(
+            'https://www.dnd5eapi.co/api/magic-schools/')
+
+        # Needs to use one or the other sometimes, -annoying
+        # value = eval(value.text)
+        value = json.loads(value.text)
+        # CommsManager.jsonHandler(value)
+        # Actual Call of discord
+        if('error' not in value):
+            embed = discord.Embed(
+                title='Magic Schools - {}'.format(name),
+                colour=discord.Colour.red()
+            )
+            embed.add_field(name='Entries Found',
+                            value=value['count'], inline=False)
+            embed = GeneralHandler.index_Handler2(
+                embed, value['results'], name)
+            embed.timestamp = datetime.utcnow()
+            embed.set_footer(text='MattMaster Bots: Dnd')
+        else:
+            embed = CommsManager.failedRequest(name)
+
+        return embed
+
+    @staticmethod
+    def IndexConditions(name):
+        name = CommsManager.paramHandler(name)
+        value = requests.get(
+            'https://www.dnd5eapi.co/api/conditions/')
+
+        # Needs to use one or the other sometimes, -annoying
+        # value = eval(value.text)
+        value = json.loads(value.text)
+        # CommsManager.jsonHandler(value)
+        # Actual Call of discord
+        if('error' not in value):
+            embed = discord.Embed(
+                title='Conditions - {}'.format(name),
+                colour=discord.Colour.red()
+            )
+            embed.add_field(name='Entries Found',
+                            value=value['count'], inline=False)
+            embed = GeneralHandler.index_Handler2(
+                embed, value['results'], name)
+            embed.timestamp = datetime.utcnow()
+            embed.set_footer(text='MattMaster Bots: Dnd')
+        else:
+            embed = CommsManager.failedRequest(name)
+
+        return embed

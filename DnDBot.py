@@ -340,7 +340,7 @@ class BotMain:
                 embed = EquipManager.EquipmentIndex(name='Index')
 
             else:
-                embed = EquipManager.Equipment(name=arg)
+                embed = EquipManager.Equipment(name=' '.join(arg))
 
             await ctx.send(embed=embed)
 
@@ -349,7 +349,8 @@ class BotMain:
             if(len(arg) == 0):
                 embed = EquipManager.MagicItemIndex(name='Index')
             else:
-                embed = EquipManager.MagicItem(name=arg)
+                print('ran')
+                embed = EquipManager.MagicItem(name=' '.join(arg))
 
             await ctx.send(embed=embed)
 
@@ -432,17 +433,29 @@ class BotMain:
         """
         @client.command(name='Mechanic/Condition')
         async def Mech_Con(ctx, *arg):
-            embed = MechanicManager.GeneralCondition(name=arg)
+            if(len(arg) == 0):
+                embed = MechanicManager.IndexConditions(name='Index')
+            else:
+                embed = MechanicManager.GeneralCondition(name=' '.join(arg))
+
             await ctx.send(embed=embed)
 
         @client.command(name='Mechanic/Damage_Type')
         async def Mech_Type(ctx, *arg):
-            embed = MechanicManager.GeneralDamageType(name=arg)
+            if(len(arg) == 0):
+                embed = MechanicManager.IndexDamageType(name='Index')
+            else:
+                embed = MechanicManager.GeneralDamageType(name=' '.join(arg))
+
             await ctx.send(embed=embed)
 
         @client.command(name='Mechanic/School')
         async def Mech_School(ctx, *arg):
-            embed = MechanicManager.GeneralSchool(name=arg)
+            if(len(arg) == 0):
+                embed = MechanicManager.IndexSchools(name='Index')
+            else:
+                embed = MechanicManager.GeneralSchool(name=' '.join(arg))
+
             await ctx.send(embed=embed)
 
         """

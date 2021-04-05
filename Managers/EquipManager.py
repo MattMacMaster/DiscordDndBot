@@ -75,6 +75,7 @@ class EquipManager:
             title='Equipment Information - {}'.format(name),
             colour=discord.Colour.red()
         )
+        print(value)
         if('error' not in value):
             if(value['equipment_category']['name'] == 'Weapon'):
                 embed.add_field(name='Equipment Category',
@@ -109,6 +110,23 @@ class EquipManager:
                     name='Gear Category', value=value['gear_category']['name'], inline=False)
                 embed.add_field(name='Cost', value=str(
                     value['cost']['unit']) + ': ' + str(value['cost']['quantity']), inline=False)
+
+            if(value['equipment_category']['name'] == 'Mounts and Vehicles'):
+                embed.add_field(name='Equipment Category',
+                                value=value['equipment_category']['name'], inline=False)
+
+                embed.add_field(
+                    name='Mount and Vehicle Category', value=value['vehicle_category'], inline=False)
+
+                embed.add_field(name='Cost', value=str(
+                    value['cost']['unit']) + ': ' + str(value['cost']['quantity']), inline=False)
+                if('weight' in value):
+                    embed.add_field(
+                        name='Weight', value=value['weight'], inline=False)
+                if('speed' in value):
+                    embed.add_field(
+                        name='Speed', value=str(value['speed']['quantity']) + ' ' + value['speed']['unit'], inline=False)
+
             if('contents' in value):
                 embed.add_field(name='Contents', value=start_equip.contentHandler(
                     value['contents']), inline=False)
@@ -119,7 +137,7 @@ class EquipManager:
         return embed
     # TODO Needs a ammunition category
 
-    @staticmethod
+    @ staticmethod
     def MagicItem(name):
         name = CommsManager.paramHandler(name)
         value = requests.get(
@@ -130,6 +148,7 @@ class EquipManager:
             title='Magic Item Information - {}'.format(name),
             colour=discord.Colour.red()
         )
+        print(value)
         if('error' not in value):
             if(value['equipment_category']['name'] == 'Weapon'):
                 embed.add_field(name='Equipment Category',
@@ -165,6 +184,13 @@ class EquipManager:
                     name='Gear Category', value=value['gear_category']['name'], inline=False)
                 embed.add_field(name='Cost', value=str(
                     value['cost']['unit']) + ': ' + str(value['cost']['quantity']), inline=False)
+
+            if(value['equipment_category']['name'] == 'Potion'):
+                embed.add_field(
+                    name='Type', value=value['equipment_category']['name'], inline=False)
+
+                embed = GeneralHandler.Desc_Handler(
+                    embed, RaceHandler.DescHandler(value['desc']), name)
 
             if('contents' in value):
                 embed.add_field(name='Contents', value=start_equip.contentHandler(
