@@ -1,9 +1,11 @@
+![GitHub last commit](https://img.shields.io/github/last-commit/MattMacMaster/DiscordDndBot)
+
 # DiscordDndBot
-A personal Project dreamt up from transistioning from hosting DnD in person to online
-over discord to help with the difficulties of online.This project uses two major api's to assist in the development of this project.You can add the bot [here](https://discord.com/api/oauth2/authorize?client_id=769265469306830898&permissions=0&scope=bot).
+A personal Project dreamt up from transitioning from hosting DnD in person to online
+over discord to help with the difficulties of online.This project uses two major api's to assist in the development of this project.You can add the bot [here](https://discord.com/api/oauth2/authorize?client_id=769265469306830898&permissions=0&scope=bot) to a discord server of your own.
 
 # Discordpy
-I use this library as this projects goal is a bot that is available for use on discord and is publicly available for use to anyone with the ability to add it to their respective servers
+This library allows the bot to work with discords toolkits and allow the bot proper permissions when being added to anyones servers.
 
 # D&D 5e API
 I utilized this public [API](http://www.dnd5eapi.co/) for the minimum core game data that the bot could use.
@@ -23,15 +25,19 @@ Windows 10, VSCode, Python - Version(3.8.2), [Discordpy](https://discordpy.readt
 
 
 # Issues
-Due to inconsistoncies from the data source some entries break the bot - Noting here
+Due to inconsistencies from the data source some entries break the bot - Noting here
 Magic Items - Sun Blade
- - Needs Wand Query
- Very Rough Features Query needs refactoring
+ - needs a wand query
  Have means of better text wrapping
 
 
 # Local Setup
-Ensure that Python is enabled on your machine, and the needed python dependencies which should be all build into python 3
+Ensure that Python is enabled on your machine, and the needed python dependencies which should be built into python 3
+except for the discord library which can be installed so.
+```
+python3 -m pip install -U discord.py
+```
+
 
 There is a env file utilized in the bot, which can be made in the root directory.
 The discord token credential can be found [here](https://discord.com/developers/docs/intro) on appplications and General information.
