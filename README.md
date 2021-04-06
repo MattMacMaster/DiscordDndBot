@@ -19,6 +19,7 @@ Windows 10, VSCode, Python - Version(3.8.2), [Discordpy](https://discordpy.readt
 - Add Homebrew manager/handler with local database?
 - Unit Testing
 - Hardcore Code thinning and optimizing
+- Running on its own  personal server for 24/7 uptime
 
 
 # Issues
@@ -26,10 +27,11 @@ Due to inconsistoncies from the data source some entries break the bot - Noting 
 Magic Items - Sun Blade
  - Needs Wand Query
  Very Rough Features Query needs refactoring
+ Have means of better text wrapping
 
 
 # Local Setup
-Ensure that Python is enabled on your machine
+Ensure that Python is enabled on your machine, and the needed python dependencies which should be all build into python 3
 
 There is a env file utilized in the bot, which can be made in the root directory.
 The discord token credential can be found [here](https://discord.com/developers/docs/intro) on appplications and General information.
