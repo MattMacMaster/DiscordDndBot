@@ -40,7 +40,7 @@ python3 -m pip install -U discord.py
 
 
 There is a env file utilized in the bot, which can be made in the root directory.
-The discord token credential can be found [here](https://discord.com/developers/docs/intro) on appplications and General information.
+The discord token credential can be found [here](https://discord.com/developers/docs/intro) on applications and General information.
 
 ```
 # .env
