@@ -24,11 +24,8 @@ Windows 10, VSCode, Python - Version(3.8.2), [Discordpy](https://discordpy.readt
 - Running on its own  personal server for 24/7 uptime
 
 
-# Issues
-Due to inconsistencies from the data source some entries break the bot - Noting here
-Magic Items - Sun Blade
- - needs a wand query
- Have means of better text wrapping
+# Known Issues
+Due to inconsistencies from the data source some entries break the bot - Noting known ones below
 
 
 # Local Setup

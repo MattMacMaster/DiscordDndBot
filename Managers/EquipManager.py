@@ -151,18 +151,22 @@ class EquipManager:
         print(value)
         if('error' not in value):
             if(value['equipment_category']['name'] == 'Weapon'):
-                embed.add_field(name='Equipment Category',
-                                value=value['equipment_category']['name'], inline=False)
-                embed.add_field(name='Weapon Category',
-                                value=value['weapon_category'], inline=False)
-                embed.add_field(name='Range', value=start_equip.rangeHandler(
-                    value['range']), inline=False)
-                embed.add_field(
-                    name='Category', value=value['equipment_category']['name'], inline=False)
-                embed.add_field(name='Cost', value=str(
-                    value['cost']['unit']) + ': ' + str(value['cost']['quantity']), inline=False)
-                embed.add_field(name='Damage', value=start_equip.damageHandler(
-                    value['damage']), inline=False)
+                if('desc' in value):
+                    embed = GeneralHandler.Desc_Handler(
+                        embed, RaceHandler.DescHandler(value['desc']), name)
+                else:
+                    embed.add_field(name='Equipment Category',
+                                    value=value['equipment_category']['name'], inline=False)
+                    embed.add_field(name='Weapon Category',
+                                    value=value['weapon_category'], inline=False)
+                    embed.add_field(name='Range', value=start_equip.rangeHandler(
+                        value['range']), inline=False)
+                    embed.add_field(
+                        name='Category', value=value['equipment_category']['name'], inline=False)
+                    embed.add_field(name='Cost', value=str(
+                        value['cost']['unit']) + ': ' + str(value['cost']['quantity']), inline=False)
+                    embed.add_field(name='Damage', value=start_equip.damageHandler(
+                        value['damage']), inline=False)
 
             if(value['equipment_category']['name'] == 'Wondrous Item'):
                 embed.add_field(
@@ -189,6 +193,12 @@ class EquipManager:
                 embed.add_field(
                     name='Type', value=value['equipment_category']['name'], inline=False)
 
+                embed = GeneralHandler.Desc_Handler(
+                    embed, RaceHandler.DescHandler(value['desc']), name)
+
+            if(value['equipment_category']['name'] == 'Wand'):
+                embed.add_field(name='Equipment Category',
+                                value=value['equipment_category']['name'], inline=False)
                 embed = GeneralHandler.Desc_Handler(
                     embed, RaceHandler.DescHandler(value['desc']), name)
 
