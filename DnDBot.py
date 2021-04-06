@@ -134,6 +134,10 @@ class BotMain:
                 Response.Character_Data["Proficiencies"]).strip('[]'), inline=False)
             embed.add_field(name='Languages', value=str(
                 Response.Character_Data["Languages"]).strip('[]'), inline=False)
+            embed.add_field(name='Traits', value=str(
+                Response.Character_Data["Traits"]).strip('[]'), inline=False)
+            embed.add_field(name='Features', value=str(
+                Response.Character_Data["Features"]).strip('[]'), inline=False)
             embed.timestamp = datetime.utcnow()
             embed.set_footer(text='MattMaster Bots: Dnd')
 
@@ -264,7 +268,8 @@ class BotMain:
             if(len(arg) == 0):
                 embed = LanguageManager.LanguageIndex(name='Index')
             else:
-                embed = LanguageManager.Languages(name=arg)
+                print('Entered')
+                embed = LanguageManager.Languages(name=' '.join(arg))
             await ctx.send(embed=embed)
 
         @client.command(name='AbilityScore')
@@ -326,8 +331,14 @@ class BotMain:
 
         @client.command(name='Feature')
         async def Main_Feature(ctx, *arg):
-            embed = FeatureManager.GeneralFeature(name=' '.join(arg))
-            await ctx.send(embed=embed)
+            if(len(arg) == 0):
+                embed = FeatureManager.IndexFeatures1(name='Index')
+                embed2 = FeatureManager.IndexFeatures2(name='Index')
+                await ctx.send(embed=embed)
+                await ctx.send(embed=embed2)
+            else:
+                embed = FeatureManager.GeneralFeature(name=arg)
+                await ctx.send(embed=embed)
 
         @client.command(name='Spell')
         async def Main_Spell(ctx, *arg):
@@ -512,21 +523,15 @@ class BotMain:
         """
         @client.command(name='Test')
         async def Test_Func(ctx, *arg):
-            """
-            # This is for trying to get Features index to work - TODO fix it
-            if(len(arg) == 0):
-                print("This one")
-                embed = Tester.Desc_FuncTest(name='Index')
-            else:
-                embed = Tester.Desc_FuncTest(name=arg)
-            for x in embed:
-                await ctx.send(embed=x)
-            """
             if(len(arg) == 0):
                 embed = Tester.Desc_FuncTest(name='Index')
+                embed2 = Tester.Desc_FuncTest2(name='Index')
+
+                await ctx.send(embed=embed)
+                await ctx.send(embed=embed2)
             else:
                 embed = Tester.Desc_FuncTest(name=arg)
-            await ctx.send(embed=embed)
+                await ctx.send(embed=embed)
 
         """
         General Error Handle

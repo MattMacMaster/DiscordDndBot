@@ -71,31 +71,18 @@ class GeneralHandler:
             return embed
 
     @staticmethod
-    def index_Handler3(embed, arg, name, counter=0):
+    def index_Handler3(embed, arg, name):
         # There is a hard limit to 6000 characters or u need another embed
         text_length = 1024
-        to_be_tupled = []
         Results = ''
         for x in arg:
             Results += x['index'] + '\n'
         json_length = len(Results)
+
+        counter = 0
         total_embeds = math.ceil(json_length / text_length)
 
-        print(json_length)
-        if(json_length > 6000):
-            # Return a tuple of embeds and send them all
-            while total_embeds > counter:
-                if(counter % 5 == 0):
-                    to_be_tupled.append(embed)
-                    embed = embed
-                embed.add_field(
-                    name='Cont..', value=Results[text_length*counter:text_length*(counter+1)],
-                    inline=False
-                )
-                counter = counter + 1
-            return tuple(to_be_tupled)
-            # Total needed embeds to fit the text
-        elif(json_length >= text_length):
+        if(json_length >= text_length):
             while total_embeds > counter:
                 embed.add_field(
                     name='Cont..', value=Results[text_length*counter:text_length*(counter+1)],

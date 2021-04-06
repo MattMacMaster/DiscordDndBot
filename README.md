@@ -25,6 +25,7 @@ Windows 10, VSCode, Python - Version(3.8.2), [Discordpy](https://discordpy.readt
 Due to inconsistoncies from the data source some entries break the bot - Noting here
 Magic Items - Sun Blade
  - Needs Wand Query
+ Very Rough Features Query needs refactoring
 
 
 # Local Setup

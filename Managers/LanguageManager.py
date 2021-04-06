@@ -14,10 +14,12 @@ from Parser import GeneralHandler
 class LanguageManager:
     @staticmethod
     def Languages(name):
+        print(name)
         name = CommsManager.paramHandler(name)
         value = requests.get(
             'https://www.dnd5eapi.co/api/languages/{}'.format(name))
-        value = eval(value.text)
+        value = json.loads(value.text)
+        print(value)
         if('error' not in value):
             embed = discord.Embed(
                 title='Language Information - {}'.format(value['name']),

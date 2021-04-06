@@ -122,10 +122,14 @@ class Response:
         """
         Ex: ($Language common),
          $Language {name},
-
+        """,
+        "Traits":
+        """
         Ex: ($Trait tinker),
         $Trait {name},
-
+        """,
+        "Features":
+        """
         Ex: ($Feature Divine Sense),
         $Feature {name},
         """
