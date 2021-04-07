@@ -40,9 +40,6 @@ class BotMain:
         # TODO Update names in $Class/Feature - Fixed - Similar issue ^ needs refactor
 
         # TODO Examples for all commands
-        # TODO $Rule combat needs a subsection section
-        # TODO Reroute index $Race/Prof, $Race/Trait, $Race/SubRace
-        # TODO $Race/Prof gnome breaks
 
         # TODO Error handling/ coverage
         # TODO Spell Check, recommendations
@@ -321,7 +318,10 @@ class BotMain:
 
         @client.command(name='Subrace')
         async def main_subrace(ctx, *arg):
-            embed = SubraceManger.Subrace(name=' '.join(arg))
+            if(len(arg) == 0):
+                embed = SubraceManger.IndexSubRaces(name='Index')
+            else:
+                embed = SubraceManger.Subrace(name=' '.join(arg))
             await ctx.send(embed=embed)
 
         @client.command(name='Trait')
@@ -384,21 +384,27 @@ class BotMain:
         """
 
         @client.command(name='Race/Prof')
-        async def race_prof(ctx, arg):
+        async def race_prof(ctx, *arg):
             if(len(arg) == 0):
-                embed = ProfManager.ProficienciesIndex(name='index')
+                embed = ProfManager.ProficienciesIndex(name='Index')
             else:
                 embed = RaceManager.Proficiencies(name=' '.join(arg))
             await ctx.send(embed=embed)
 
         @client.command(name='Race/Trait')
-        async def race_trait(ctx, arg):
-            embed = RaceManager.Traits(name=arg)
+        async def race_trait(ctx, *arg):
+            if(len(arg) == 0):
+                embed = TraitManager.TraitIndex(name='Index')
+            else:
+                embed = RaceManager.Traits(name=' '.join(arg))
             await ctx.send(embed=embed)
 
         @client.command(name='Race/SubRace')
-        async def race_subrace(ctx, arg):
-            embed = RaceManager.Subraces(name=arg)
+        async def race_subrace(ctx, *arg):
+            if(len(arg) == 0):
+                embed = SubraceManger.IndexSubRaces(name='Index')
+            else:
+                embed = RaceManager.Subraces(name=' '.join(arg))
             await ctx.send(embed=embed)
 
         """

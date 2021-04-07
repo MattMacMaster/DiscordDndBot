@@ -33,7 +33,7 @@ class RaceManager:
             # value['starting_proficiencies']
             embed.add_field(name='Ability Bonuses - $AbilityScore {value}', value=RaceHandler.abilityHandler(
                 value['ability_bonuses']), inline=False)
-            embed.add_field(name='Starter Proficiencies - $Proficiencies {value}', value=RaceHandler.proficienciesHandler(
+            embed.add_field(name='Starter Proficiencies - $Prof {value}', value=RaceHandler.proficienciesHandler(
                 value['starting_proficiencies']), inline=False)
             embed.add_field(name='Speed', value=value['speed'], inline=False)
             embed.add_field(name='Size', value=value['size'], inline=False)
@@ -85,6 +85,7 @@ class RaceManager:
         value = requests.get(
             'https://www.dnd5eapi.co/api/races/{}/traits/'.format(name))
         value = eval(value.text)
+        print(value)
         if('error' not in value):
             embed = discord.Embed(
                 title='{} Traits '.format(name) + '- $Traits {value}',
