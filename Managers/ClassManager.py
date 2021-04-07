@@ -66,7 +66,8 @@ class ClassManager:
         value = requests.get(
             'https://www.dnd5eapi.co/api/classes/{}/spells/'.format(name))
         value = eval(value.text)
-
+        print(value)
+        print(len(RaceHandler.proficienciesHandler(value['results'])))
         if('error' not in value):
             embed = discord.Embed(
                 title='Class Spell Information - {}'.format(name),
@@ -77,8 +78,9 @@ class ClassManager:
                     value['results'])[0:1000], inline=False)
                 embed.add_field(name='Cont...', value=RaceHandler.proficienciesHandler(
                     value['results'])[1001:2000], inline=False)
-                embed.add_field(name='Cont....', value=RaceHandler.proficienciesHandler(
-                    value['results'])[2001:], inline=False)
+                if(len(RaceHandler.proficienciesHandler(value['results'])) >= 2000):
+                    embed.add_field(name='Cont....', value=RaceHandler.proficienciesHandler(
+                        value['results'])[2001:], inline=False)
             else:
                 embed.add_field(name='Spells', value=RaceHandler.proficienciesHandler(
                     value['results']), inline=False)
@@ -96,7 +98,6 @@ class ClassManager:
         value = requests.get(
             'https://www.dnd5eapi.co/api/classes/{}/subclasses'.format(name))
         value = eval(value.text)
-
         if('error' not in value):
             embed = discord.Embed(
                 title='Class SubClass List - {}'.format(name),
@@ -198,8 +199,9 @@ class ClassManager:
                     value['results'])[0:1000], inline=False)
                 embed.add_field(name='Cont...', value=RaceHandler.proficienciesHandler(
                     value['results'])[1001:2000], inline=False)
-                embed.add_field(name='Cont....', value=RaceHandler.proficienciesHandler(
-                    value['results'])[2000:], inline=False)
+                if(len(RaceHandler.proficienciesHandler(value['results'])) >= 2000):
+                    embed.add_field(name='Cont....', value=RaceHandler.proficienciesHandler(
+                        value['results'])[2000:], inline=False)
             else:
                 embed.add_field(name='Features', value=RaceHandler.proficienciesHandler(
                     value['results']), inline=False)

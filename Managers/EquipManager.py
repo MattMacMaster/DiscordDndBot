@@ -127,6 +127,10 @@ class EquipManager:
                     embed.add_field(
                         name='Speed', value=str(value['speed']['quantity']) + ' ' + value['speed']['unit'], inline=False)
 
+                if('desc' in value):
+                    embed.add_field(
+                        name='Desc', value=RaceHandler.DescHandler(value['desc']), inline=False)
+
             if('contents' in value):
                 embed.add_field(name='Contents', value=start_equip.contentHandler(
                     value['contents']), inline=False)

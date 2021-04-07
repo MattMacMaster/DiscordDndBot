@@ -50,8 +50,6 @@ class GeneralHandler:
                     )
                     counter = counter + 1
                 elif(counter == total_embeds - 1):
-                    print('last')
-                    print(text_length*counter)
                     embed.add_field(
                         name='Cont..', value=Results[text_length*counter:],
                         inline=False
@@ -153,7 +151,7 @@ class RaceHandler:
         Proficiencies = ''
         Raw_Proficiencies = arg
         for x in Raw_Proficiencies:
-            Proficiencies += x['name'] + '\n'
+            Proficiencies += x['index'] + '\n'
 
         return Proficiencies
 

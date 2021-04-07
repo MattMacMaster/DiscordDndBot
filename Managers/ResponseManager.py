@@ -6,42 +6,42 @@ class Response:
     def __init__(self):
         print("Initializing Response Manager")
 
-    Race_Data = {
+    race_data = {
         "General": """
         $Race {RaceName}
         """,
         "Specific": """
-           $Race/Proficiencies {RaceName},
-             $Race/Traits {RaceName},
-               $Race/SubRaces {RaceName},
+           $Race/Prof {RaceName},
+             $Race/Trait {RaceName},
+               $Race/SubRace {RaceName},
 
                $Subrace {SubRaceName}
                   """
     }
 
-    Monster_Data = {
+    monster_data = {
         "General": """
         $Monster {MonsterName}
         """,
         "Main":
         """
-        $Monsters/CR {CR}
+        $Monster/cr {CR}
         """
     }
-    Class_Data = {
+    class_data = {
         "General": """
         $Class {ClassName}
         """,
         "Main":
         """
-        $Class/Spells {ClassName},
-        $Class/SubClasses {ClassName},
-        $Class/Features {ClassName},
+        $Class/Spell {ClassName},
+        $Class/SubClass {ClassName},
+        $Class/Feature {ClassName},
         $Class/Prof {ClassName},
         $Class/Start-Equip {ClassName},
         """
     }
-    Equipment_Data = {
+    equipment_data = {
         "General":
         """
         $Equip {Name},
@@ -50,7 +50,7 @@ class Response:
         """
 
     }
-    Spell_Data = {
+    spell_data = {
         "General":
         """
         $Spell {Spellname}
@@ -73,38 +73,38 @@ class Response:
          $Spell/Attack_Type {Spellname},
          $Spell/Damage {Spellname},
          $Spell/School {Spellname},
-         $Spell/Classes {Spellname},
-         $Spell/Subclasses {Spellname},
+         $Spell/Class {Spellname},
+         $Spell/Subclass {Spellname},
         """
     }
-    Mechanic_Data = {
+    mechanic_data = {
         "Conditions":
         """
         $Mechanic/Condition {name}
         """,
         "Damage_Types":
         """
-        $Mechanic/Damage_Type {name}
+        $Mechanic/DamageType {name}
         """,
         "Schools":
         """
         $Mechanic/School {name}
         """
     }
-    Rules_Data = {
-        "Rules":
+    rules_data = {
+        "Rule":
         """
-        $Rules {name}
+        $Rule {name}
         """,
-        "Rules-Sections":
+        "Rule-Section":
         """
-        $Rules_Sec {name}
+        $RuleSec {name}
         """
     }
 
     # Please god find a better way to format this in the embed tool
-    Character_Data = {
-        "Ability Scores": """
+    character_data = {
+        "Ability-Scores": """
         Ex: ($AbilityScore con),
          $AbilityScore {name},
         """,
@@ -115,8 +115,8 @@ class Response:
            """,
         "Proficiencies":
         """
-        Ex: ($Proficiencies medium-armor),
-        $Proficiencies {name},
+        Ex: ($Prof medium-armor),
+        $Prof {name},
            """,
         "Languages":
         """

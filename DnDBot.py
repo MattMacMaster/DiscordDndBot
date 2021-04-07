@@ -36,6 +36,15 @@ class BotMain:
         client.remove_command('help')
 
         # TODO Update Read me, explain how it works - setup, env needs
+        # TODO Class Spell Druid breaks and cleric - Fixed but needs refactor
+        # TODO Update names in $Class/Feature - Fixed - Similar issue ^ needs refactor
+
+        # TODO Examples for all commands
+        # TODO $Spell/School index reroute
+        # TODO $Spell/School necromancy breaks
+        # TODO $Rule combat needs a subsection section
+        # TODO Reroute index $Race/Prof, $Race/Trait, $Race/SubRace
+        # TODO $Race/Prof gnome breaks
 
         # TODO Error handling/ coverage
         # TODO Spell Check, recommendations
@@ -100,16 +109,16 @@ class BotMain:
             )
             embed.add_field(name='Character Info',
                             value="$Character_info/help", inline=True)
-            embed.add_field(name='Class', value='$Class/help', inline=True)
-            embed.add_field(name='Races', value='$Races/help', inline=True)
+            embed.add_field(name='Classes', value='$Class/help', inline=True)
+            embed.add_field(name='Races', value='$Race/help', inline=True)
             embed.add_field(name='Equipment',
                             value='$Equipment/help', inline=True)
             embed.add_field(name='Spells', value='$Spell/help', inline=True)
             embed.add_field(name='Monsters',
-                            value='$Monsters/help', inline=True)
-            embed.add_field(name='Mechanics',
+                            value='$Monster/help', inline=True)
+            embed.add_field(name='Mechanic',
                             value='$Mechanic/help', inline=True)
-            embed.add_field(name='Rules', value='$Rules/help', inline=True)
+            embed.add_field(name='Rules', value='$Rule/help', inline=True)
             embed.add_field(name='Homebrews', value='Coming Soon', inline=True)
             embed.timestamp = datetime.utcnow()
             embed.set_footer(text='MattMaster Bots: Dnd')
@@ -119,54 +128,54 @@ class BotMain:
         @client.command(name='Character_info/help')
         async def character_info_help(ctx):
             embed = discord.Embed(
-                title='Character Info Help - $Character_info/help',
+                title='Character Info Help - $character_info/help',
                 description=Response.com_help(self, 'Character Info'),
                 colour=discord.Colour.red()
             )
             embed.add_field(name='Ability Scores', value=str(
-                Response.Character_Data["Ability Scores"]).strip('[]'), inline=False)
+                Response.character_data["Ability-Scores"]).strip('[]'), inline=False)
             embed.add_field(name='Skills', value=str(
-                Response.Character_Data["Skills"]).strip('[]'), inline=False)
+                Response.character_data["Skills"]).strip('[]'), inline=False)
             embed.add_field(name='Proficiencies', value=str(
-                Response.Character_Data["Proficiencies"]).strip('[]'), inline=False)
+                Response.character_data["Proficiencies"]).strip('[]'), inline=False)
             embed.add_field(name='Languages', value=str(
-                Response.Character_Data["Languages"]).strip('[]'), inline=False)
+                Response.character_data["Languages"]).strip('[]'), inline=False)
             embed.add_field(name='Traits', value=str(
-                Response.Character_Data["Traits"]).strip('[]'), inline=False)
+                Response.character_data["Traits"]).strip('[]'), inline=False)
             embed.add_field(name='Features', value=str(
-                Response.Character_Data["Features"]).strip('[]'), inline=False)
+                Response.character_data["Features"]).strip('[]'), inline=False)
             embed.timestamp = datetime.utcnow()
             embed.set_footer(text='MattMaster Bots: Dnd')
 
             await ctx.send(embed=embed)
 
-        @client.command(name='Races/help')
+        @client.command(name='Race/help')
         async def race_help(ctx):
             embed = discord.Embed(
-                title='Race Info Help - $Races/help',
+                title='Race Info Help - $Race/help',
                 description=Response.com_help(self, 'Race'),
                 colour=discord.Colour.red()
             )
             embed.add_field(
-                name='General', value=Response.Race_Data["General"], inline=False)
+                name='General', value=Response.race_data["General"], inline=False)
             embed.add_field(name='Specific',
-                            value=Response.Race_Data["Specific"], inline=False)
+                            value=Response.race_data["Specific"], inline=False)
             embed.timestamp = datetime.utcnow()
             embed.set_footer(text='MattMaster Bots: Dnd')
 
             await ctx.send(embed=embed)
 
-        @client.command(name='Monsters/help')
+        @client.command(name='Monster/help')
         async def monster_help(ctx):
             embed = discord.Embed(
-                title='Monster Info Help - $Monsters/help',
+                title='Monster Info Help - $Monster/help',
                 description=Response.com_help(self, 'Monster'),
                 colour=discord.Colour.red()
             )
             embed.add_field(
-                name='General', value=Response.Monster_Data["General"], inline=False)
+                name='General', value=Response.monster_data["General"], inline=False)
             embed.add_field(
-                name='Main', value=Response.Monster_Data["Main"], inline=False)
+                name='Main', value=Response.monster_data["Main"], inline=False)
             embed.timestamp = datetime.utcnow()
             embed.set_footer(text='MattMaster Bots: Dnd')
 
@@ -175,14 +184,14 @@ class BotMain:
         @client.command(name='Class/help')
         async def classes_help(ctx):
             embed = discord.Embed(
-                title='Classes Info Help - $Classes/help',
+                title='Classes Info Help - $Class/help',
                 description=Response.com_help(self, 'Class'),
                 colour=discord.Colour.red()
             )
             embed.add_field(
-                name='General', value=Response.Class_Data["General"], inline=False)
+                name='General', value=Response.class_data["General"], inline=False)
             embed.add_field(
-                name='Main', value=Response.Class_Data["Main"], inline=False)
+                name='Main', value=Response.class_data["Main"], inline=False)
             embed.timestamp = datetime.utcnow()
             embed.set_footer(text='MattMaster Bots: Dnd')
             await ctx.send(embed=embed)
@@ -195,7 +204,7 @@ class BotMain:
                 colour=discord.Colour.red()
             )
             embed.add_field(
-                name='General', value=Response.Equipment_Data["General"], inline=False)
+                name='General', value=Response.equipment_data["General"], inline=False)
             embed.timestamp = datetime.utcnow()
             embed.set_footer(text='MattMaster Bots: Dnd')
             await ctx.send(embed=embed)
@@ -208,12 +217,12 @@ class BotMain:
                 colour=discord.Colour.red()
             )
             embed.add_field(
-                name='General', value=Response.Spell_Data["General"], inline=False)
+                name='General', value=Response.spell_data["General"], inline=False)
             embed.timestamp = datetime.utcnow()
             embed.set_footer(text='MattMaster Bots: Dnd')
             await ctx.send(embed=embed)
 
-        @client.command(name='Rules/help')
+        @client.command(name='Rule/help')
         async def rules_help(ctx):
             embed = discord.Embed(
                 title='Rules Info Help - $Rules/help',
@@ -221,9 +230,9 @@ class BotMain:
                 colour=discord.Colour.red()
             )
             embed.add_field(
-                name='Rules', value=Response.Rules_Data["Rules"], inline=False)
+                name='Rules', value=Response.rules_data["Rule"], inline=False)
             embed.add_field(
-                name='Rules Section', value=Response.Rules_Data["Rules-Sections"], inline=False)
+                name='Rules Section', value=Response.rules_data["Rule-Section"], inline=False)
 
             embed.timestamp = datetime.utcnow()
             embed.set_footer(text='MattMaster Bots: Dnd')
@@ -232,21 +241,21 @@ class BotMain:
         @client.command(name='Mechanic/help')
         async def mechanics_help(ctx):
             embed = discord.Embed(
-                title='Mechanics Info Help - $Mechanics/help',
+                title='Mechanics Info Help - $Mechanic/help',
                 description='This Section Covers Game Mechanics - Conditions, Damage Types, and Schools',
                 colour=discord.Colour.red()
             )
             embed.add_field(
-                name='Condition', value=Response.Mechanic_Data["Conditions"], inline=False)
+                name='Condition', value=Response.mechanic_data["Conditions"], inline=False)
             embed.add_field(
-                name='Dmg_Type', value=Response.Mechanic_Data["Damage_Types"], inline=False)
+                name='Dmg_Type', value=Response.mechanic_data["Damage_Types"], inline=False)
             embed.add_field(
-                name='School', value=Response.Mechanic_Data["Schools"], inline=False)
+                name='School', value=Response.mechanic_data["Schools"], inline=False)
             embed.timestamp = datetime.utcnow()
             embed.set_footer(text='MattMaster Bots: Dnd')
             await ctx.send(embed=embed)
 
-        @client.command(name='Homebrews/help')
+        @client.command(name='Homebrew/help')
         async def homebrew_help(ctx):
             embed = discord.Embed(
                 title='Homebrew Info Help - $Homebrews/help',
@@ -284,7 +293,7 @@ class BotMain:
                 embed = SkillsManager.GeneralSkills(name=' '.join(arg))
             await ctx.send(embed=embed)
 
-        @client.command(name='Proficiencies')
+        @client.command(name='Prof')
         async def main_prof(ctx, *arg):
             if(len(arg) == 0):
                 embed = ProfManager.ProficienciesIndex(name='index')
@@ -376,7 +385,7 @@ class BotMain:
         First will be race and its sub commands
         """
 
-        @client.command(name='Race/Proficiencies')
+        @client.command(name='Race/Prof')
         async def race_prof(ctx, arg):
             if(len(arg) == 0):
                 embed = ProfManager.ProficienciesIndex(name='index')
@@ -384,12 +393,12 @@ class BotMain:
                 embed = RaceManager.Proficiencies(name=' '.join(arg))
             await ctx.send(embed=embed)
 
-        @client.command(name='Race/Traits')
+        @client.command(name='Race/Trait')
         async def race_trait(ctx, arg):
             embed = RaceManager.Traits(name=arg)
             await ctx.send(embed=embed)
 
-        @client.command(name='Race/SubRaces')
+        @client.command(name='Race/SubRace')
         async def race_subrace(ctx, arg):
             embed = RaceManager.Subraces(name=arg)
             await ctx.send(embed=embed)
@@ -415,7 +424,7 @@ class BotMain:
         Classes Subsiduaries
 
         """
-        @client.command(name='Class/SubClasses')
+        @client.command(name='Class/SubClass')
         async def class_sub(ctx, *arg):
             if(len(arg) == 0):
                 embed = ClassManager.IndexSubClasses(name='Index')
@@ -423,7 +432,7 @@ class BotMain:
                 embed = ClassManager.SubClass(' '.join(arg))
             await ctx.send(embed=embed)
 
-        @client.command(name='Class/Spells')
+        @client.command(name='Class/Spell')
         async def class_spell(ctx, *arg):
             if(len(arg) == 0):
                 embed = SpellsManager.IndexSpell(name='Index')
@@ -431,10 +440,16 @@ class BotMain:
                 embed = ClassManager.ClassSpell(' '.join(arg))
             await ctx.send(embed=embed)
 
-        @client.command(name='Class/Features')
+        @client.command(name='Class/Feature')
         async def class_features(ctx, *arg):
-            embed = ClassManager.ClassFeat(name=arg)
-            await ctx.send(embed=embed)
+            if(len(arg) == 0):
+                embed = FeatureManager.IndexFeatures1(name='Index')
+                embed2 = FeatureManager.IndexFeatures2(name='Index')
+                await ctx.send(embed=embed)
+                await ctx.send(embed=embed2)
+            else:
+                embed = ClassManager.ClassFeat(name=arg)
+                await ctx.send(embed=embed)
 
         @client.command(name='Class/Prof')
         async def class_prof(ctx, *arg):
@@ -452,7 +467,7 @@ class BotMain:
         """
         One subset for monsters, filter by CR value
         """
-        @client.command(name='Monsters/CR')
+        @client.command(name='Monster/CR')
         async def monster_cr(ctx, *arg):
             embed = MonsterManager.MonsterCR(name=arg)
             await ctx.send(embed=embed)
@@ -470,7 +485,7 @@ class BotMain:
 
             await ctx.send(embed=embed)
 
-        @client.command(name='Mechanic/Damage_Type')
+        @client.command(name='Mechanic/DamageType')
         async def mech_type(ctx, *arg):
             if(len(arg) == 0):
                 embed = MechanicManager.IndexDamageType(name='Index')
@@ -491,7 +506,7 @@ class BotMain:
         """
         Rules Subset
         """
-        @client.command(name='Rules')
+        @client.command(name='Rule')
         async def rules(ctx, *arg):
             if(len(arg) == 0):
                 embed = RulesHandler.RuleIndex(name='Index')
@@ -500,7 +515,7 @@ class BotMain:
 
             await ctx.send(embed=embed)
 
-        @client.command(name='Rules_Sec')
+        @client.command(name='RuleSec')
         async def rules_sec(ctx, *arg):
             if(len(arg) == 0):
                 embed = RulesHandler.RuleSecIndex(name='Index')
