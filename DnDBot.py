@@ -36,13 +36,10 @@ class BotMain:
         client.remove_command('help')
 
         # TODO Update Read me, explain how it works - setup, env needs
-        # TODO Features Index is not working for some reason
-        # TODO Feature options dont all work - fix is show index's
 
         # TODO Error handling/ coverage
         # TODO Spell Check, recommendations
 
-        # TODO Add a means to show all potions of a command
         # TODO Clean up command help sheets and naming conventions, consistancy
         # TODO Command Cooldowns
 
@@ -51,7 +48,7 @@ class BotMain:
 
         # TODO Update Readme for easy setup, most likely without a database - or sqlite setup
         # TODO Data base built with two migration scripts, windows and ubuntu
-        # TODO Test out web scraper for missing dataw
+        # TODO Test out web scraper for missing data
         # TODO Move to pi for 24/7 activity
 
         # Notes
@@ -120,7 +117,7 @@ class BotMain:
             await ctx.send(embed=embed)
 
         @client.command(name='Character_info/help')
-        async def Character_info_help(ctx):
+        async def character_info_help(ctx):
             embed = discord.Embed(
                 title='Character Info Help - $Character_info/help',
                 description=Response.com_help(self, 'Character Info'),
@@ -144,7 +141,7 @@ class BotMain:
             await ctx.send(embed=embed)
 
         @client.command(name='Races/help')
-        async def Race_help(ctx):
+        async def race_help(ctx):
             embed = discord.Embed(
                 title='Race Info Help - $Races/help',
                 description=Response.com_help(self, 'Race'),
@@ -160,7 +157,7 @@ class BotMain:
             await ctx.send(embed=embed)
 
         @client.command(name='Monsters/help')
-        async def Monster_help(ctx):
+        async def monster_help(ctx):
             embed = discord.Embed(
                 title='Monster Info Help - $Monsters/help',
                 description=Response.com_help(self, 'Monster'),
@@ -176,7 +173,7 @@ class BotMain:
             await ctx.send(embed=embed)
 
         @client.command(name='Class/help')
-        async def Classes_help(ctx):
+        async def classes_help(ctx):
             embed = discord.Embed(
                 title='Classes Info Help - $Classes/help',
                 description=Response.com_help(self, 'Class'),
@@ -191,7 +188,7 @@ class BotMain:
             await ctx.send(embed=embed)
 
         @client.command(name='Equipment/help')
-        async def Equipment_help(ctx):
+        async def equipment_help(ctx):
             embed = discord.Embed(
                 title='Equipment Info Help - $Equipment/help',
                 description=Response.com_help(self, 'Equipment'),
@@ -204,7 +201,7 @@ class BotMain:
             await ctx.send(embed=embed)
 
         @client.command(name='Spell/help')
-        async def Spell_help(ctx):
+        async def spell_help(ctx):
             embed = discord.Embed(
                 title='Spell Info Help - $Spell/help',
                 description=Response.com_help(self, 'Spell'),
@@ -217,7 +214,7 @@ class BotMain:
             await ctx.send(embed=embed)
 
         @client.command(name='Rules/help')
-        async def Rules_help(ctx):
+        async def rules_help(ctx):
             embed = discord.Embed(
                 title='Rules Info Help - $Rules/help',
                 description='Rules that are core set only',
@@ -233,7 +230,7 @@ class BotMain:
             await ctx.send(embed=embed)
 
         @client.command(name='Mechanic/help')
-        async def Mechanics_help(ctx):
+        async def mechanics_help(ctx):
             embed = discord.Embed(
                 title='Mechanics Info Help - $Mechanics/help',
                 description='This Section Covers Game Mechanics - Conditions, Damage Types, and Schools',
@@ -250,7 +247,7 @@ class BotMain:
             await ctx.send(embed=embed)
 
         @client.command(name='Homebrews/help')
-        async def Homebrew_help(ctx):
+        async def homebrew_help(ctx):
             embed = discord.Embed(
                 title='Homebrew Info Help - $Homebrews/help',
                 description='Coming Soon',
@@ -264,16 +261,15 @@ class BotMain:
         TODO Update Character data calls to this info, cause its done via this
         """
         @client.command(name='Language')
-        async def Main_Language(ctx, *arg):
+        async def main_language(ctx, *arg):
             if(len(arg) == 0):
                 embed = LanguageManager.LanguageIndex(name='Index')
             else:
-                print('Entered')
                 embed = LanguageManager.Languages(name=' '.join(arg))
             await ctx.send(embed=embed)
 
         @client.command(name='AbilityScore')
-        async def Main_Score(ctx, *arg):
+        async def main_score(ctx, *arg):
             if(len(arg) == 0):
                 embed = AbilityScoreManager.AbilityScoresIndex(name=arg)
             else:
@@ -281,7 +277,7 @@ class BotMain:
             await ctx.send(embed=embed)
 
         @client.command(name='Skill')
-        async def Main_Skill(ctx, *arg):
+        async def main_skill(ctx, *arg):
             if(len(arg) == 0):
                 embed = SkillsManager.SkillsIndex(name=arg)
             else:
@@ -289,7 +285,7 @@ class BotMain:
             await ctx.send(embed=embed)
 
         @client.command(name='Proficiencies')
-        async def Main_Prof(ctx, *arg):
+        async def main_prof(ctx, *arg):
             if(len(arg) == 0):
                 embed = ProfManager.ProficienciesIndex(name='index')
             else:
@@ -300,7 +296,7 @@ class BotMain:
         Still Genereal Statements
         """
         @client.command(name='Monster')
-        async def Main_Monster(ctx, *arg):
+        async def main_monster(ctx, *arg):
             if(len(arg) == 0):
                 embed = MonsterManager.IndexMonster(name='Index')
             else:
@@ -308,7 +304,7 @@ class BotMain:
             await ctx.send(embed=embed)
 
         @client.command(name='Race')
-        async def Main_Race(ctx, *arg):
+        async def main_race(ctx, *arg):
             if(len(arg) == 0):
                 embed = RaceManager.IndexRaces(name='Index')
             else:
@@ -317,12 +313,12 @@ class BotMain:
             await ctx.send(embed=embed)
 
         @client.command(name='Subrace')
-        async def Main_Subrace(ctx, *arg):
+        async def main_subrace(ctx, *arg):
             embed = SubraceManger.Subrace(name=' '.join(arg))
             await ctx.send(embed=embed)
 
         @client.command(name='Trait')
-        async def Main_Trait(ctx, *arg):
+        async def main_trait(ctx, *arg):
             if(len(arg) == 0):
                 embed = TraitManager.TraitIndex(name='Index')
             else:
@@ -330,7 +326,7 @@ class BotMain:
             await ctx.send(embed=embed)
 
         @client.command(name='Feature')
-        async def Main_Feature(ctx, *arg):
+        async def main_feature(ctx, *arg):
             if(len(arg) == 0):
                 embed = FeatureManager.IndexFeatures1(name='Index')
                 embed2 = FeatureManager.IndexFeatures2(name='Index')
@@ -341,7 +337,7 @@ class BotMain:
                 await ctx.send(embed=embed)
 
         @client.command(name='Spell')
-        async def Main_Spell(ctx, *arg):
+        async def main_spell(ctx, *arg):
             if(len(arg) == 0):
                 embed = SpellsManager.IndexSpell(name='Index')
             else:
@@ -349,17 +345,15 @@ class BotMain:
             await ctx.send(embed=embed)
 
         @client.command(name='Class')
-        async def Main_Class(ctx, *arg):
+        async def main_class(ctx, *arg):
             if(len(arg) == 0):
-                print('reaeeee')
                 embed = ClassManager.IndexClasses(name='Index')
             else:
-                print('ran')
                 embed = ClassManager.GeneralClass(name=arg)
             await ctx.send(embed=embed)
 
         @client.command(name='Equip')
-        async def Main_Equip(ctx, *arg):
+        async def main_equip(ctx, *arg):
             if(len(arg) == 0):
                 embed = EquipManager.EquipmentIndex(name='Index')
 
@@ -369,11 +363,10 @@ class BotMain:
             await ctx.send(embed=embed)
 
         @client.command(name='MagicItem')
-        async def Main_MagicItem(ctx, *arg):
+        async def main_magicItem(ctx, *arg):
             if(len(arg) == 0):
                 embed = EquipManager.MagicItemIndex(name='Index')
             else:
-                print('ran')
                 embed = EquipManager.MagicItem(name=' '.join(arg))
 
             await ctx.send(embed=embed)
@@ -384,7 +377,7 @@ class BotMain:
         """
 
         @client.command(name='Race/Proficiencies')
-        async def Race_Prof(ctx, arg):
+        async def race_prof(ctx, arg):
             if(len(arg) == 0):
                 embed = ProfManager.ProficienciesIndex(name='index')
             else:
@@ -392,12 +385,12 @@ class BotMain:
             await ctx.send(embed=embed)
 
         @client.command(name='Race/Traits')
-        async def Race_Trait(ctx, arg):
+        async def race_trait(ctx, arg):
             embed = RaceManager.Traits(name=arg)
             await ctx.send(embed=embed)
 
         @client.command(name='Race/SubRaces')
-        async def Race_Subrace(ctx, arg):
+        async def race_subrace(ctx, arg):
             embed = RaceManager.Subraces(name=arg)
             await ctx.send(embed=embed)
 
@@ -406,12 +399,12 @@ class BotMain:
         """
 
         @client.command(name='Spell/Level')
-        async def Spell_Level(ctx, arg):
+        async def spell_level(ctx, arg):
             embed = SpellsManager.Level(name=arg)
             await ctx.send(embed=embed)
 
         @client.command(name='Spell/School')
-        async def Spell_School(ctx, arg):
+        async def spell_school(ctx, arg):
             if(len(arg) == 0):
                 embed = MechanicManager.IndexSchools(name='Index')
             else:
@@ -420,12 +413,10 @@ class BotMain:
 
         """
         Classes Subsiduaries
-        TODO Subclasses gets about all of these
-        TODO Finsih features and further
 
         """
         @client.command(name='Class/SubClasses')
-        async def Class_Sub(ctx, *arg):
+        async def class_sub(ctx, *arg):
             if(len(arg) == 0):
                 embed = ClassManager.IndexSubClasses(name='Index')
             else:
@@ -433,7 +424,7 @@ class BotMain:
             await ctx.send(embed=embed)
 
         @client.command(name='Class/Spells')
-        async def Class_Spell(ctx, *arg):
+        async def class_spell(ctx, *arg):
             if(len(arg) == 0):
                 embed = SpellsManager.IndexSpell(name='Index')
             else:
@@ -441,12 +432,12 @@ class BotMain:
             await ctx.send(embed=embed)
 
         @client.command(name='Class/Features')
-        async def Class_Features(ctx, *arg):
+        async def class_features(ctx, *arg):
             embed = ClassManager.ClassFeat(name=arg)
             await ctx.send(embed=embed)
 
         @client.command(name='Class/Prof')
-        async def Class_Prof(ctx, *arg):
+        async def class_prof(ctx, *arg):
             if(len(arg) == 0):
                 embed = ProfManager.ProficienciesIndex(name='index')
             else:
@@ -454,7 +445,7 @@ class BotMain:
             await ctx.send(embed=embed)
 
         @client.command(name='Class/Start-Equip')
-        async def Class_Start_Equip(ctx, *arg):
+        async def class_start_equip(ctx, *arg):
             embed = ClassManager.ClassEquip(name=arg)
             await ctx.send(embed=embed)
 
@@ -462,7 +453,7 @@ class BotMain:
         One subset for monsters, filter by CR value
         """
         @client.command(name='Monsters/CR')
-        async def Monster_CR(ctx, *arg):
+        async def monster_cr(ctx, *arg):
             embed = MonsterManager.MonsterCR(name=arg)
             await ctx.send(embed=embed)
 
@@ -471,7 +462,7 @@ class BotMain:
         Condition, school, and damage type
         """
         @client.command(name='Mechanic/Condition')
-        async def Mech_Con(ctx, *arg):
+        async def mech_con(ctx, *arg):
             if(len(arg) == 0):
                 embed = MechanicManager.IndexConditions(name='Index')
             else:
@@ -480,7 +471,7 @@ class BotMain:
             await ctx.send(embed=embed)
 
         @client.command(name='Mechanic/Damage_Type')
-        async def Mech_Type(ctx, *arg):
+        async def mech_type(ctx, *arg):
             if(len(arg) == 0):
                 embed = MechanicManager.IndexDamageType(name='Index')
             else:
@@ -489,7 +480,7 @@ class BotMain:
             await ctx.send(embed=embed)
 
         @client.command(name='Mechanic/School')
-        async def Mech_School(ctx, *arg):
+        async def mech_school(ctx, *arg):
             if(len(arg) == 0):
                 embed = MechanicManager.IndexSchools(name='Index')
             else:
@@ -501,7 +492,7 @@ class BotMain:
         Rules Subset
         """
         @client.command(name='Rules')
-        async def Rules(ctx, *arg):
+        async def rules(ctx, *arg):
             if(len(arg) == 0):
                 embed = RulesHandler.RuleIndex(name='Index')
             else:
@@ -510,7 +501,7 @@ class BotMain:
             await ctx.send(embed=embed)
 
         @client.command(name='Rules_Sec')
-        async def Rules_Sec(ctx, *arg):
+        async def rules_sec(ctx, *arg):
             if(len(arg) == 0):
                 embed = RulesHandler.RuleSecIndex(name='Index')
             else:
@@ -522,7 +513,7 @@ class BotMain:
         Test Function - Used to test json 
         """
         @client.command(name='Test')
-        async def Test_Func(ctx, *arg):
+        async def test_func(ctx, *arg):
             if(len(arg) == 0):
                 embed = Tester.Desc_FuncTest(name='Index')
                 embed2 = Tester.Desc_FuncTest2(name='Index')
@@ -532,13 +523,6 @@ class BotMain:
             else:
                 embed = Tester.Desc_FuncTest(name=arg)
                 await ctx.send(embed=embed)
-
-        """
-        General Error Handle
-        """
-        @Class_Start_Equip.error
-        async def info_error(ctx, error):
-            await ctx.send('Something went horribly wrong: {}'.format(error))
 
         client.run(TOKEN)
 

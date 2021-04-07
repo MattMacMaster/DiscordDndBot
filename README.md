@@ -16,11 +16,9 @@ Windows 10, VSCode, Python - Version(3.8.2), [Discordpy](https://discordpy.readt
 # Future Additions
 - Add a did you mean clause on failed requests
 - Further Error Handling
-- Add Command Cooldowns
-- Make codebase less monolithic and more reuseable
 - Add Homebrew manager/handler with local database?
 - Unit Testing
-- Hardcore Code thinning and optimizing
+- Hardcore Code thinning and optimizing / Make codebase less monolithic and more reuseable
 - Running on its own  personal server for 24/7 uptime
 
 
