@@ -7,6 +7,8 @@ from Managers.CommManager import CommsManager
 import discord
 import requests
 from datetime import datetime
+import json
+from Parser import GeneralHandler
 
 
 class SubraceManger:
@@ -40,4 +42,31 @@ class SubraceManger:
         else:
             embed = CommsManager.failedRequest(name)
 
+        return embed
+
+    @staticmethod
+    def IndexSubRaces(name):
+        name = CommsManager.paramHandler(name)
+        value = requests.get(
+            'https://www.dnd5eapi.co/api/subraces/')
+
+        # Needs to use one or the other sometimes, -annoying
+        # value = eval(value.text)
+        value = json.loads(value.text)
+        # Actual Call of discord
+        if('error' not in value):
+            embed = discord.Embed(
+                title='Subraces - {}'.format(name),
+                colour=discord.Colour.red()
+            )
+            embed.add_field(name='Entries Found',
+                            value=value['count'], inline=False)
+
+            embed = GeneralHandler.index_Handler3(
+                embed, value['results'], name)
+
+            embed.timestamp = datetime.utcnow()
+            embed.set_footer(text='MattMaster Bots: Dnd')
+        else:
+            embed = CommsManager.failedRequest(name)
         return embed
