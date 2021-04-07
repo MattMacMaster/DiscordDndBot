@@ -40,8 +40,6 @@ class BotMain:
         # TODO Update names in $Class/Feature - Fixed - Similar issue ^ needs refactor
 
         # TODO Examples for all commands
-        # TODO $Spell/School index reroute
-        # TODO $Spell/School necromancy breaks
         # TODO $Rule combat needs a subsection section
         # TODO Reroute index $Race/Prof, $Race/Trait, $Race/SubRace
         # TODO $Race/Prof gnome breaks
@@ -413,7 +411,7 @@ class BotMain:
             await ctx.send(embed=embed)
 
         @client.command(name='Spell/School')
-        async def spell_school(ctx, arg):
+        async def spell_school(ctx, *arg):
             if(len(arg) == 0):
                 embed = MechanicManager.IndexSchools(name='Index')
             else:

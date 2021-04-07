@@ -24,8 +24,10 @@ class RulesHandler:
             embed.add_field(name='Name',
                             value=value['name'], inline=False)
 
-            embed = GeneralHandler.Desc_Handler(
-                embed, value['desc'], name)
+            if('subsections' in value):
+                embed.add_field(name='SubSections - $RulesSec {Value}',
+                                value=RaceHandler.proficienciesHandler(value['subsections']), inline=False)
+
         else:
             embed = CommsManager.failedRequest(name)
         return embed
