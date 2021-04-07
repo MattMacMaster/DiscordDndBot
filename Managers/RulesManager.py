@@ -44,8 +44,6 @@ class RulesHandler:
                 title='Damage Type Information - {}'.format(value['name']),
                 colour=discord.Colour.red()
             )
-            embed.add_field(name='Name',
-                            value=value['name'], inline=False)
 
             embed = GeneralHandler.Desc_Handler(
                 embed, value['desc'], name)

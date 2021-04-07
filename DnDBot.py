@@ -38,6 +38,8 @@ class BotMain:
         # TODO Update Read me, explain how it works - setup, env needs
         # TODO Class Spell Druid breaks and cleric - Fixed but needs refactor
         # TODO Update names in $Class/Feature - Fixed - Similar issue ^ needs refactor
+        # TODO Look into base cases in $MagicItem armor
+        # TODO $RuleSec fantasy-historical-pantheons breaks
 
         # TODO Examples for all commands
 
@@ -170,7 +172,7 @@ class BotMain:
             embed.add_field(
                 name='General', value=Response.monster_data["General"], inline=False)
             embed.add_field(
-                name='Main', value=Response.monster_data["Main"], inline=False)
+                name='CR', value=Response.monster_data["Main"], inline=False)
             embed.timestamp = datetime.utcnow()
             embed.set_footer(text='MattMaster Bots: Dnd')
 
@@ -243,7 +245,7 @@ class BotMain:
             embed.add_field(
                 name='Condition', value=Response.mechanic_data["Conditions"], inline=False)
             embed.add_field(
-                name='Dmg_Type', value=Response.mechanic_data["Damage_Types"], inline=False)
+                name='Damage_Type', value=Response.mechanic_data["Damage_Types"], inline=False)
             embed.add_field(
                 name='School', value=Response.mechanic_data["Schools"], inline=False)
             embed.timestamp = datetime.utcnow()

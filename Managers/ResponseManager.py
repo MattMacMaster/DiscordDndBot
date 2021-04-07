@@ -8,43 +8,65 @@ class Response:
 
     race_data = {
         "General": """
+        Ex: ($Race dwarf)
         $Race {RaceName}
         """,
         "Specific": """
+           Ex: ($Race/Prof dwarf)
            $Race/Prof {RaceName},
-             $Race/Trait {RaceName},
-               $Race/SubRace {RaceName},
 
-               $Subrace {SubRaceName}
-                  """
+           Ex: ($Race/Trait dwarf)
+           $Race/Trait {RaceName},
+
+           Ex: ($Race/Trait dwarf)
+           $Race/SubRace {RaceName},
+
+           Ex: ($Subrace lightfoot-halfling)
+           $Subrace {SubRaceName}
+        """
     }
 
     monster_data = {
         "General": """
+        Ex: ($Monster assassin)
         $Monster {MonsterName}
         """,
         "Main":
         """
+        Ex: ($Monster/cr 8)
         $Monster/cr {CR}
         """
     }
     class_data = {
         "General": """
+        Ex: ($Class sorcerer)
         $Class {ClassName}
         """,
         "Main":
         """
+        Ex: ($Class/Spell sorcerer)
         $Class/Spell {ClassName},
+
+        Ex: ($Class/Subclass sorcerer)
         $Class/SubClass {ClassName},
+
+        Ex: ($Class/Feature bard)
         $Class/Feature {ClassName},
+
+        Ex: ($Class/Prof bard)
         $Class/Prof {ClassName},
+
+        Ex: ($Class/Start-Equip bard)
         $Class/Start-Equip {ClassName},
         """
     }
     equipment_data = {
         "General":
         """
+        Ex: ($Equip trident)
         $Equip {Name},
+        
+        Ex: ($MagicItem vorpal-sword)
         $MagicItem {Name},
 
         """
@@ -53,8 +75,13 @@ class Response:
     spell_data = {
         "General":
         """
+        Ex: ($Spell commune)
         $Spell {Spellname}
+
+        Ex: ($Spell/School abjuration)
         $Spell/School {Schoolname}
+
+        Ex: ($Spell/Level 6)
         $Spell/Level {Level}
         """,
 
@@ -80,24 +107,29 @@ class Response:
     mechanic_data = {
         "Conditions":
         """
+        Ex: ($Mechanic/Condition deafened)
         $Mechanic/Condition {name}
         """,
         "Damage_Types":
         """
+        Ex: ($Mechanic/DamageType force)
         $Mechanic/DamageType {name}
         """,
         "Schools":
         """
+        Ex: ($Mechanic/School abjuration)
         $Mechanic/School {name}
         """
     }
     rules_data = {
         "Rule":
         """
+        Ex: ($Rule adventuring)
         $Rule {name}
         """,
         "Rule-Section":
         """
+        Ex: ($RuleSec fantasy-historical-pantheons)
         $RuleSec {name}
         """
     }
