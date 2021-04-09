@@ -42,20 +42,28 @@ class Response:
         Ex: ($Class sorcerer)
         $Class {ClassName}
         """,
-        "Main":
+        "Class Spell List":
         """
         Ex: ($Class/Spell sorcerer)
         $Class/Spell {ClassName},
-
+        """,
+        "Class Subclass List":
+        """
         Ex: ($Class/Subclass sorcerer)
         $Class/SubClass {ClassName},
-
+        """,
+        "Class Feature List":
+        """
         Ex: ($Class/Feature bard)
         $Class/Feature {ClassName},
-
+        """,
+        "Class Proficiencies List":
+        """
         Ex: ($Class/Prof bard)
         $Class/Prof {ClassName},
-
+        """,
+        "Class Starting Equipment List":
+        """
         Ex: ($Class/Start-Equip bard)
         $Class/Start-Equip {ClassName},
         """
@@ -65,7 +73,7 @@ class Response:
         """
         Ex: ($Equip trident)
         $Equip {Name},
-        
+
         Ex: ($MagicItem vorpal-sword)
         $MagicItem {Name},
 
@@ -86,7 +94,7 @@ class Response:
         """,
 
         "Main":
-        """ 
+        """
          $Spell/Desc {Spellname},
          $Spell/Range {Spellname},
          $Spell/Higher_Level {Spellname},
@@ -171,8 +179,8 @@ class Response:
     def intro(self):
         return """
         Hello,
-         I am D&D bot.
-          I exist to help with all your D&D needs and questions.
+         I am D & D bot.
+          I exist to help with all your D & D needs and questions.
            My currrent knowledge base includes but is not limited to,
            classes, races, equipment, spells, monsters, mechanics and rules.
             I also manage my masters homebrews which I keep incase anyone is ever
