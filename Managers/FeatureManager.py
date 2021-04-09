@@ -27,8 +27,8 @@ class FeatureManager:
         if('error' not in value):
             embed.add_field(name='Name', value=value['name'], inline=False)
             embed.add_field(
-                name='Class', value=value['class']['name'], inline=False)
-            embed.add_field(name='Level', value=str(
+                name='Class - $Class {ClassName}', value=value['class']['name'], inline=False)
+            embed.add_field(name='Level - $Spell/Level {Level}', value=str(
                 value['level']), inline=False)
             embed.add_field(name='Prerequisites',
                             value=value['prerequisites'], inline=False)

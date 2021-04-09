@@ -156,6 +156,8 @@ class EquipManager:
         if('error' not in value):
             if(value['equipment_category']['name'] == 'Weapon'):
                 if('desc' in value):
+                    embed.add_field(name='Equipment Category',
+                                    value=value['equipment_category']['name'], inline=False)
                     embed = GeneralHandler.Desc_Handler(
                         embed, RaceHandler.DescHandler(value['desc']), name)
                 else:
@@ -179,7 +181,12 @@ class EquipManager:
                 embed = GeneralHandler.Desc_Handler(
                     embed, RaceHandler.DescHandler(value['desc']), name)
 
-            if(value['equipment_category']['name'].lower == 'armor'):
+            if(value['equipment_category']['name'] == 'Armor'):
+                embed.add_field(name='Equipment Category',
+                                value=value['equipment_category']['name'], inline=False)
+                embed.add_field(name='Equipment Description', value=RaceHandler.DescHandler(
+                    value['desc']), inline=False)
+            if(value['equipment_category']['name'] == 'Ammunition'):
                 embed.add_field(name='Equipment Category',
                                 value=value['equipment_category']['name'], inline=False)
                 embed.add_field(name='Equipment Description', value=RaceHandler.DescHandler(

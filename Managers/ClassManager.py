@@ -9,6 +9,7 @@ from Parser import SpellsHandler
 from Parser import start_equip
 from Parser import GeneralHandler
 import json
+import math
 
 
 class ClassManager:
@@ -32,24 +33,24 @@ class ClassManager:
             embed.add_field(name='Name', value=value['name'], inline=False)
             embed.add_field(name='Hit Die', value='d' +
                             str(value['hit_die']), inline=False)
-            embed.add_field(name='Proficiency Choices', value=ProficienciesHandler.prof_choices(
+            embed.add_field(name='Proficiency Choices - $Prof {value}', value=ProficienciesHandler.prof_choices(
                 value['proficiency_choices']), inline=False)
-            embed.add_field(name='Proficiencies', value=RaceHandler.proficienciesHandler(
+            embed.add_field(name='Proficiencies - $Prof {value}', value=RaceHandler.proficienciesHandler(
                 value['proficiencies']), inline=False)
-            embed.add_field(name='Saving Throws', value=RaceHandler.proficienciesHandler(
+            embed.add_field(name='Saving Throws - $AbilityScore {value}', value=RaceHandler.proficienciesHandler(
                 value['saving_throws']), inline=False)
-            embed.add_field(name='Starting Equipment', value=start_equip.startEquipmentHandler(
+            embed.add_field(name='Starting Equipment - $Equip {value}', value=start_equip.startEquipmentHandler(
                 value2['starting_equipment']), inline=False)
-            embed.add_field(name='Starting Equipment Options', value=start_equip.equipmentHandler(
+            embed.add_field(name='Starting Equipment Options - $Equip {value}', value=start_equip.equipmentHandler(
                 value2['starting_equipment_options']), inline=False)
             if('spellcasting' in value):
-                embed.add_field(name='SpellCasting Ability',
+                embed.add_field(name='SpellCasting Ability - $AbilityScore {value}',
                                 value=value['spellcasting']['spellcasting_ability']['name'], inline=False)
                 embed.add_field(name='SpellCasting Desc', value=SpellsHandler.dcHandler(
                     value['spellcasting']['info']), inline=False)
             embed.add_field(
-                name='Spells', value='$Class/Spells {}'.format(name), inline=False)
-            embed.add_field(name='SubClasses - $Class/SubClasses {}',
+                name='Spells - $Spell {value}', value='$Class/Spell {}'.format(name), inline=False)
+            embed.add_field(name='SubClasses - $Class/SubClasses {value}',
                             value=RaceHandler.proficienciesHandler(value['subclasses']), inline=False)
             embed.timestamp = datetime.utcnow()
             embed.set_footer(text='MattMaster Bots: Dnd')
@@ -66,24 +67,24 @@ class ClassManager:
         value = requests.get(
             'https://www.dnd5eapi.co/api/classes/{}/spells/'.format(name))
         value = eval(value.text)
-        print(value)
-        print(len(RaceHandler.proficienciesHandler(value['results'])))
+        counter = math.ceil(
+            len(RaceHandler.proficienciesHandler(value['results'])) / 1024)
+        counter2 = 0
         if('error' not in value):
             embed = discord.Embed(
                 title='Class Spell Information - {}'.format(name),
                 colour=discord.Colour.red()
             )
-            if(len(RaceHandler.proficienciesHandler(value['results'])) >= 1024):
-                embed.add_field(name='Spells', value=RaceHandler.proficienciesHandler(
-                    value['results'])[0:1000], inline=False)
-                embed.add_field(name='Cont...', value=RaceHandler.proficienciesHandler(
-                    value['results'])[1001:2000], inline=False)
-                if(len(RaceHandler.proficienciesHandler(value['results'])) >= 2000):
-                    embed.add_field(name='Cont....', value=RaceHandler.proficienciesHandler(
-                        value['results'])[2001:], inline=False)
-            else:
-                embed.add_field(name='Spells', value=RaceHandler.proficienciesHandler(
-                    value['results']), inline=False)
+            while(counter > counter2):
+                if(counter2 == 0):
+                    temp = counter2 + 1
+                    embed.add_field(name='Spells - $Spell {value}', value=RaceHandler.proficienciesHandler(
+                        value['results'])[counter2 * 1000:temp*1000], inline=False)
+                else:
+                    temp = counter2 + 1
+                    embed.add_field(name='Cont...', value=RaceHandler.proficienciesHandler(
+                        value['results'])[counter2 * 1000:temp*1000], inline=False)
+                counter2 = counter2 + 1
         else:
             embed = CommsManager.failedRequest(name)
         embed.timestamp = datetime.utcnow()
@@ -148,7 +149,7 @@ class ClassManager:
                 title='Class Proficiencies - {}'.format(name),
                 colour=discord.Colour.red()
             )
-            embed.add_field(name='Proficiencies', value=RaceHandler.proficienciesHandler(
+            embed.add_field(name='Proficiencies - $Prof {value}', value=RaceHandler.proficienciesHandler(
                 value['results']), inline=False)
         else:
             embed = CommsManager.failedRequest(name)
@@ -169,9 +170,9 @@ class ClassManager:
                 title='Class Starting Equipment - {}'.format(name),
                 colour=discord.Colour.red()
             )
-            embed.add_field(name='Starting Equipment', value=start_equip.startEquipmentHandler(
+            embed.add_field(name='Starting Equipment - $Equip {value}', value=start_equip.startEquipmentHandler(
                 value['starting_equipment']), inline=False)
-            embed.add_field(name='Starting Equipment Options', value=start_equip.equipmentHandler(
+            embed.add_field(name='Starting Equipment Options - $Equip {value}', value=start_equip.equipmentHandler(
                 value['starting_equipment_options']), inline=False)
         else:
             embed = CommsManager.failedRequest(name)
@@ -187,24 +188,24 @@ class ClassManager:
         value = requests.get(
             'https://www.dnd5eapi.co/api/classes/{}/features/'.format(name))
         value = eval(value.text)
-
+        counter = math.ceil(
+            len(RaceHandler.proficienciesHandler(value['results'])) / 1024)
+        counter2 = 0
         if('error' not in value):
             embed = discord.Embed(
                 title='Class Features Information - {}'.format(name),
                 colour=discord.Colour.red()
             )
-            embed.add_field(name='General Command', value='$Feature {Name}')
-            if(len(RaceHandler.proficienciesHandler(value['results'])) >= 1024):
-                embed.add_field(name='Features - $Feature {name}', value=RaceHandler.proficienciesHandler(
-                    value['results'])[0:1000], inline=False)
-                embed.add_field(name='Cont...', value=RaceHandler.proficienciesHandler(
-                    value['results'])[1001:2000], inline=False)
-                if(len(RaceHandler.proficienciesHandler(value['results'])) >= 2000):
-                    embed.add_field(name='Cont....', value=RaceHandler.proficienciesHandler(
-                        value['results'])[2000:], inline=False)
-            else:
-                embed.add_field(name='Features', value=RaceHandler.proficienciesHandler(
-                    value['results']), inline=False)
+            while(counter > counter2):
+                if(counter2 == 0):
+                    temp = counter2 + 1
+                    embed.add_field(name='Features - $Feature {value}', value=RaceHandler.proficienciesHandler(
+                        value['results'])[counter2 * 1000:temp*1000], inline=False)
+                else:
+                    temp = counter2 + 1
+                    embed.add_field(name='Cont...', value=RaceHandler.proficienciesHandler(
+                        value['results'])[counter2 * 1000:temp*1000], inline=False)
+                counter2 = counter2 + 1
         else:
             embed = CommsManager.failedRequest(name)
         embed.timestamp = datetime.utcnow()
@@ -267,6 +268,3 @@ class ClassManager:
             embed = CommsManager.failedRequest(name)
 
         return embed
-
-    # Index of features would already exist  - Skipping that one and will simple route it to the existing one
-    # Same with spells - Prof - and Equip - Skipping

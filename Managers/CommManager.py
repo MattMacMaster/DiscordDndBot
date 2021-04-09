@@ -18,8 +18,9 @@ class CommsManager():
             value = ' '.join(arg)
             value = value.replace('\'', "")
             value = value.lower()
-            value = value.replace(' ', '-')
             value = value.replace(',', '')
+            value = value.replace(':', '-')
+
             return value
         else:
             value = ''.join(arg)
@@ -27,6 +28,8 @@ class CommsManager():
             value = value.lower()
             value = value.replace(' ', '-')
             value = value.replace('/', '-')
+            value = value.replace(':', '-')
+
             return value
     # Arg will always be an array or a dictionary
 

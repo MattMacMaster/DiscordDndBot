@@ -21,7 +21,7 @@ class TraitManager:
         value = eval(value.text)
         if('error' not in value):
             embed = discord.Embed(
-                title='Subrace Information - {}'.format(value['name']),
+                title='Trait Information - {}'.format(value['name']),
                 colour=discord.Colour.red()
             )
             # value['starting_proficiencies']
@@ -32,7 +32,7 @@ class TraitManager:
                 name='Races - $Race {value}', value=TraitHandler.raceHandler(value['races']), inline=False)
             embed.add_field(
                 name='Subraces - $Subrace {value}', value=RaceHandler.SubHandler(value['subraces']), inline=False)
-            embed.add_field(name='Proficiencies', value=SubRaceHandler.proficienciesHandler(
+            embed.add_field(name='Proficiencies - $Prof {value}', value=SubRaceHandler.proficienciesHandler(
                 value['proficiencies']), inline=False)
             embed.timestamp = datetime.utcnow()
             embed.set_footer(text='MattMaster Bots: Dnd')

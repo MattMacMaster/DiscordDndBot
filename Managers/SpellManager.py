@@ -76,7 +76,7 @@ class SpellsManager:
                 colour=discord.Colour.red()
             )
             embed.add_field(
-                name='Spells', value=RaceHandler.traitHandler(value['results']))
+                name='Spells - $Spell {value}', value=RaceHandler.traitHandler(value['results']))
             embed.timestamp = datetime.utcnow()
             embed.set_footer(text='MattMaster Bots: Dnd')
 
@@ -97,7 +97,7 @@ class SpellsManager:
                 colour=discord.Colour.red()
             )
             embed.add_field(
-                name='Spells', value=RaceHandler.traitHandler(value['results']))
+                name='Spells - $Spell {value}', value=RaceHandler.traitHandler(value['results']))
             embed.timestamp = datetime.utcnow()
             embed.set_footer(text='MattMaster Bots: Dnd')
 

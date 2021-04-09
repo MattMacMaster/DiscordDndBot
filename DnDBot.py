@@ -36,12 +36,11 @@ class BotMain:
         client.remove_command('help')
 
         # TODO Update Read me, explain how it works - setup, env needs
-        # TODO Class Spell Druid breaks and cleric - Fixed but needs refactor
-        # TODO Update names in $Class/Feature - Fixed - Similar issue ^ needs refactor
-        # TODO Look into base cases in $MagicItem armor
-        # TODO $RuleSec fantasy-historical-pantheons breaks
+        # TODO Refactor Text wrapping for responses
+        # TODO $RuleSec fantasy-historical-pantheons breaks - Length is to long
+        # TODO Add Subclass Goodness
 
-        # TODO Examples for all commands
+        # TODO Add related commands to prompts
 
         # TODO Error handling/ coverage
         # TODO Spell Check, recommendations
@@ -50,11 +49,11 @@ class BotMain:
         # TODO Command Cooldowns
 
         # TODO Clean up codebase to be less monolithic
-        # TODO Flesh out database and homebrew interaction
+        # TODO Flesh out database and homebrew interaction - Long Term
 
-        # TODO Update Readme for easy setup, most likely without a database - or sqlite setup
-        # TODO Data base built with two migration scripts, windows and ubuntu
-        # TODO Test out web scraper for missing data
+        # TODO Update Readme for easy setup, most likely without a database - or sqlite setup - Long Term
+        # TODO Data base built with two migration scripts, windows and ubuntu - Long Term
+        # TODO Test out web scraper for missing data - Long Term
         # TODO Move to pi for 24/7 activity
 
         # Notes
