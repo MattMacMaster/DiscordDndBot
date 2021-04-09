@@ -187,7 +187,15 @@ class BotMain:
             embed.add_field(
                 name='General', value=Response.class_data["General"], inline=False)
             embed.add_field(
-                name='Main', value=Response.class_data["Main"], inline=False)
+                name='Class Spell List', value=Response.class_data["Class Spell List"], inline=False)
+            embed.add_field(
+                name='Class Subclass List', value=Response.class_data["Class Subclass List"], inline=False)
+            embed.add_field(
+                name='Class Feature List', value=Response.class_data["Class Feature List"], inline=False)
+            embed.add_field(
+                name='Class Proficiencies List', value=Response.class_data["Class Proficiencies List"], inline=False)
+            embed.add_field(
+                name='Class Starting Equipment List', value=Response.class_data["Class Starting Equipment List"], inline=False)
             embed.timestamp = datetime.utcnow()
             embed.set_footer(text='MattMaster Bots: Dnd')
             await ctx.send(embed=embed)
