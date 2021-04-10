@@ -36,11 +36,8 @@ class BotMain:
         client.remove_command('help')
 
         # TODO Update Read me, explain how it works - setup, envs needs
-        # TODO Refactor Text wrapping for responses
-        # TODO Add Subclass Goodness
-        # TODO Remove all prints
-
-        # TODO Add related commands to prompts
+        # TODO Refactor Text wrapping for responses - Less Cont.. titles
+        # TODO Refactor Special abilities in Monster handler
 
         # TODO Error handling/ coverage
         # TODO Spell Check, recommendations
@@ -540,6 +537,7 @@ class BotMain:
 
         @client.command(name='RuleSec')
         async def rules_sec(ctx, *arg):
+            len(arg)
             if(len(arg) == 0):
                 embed = RulesHandler.RuleSecIndex(name='Index')
             else:
@@ -547,7 +545,7 @@ class BotMain:
                 for x in embed:
                     await ctx.send(embed=x)
 
-            # await ctx.send(embed=embed)
+            await ctx.send(embed=embed)
 
         """
         Test Function - Used to test json 

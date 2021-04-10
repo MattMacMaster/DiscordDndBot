@@ -23,7 +23,7 @@ Windows 10, VSCode, Python - Version(3.8.2), [Discordpy](https://discordpy.readt
 
 
 # Known Issues
-Due to inconsistencies from the data source some entries break the bot - Noting known ones below
+Due to inconsistencies from the data source some entries break the bot - Noting known ones below that remain unfixed
 
 
 # Local Setup
