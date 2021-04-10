@@ -15,7 +15,6 @@ class RulesHandler:
         value = requests.get(
             'https://www.dnd5eapi.co/api/rules/{}'.format(name))
         value = json.loads(value.text)
-        print(value)
         if('error' not in value):
             embed = discord.Embed(
                 title='Damage Type Information - {}'.format(value['name']),
@@ -25,7 +24,7 @@ class RulesHandler:
                             value=value['name'], inline=False)
 
             if('subsections' in value):
-                embed.add_field(name='SubSections - $RulesSec {Value}',
+                embed.add_field(name='SubSections - $RuleSec {Value}',
                                 value=RaceHandler.proficienciesHandler(value['subsections']), inline=False)
 
         else:
@@ -42,7 +41,6 @@ class RulesHandler:
         rounds = math.ceil(len(value['desc']) / length)
         counter = 0
         embeds = []
-        print(value)
         if('error' not in value):
             while(rounds > counter):
 
@@ -100,7 +98,7 @@ class RulesHandler:
         # Actual Call of discord
         if('error' not in value):
             embed = discord.Embed(
-                title='Test - {}'.format(name),
+                title='Rules Sections - $RuleSec {value}',
                 colour=discord.Colour.red()
             )
             embed.add_field(name='Entries Found',

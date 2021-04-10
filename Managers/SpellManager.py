@@ -16,7 +16,6 @@ class SpellsManager:
         value = requests.get(
             'https://www.dnd5eapi.co/api/spells/{}'.format(name))
         value = json.loads(value.text)
-        print(value)
 
         if('error' not in value):
             embed = discord.Embed(

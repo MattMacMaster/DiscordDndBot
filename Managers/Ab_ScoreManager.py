@@ -46,7 +46,6 @@ class AbilityScoreManager:
         value = requests.get(
             'https://www.dnd5eapi.co/api/ability-scores/')
         value = eval(value.text)
-        print(value)
         if('error' not in value):
             embed = discord.Embed(
                 title='Ability Score Index ',

@@ -85,7 +85,6 @@ class RaceManager:
         value = requests.get(
             'https://www.dnd5eapi.co/api/races/{}/traits/'.format(name))
         value = eval(value.text)
-        print(value)
         if('error' not in value):
             embed = discord.Embed(
                 title='{} Traits '.format(name) + '- $Traits {value}',

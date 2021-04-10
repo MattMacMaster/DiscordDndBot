@@ -21,7 +21,6 @@ class MonsterManager:
         value = requests.get(
             'https://www.dnd5eapi.co/api/monsters/{}'.format(name))
         value = json.loads(value.text)
-        print(value)
         if('error' not in value):
             embed = discord.Embed(
                 title='Monster Information - {}'.format(value['name']),
@@ -44,24 +43,24 @@ class MonsterManager:
             embed.add_field(name='Speed', value=monster.moveHandler(
                 value['speed']), inline=False)
 
-            embed.add_field(name='Ability Scores', value='STR: ' + str(value['strength']) + ', DEX: ' + str(value['dexterity']) + ', CON: ' + str(
+            embed.add_field(name='Ability Scores - $AbilityScore {name}', value='STR: ' + str(value['strength']) + ', DEX: ' + str(value['dexterity']) + ', CON: ' + str(
                 value['constitution']) + ', INT: ' + str(value['intelligence']) + ', WIS: ' + str(value['wisdom']) + ', CHA: ' + str(value['charisma']), inline=False)
             embed.add_field(name='Proficiencies', value=monster.profHandler(
                 value['proficiencies']), inline=False)
-            embed.add_field(name='DMG Vulnerabilities',
+            embed.add_field(name='DMG Vulnerabilities - $Mechanic/DamageType {value}',
                             value=monster.arrayhandle(value['damage_vulnerabilities']), inline=False)
-            embed.add_field(name='DMG Resistances',
+            embed.add_field(name='DMG Resistances - $Mechanic/DamageType {value}',
                             value=monster.arrayhandle(value['damage_resistances']), inline=False)
-            embed.add_field(name='DMG Immunities',
+            embed.add_field(name='DMG Immunities - $Mechanic/DamageType {value}',
                             value=monster.arrayhandle(value['damage_immunities']), inline=False)
 
-            embed.add_field(name='Condition Immunities', value=RaceHandler.proficienciesHandler(
+            embed.add_field(name='Condition Immunities - $Mechanic/Condition {name}', value=RaceHandler.proficienciesHandler(
                 value['condition_immunities']), inline=False)
 
             embed.add_field(name='Senses', value=monster.sensesHandler(
                 value['senses']), inline=False)
 
-            embed.add_field(name='Languages',
+            embed.add_field(name='Languages - $Language {name}',
                             value=GeneralHandler.emptyHandler(value['languages']), inline=False)
 
             embed.add_field(

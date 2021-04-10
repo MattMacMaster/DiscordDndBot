@@ -50,7 +50,7 @@ class ClassManager:
                     value['spellcasting']['info']), inline=False)
             embed.add_field(
                 name='Spells - $Spell {value}', value='$Class/Spell {}'.format(name), inline=False)
-            embed.add_field(name='SubClasses - $Class/SubClasses {value}',
+            embed.add_field(name='SubClasses - $SubClass {value}',
                             value=RaceHandler.proficienciesHandler(value['subclasses']), inline=False)
             embed.timestamp = datetime.utcnow()
             embed.set_footer(text='MattMaster Bots: Dnd')
@@ -106,7 +106,7 @@ class ClassManager:
                 colour=discord.Colour.red()
             )
 
-            embed.add_field(name='Parent Class',
+            embed.add_field(name='Parent Class - $Class {value}',
                             value=value['class']['name'], inline=False)
             embed.add_field(name='Name',
                             value=value['name'], inline=False)
@@ -118,7 +118,8 @@ class ClassManager:
             embed.set_footer(text='MattMaster Bots: Dnd')
             if('spells' in value):
                 embed2 = discord.Embed(
-                    title='Spell Information - {}'.format(value['name']),
+                    title='Spell Information - {} - $Spell {}'.format(
+                        value['name'], '{value}'),
                     colour=discord.Colour.red()
                 )
                 embed2 = GeneralHandler.SubClassSpellHandler2(
@@ -266,7 +267,6 @@ class ClassManager:
         value = json.loads(value.text)
         # CommsManager.jsonHandler(value)
         # Actual Call of discord
-        print(value)
         if('error' not in value):
             embed = discord.Embed(
                 title='Classes - {}'.format(name),

@@ -75,7 +75,6 @@ class EquipManager:
             title='Equipment Information - {}'.format(name),
             colour=discord.Colour.red()
         )
-        print(value)
         if('error' not in value):
             if(value['equipment_category']['name'] == 'Weapon'):
                 embed.add_field(name='Equipment Category',
@@ -152,7 +151,6 @@ class EquipManager:
             title='Magic Item Information - {}'.format(name),
             colour=discord.Colour.red()
         )
-        print(value)
         if('error' not in value):
             if(value['equipment_category']['name'] == 'Weapon'):
                 if('desc' in value):

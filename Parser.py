@@ -31,16 +31,12 @@ class GeneralHandler:
         if(json_length >= text_length):
             counter = 0
 
-            print(json_length)
-            print(total_embeds)
             # Need to account for one embed, many, and the last
             # 5>counter is fine
             # total_embeds > 6
             # Entry 5 is fucked?
             while total_embeds > counter:
                 if(counter == 6):
-                    print(Results[counter:text_length*(
-                        counter+1)])
                     counter = counter + 1
                 if(counter == 0):
                     embed.add_field(
@@ -132,7 +128,6 @@ class GeneralHandler:
         embed = embed
 
         for x in arg:
-            print(x['spell']['name'])
             Results = 'Required:' + '\n'
             for z in x['prerequisites']:
                 Results += z['type'] + ' ' + z['name'] + '\n'

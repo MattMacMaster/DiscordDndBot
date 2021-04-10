@@ -14,18 +14,15 @@ from Parser import GeneralHandler
 class LanguageManager:
     @staticmethod
     def Languages(name):
-        print(name)
         name = CommsManager.paramHandler(name)
         value = requests.get(
             'https://www.dnd5eapi.co/api/languages/{}'.format(name))
         value = json.loads(value.text)
-        print(value)
         if('error' not in value):
             embed = discord.Embed(
                 title='Language Information - {}'.format(value['name']),
                 colour=discord.Colour.red()
             )
-            print(value)
             # value['starting_proficiencies']
             embed.add_field(name='Name', value=value['name'], inline=False)
             embed.add_field(name='Type', value=value['type'], inline=False)

@@ -54,11 +54,6 @@ class CommsManager():
                 elif(type(b) == type({})):
                     # Keep working way down until a bottom is reached
                     CommsManager.jsonHandler(b)
-                else:
-                    # Data type is non nestable
-                    # Need a way to take this point and have it usable into the embed system with discord
-                    print(b)
-        # Assumed object furthuring
         else:
             for i in arg.keys():
                 # Assuming args is an object now, using iteratives as keys
@@ -69,10 +64,6 @@ class CommsManager():
                 elif(type(arg[i]) == type({})):
                     # Keep working way down until a bottom is reached
                     CommsManager.jsonHandler(arg[i])
-                else:
-                    # Data type is non nestable
-                    print(i)
-                    print(arg[i])
 
     @staticmethod
     def failedRequest(arg):

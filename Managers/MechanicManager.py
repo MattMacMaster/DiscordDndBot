@@ -15,7 +15,6 @@ class MechanicManager:
         value = requests.get(
             'https://www.dnd5eapi.co/api/conditions/{}'.format(name))
         value = json.loads(value.text)
-        print(value)
         if('error' not in value):
             embed = discord.Embed(
                 title='Condition Information - {}'.format(value['name']),
@@ -38,7 +37,6 @@ class MechanicManager:
         value = requests.get(
             'https://www.dnd5eapi.co/api/damage-types/{}'.format(name))
         value = json.loads(value.text)
-        print(value)
         if('error' not in value):
             embed = discord.Embed(
                 title='Damage Type Information - {}'.format(value['name']),
@@ -59,7 +57,6 @@ class MechanicManager:
         value = requests.get(
             'https://www.dnd5eapi.co/api/magic-schools/{}'.format(name))
         value = json.loads(value.text)
-        print(value)
         if('error' not in value):
             embed = discord.Embed(
                 title='Magic School Information - {}'.format(value['name']),
@@ -113,7 +110,6 @@ class MechanicManager:
         value = json.loads(value.text)
         # CommsManager.jsonHandler(value)
         # Actual Call of discord
-        print(value)
         if('error' not in value):
             embed = discord.Embed(
                 title='Magic Schools - {}'.format(name),
