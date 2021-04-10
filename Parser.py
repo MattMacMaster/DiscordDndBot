@@ -102,12 +102,10 @@ class GeneralHandler:
         json_length = len(description)
         # Total needed embeds to fit the text
         total_embeds = math.ceil(json_length / text_length)
-
         if(json_length >= text_length):
             counter = 0
             # Need to account for one embed, many, and the last
             while total_embeds > counter:
-
                 if(counter == 0):
                     embed.add_field(
                         name=name, value=description[counter:text_length*(
@@ -128,6 +126,27 @@ class GeneralHandler:
                 name='Description', value=description
             )
             return embed
+
+    @staticmethod
+    def SubClassSpellHandler2(embed, arg, name):
+        embed = embed
+
+        for x in arg:
+            print(x['spell']['name'])
+            Results = 'Required:' + '\n'
+            for z in x['prerequisites']:
+                Results += z['type'] + ' ' + z['name'] + '\n'
+
+            embed.add_field(name=x['spell']['name'],
+                            value=Results, inline=False)
+            """
+            
+
+                #Results += z['type'] + ' ' + z['name'] + '\n'
+                Results += 'boo' + '\n'
+            """
+
+        return embed
 
 
 class RaceHandler:

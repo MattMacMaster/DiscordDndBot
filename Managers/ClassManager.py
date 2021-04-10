@@ -93,6 +93,47 @@ class ClassManager:
         return embed
 
     @staticmethod
+    def GeneralSubClass(name):
+        name = CommsManager.paramHandler(name)
+
+        value = requests.get(
+            'https://www.dnd5eapi.co/api/subclasses/{}'.format(name))
+        value = eval(value.text)
+
+        if('error' not in value):
+            embed = discord.Embed(
+                title='Class Information - {}'.format(value['name']),
+                colour=discord.Colour.red()
+            )
+
+            embed.add_field(name='Parent Class',
+                            value=value['class']['name'], inline=False)
+            embed.add_field(name='Name',
+                            value=value['name'], inline=False)
+            embed.add_field(name='Flavor Text',
+                            value=value['subclass_flavor'], inline=False)
+            embed.add_field(name='Description',
+                            value=RaceHandler.DescHandler(value['desc']), inline=False)
+            embed.timestamp = datetime.utcnow()
+            embed.set_footer(text='MattMaster Bots: Dnd')
+            if('spells' in value):
+                embed2 = discord.Embed(
+                    title='Spell Information - {}'.format(value['name']),
+                    colour=discord.Colour.red()
+                )
+                embed2 = GeneralHandler.SubClassSpellHandler2(
+                    embed2, value['spells'], name)
+                embed2.timestamp = datetime.utcnow()
+                embed2.set_footer(text='MattMaster Bots: Dnd')
+                return [embed, embed2]
+            else:
+                return [embed]
+
+        else:
+            embed = CommsManager.failedRequest(name)
+            return [embed]
+
+    @ staticmethod
     def SubClass(name):
         name = CommsManager.paramHandler(name)
 
@@ -113,7 +154,7 @@ class ClassManager:
 
         return embed
 
-    @staticmethod
+    @ staticmethod
     def ClassCast(name):
         name = CommsManager.paramHandler(name)
 
@@ -136,7 +177,7 @@ class ClassManager:
 
         return embed
 
-    @staticmethod
+    @ staticmethod
     def ClassProf(name):
         name = CommsManager.paramHandler(name)
 
@@ -158,7 +199,7 @@ class ClassManager:
 
         return embed
 
-    @staticmethod
+    @ staticmethod
     def ClassEquip(name):
         name = CommsManager.paramHandler(name)
 
@@ -181,7 +222,7 @@ class ClassManager:
 
         return embed
 
-    @staticmethod
+    @ staticmethod
     def ClassFeat(name):
         name = CommsManager.paramHandler(name)
 
@@ -214,7 +255,7 @@ class ClassManager:
         return embed
 
     # Indexes
-    @staticmethod
+    @ staticmethod
     def IndexClasses(name):
         name = CommsManager.paramHandler(name)
         value = requests.get(
@@ -242,7 +283,7 @@ class ClassManager:
 
         return embed
 
-    @staticmethod
+    @ staticmethod
     def IndexSubClasses(name):
         name = CommsManager.paramHandler(name)
         value = requests.get(

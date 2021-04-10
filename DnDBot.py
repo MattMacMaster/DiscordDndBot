@@ -35,10 +35,10 @@ class BotMain:
         client = commands.Bot(command_prefix='$', case_insensitive=True)
         client.remove_command('help')
 
-        # TODO Update Read me, explain how it works - setup, env needs
+        # TODO Update Read me, explain how it works - setup, envs needs
         # TODO Refactor Text wrapping for responses
-        # TODO $RuleSec fantasy-historical-pantheons breaks - Length is to long
         # TODO Add Subclass Goodness
+        # TODO Remove all prints
 
         # TODO Add related commands to prompts
 
@@ -368,6 +368,16 @@ class BotMain:
                 embed = ClassManager.GeneralClass(name=arg)
             await ctx.send(embed=embed)
 
+        @client.command(name='SubClass')
+        async def main_subclass(ctx, *arg):
+            if(len(arg) == 0):
+                embed = ClassManager.IndexSubClasses(name='Index')
+                await ctx.send(embed=embed)
+            else:
+                embed = ClassManager.GeneralSubClass(name=' '.join(arg))
+                for x in embed:
+                    await ctx.send(embed=x)
+
         @client.command(name='Equip')
         async def main_equip(ctx, *arg):
             if(len(arg) == 0):
@@ -534,8 +544,10 @@ class BotMain:
                 embed = RulesHandler.RuleSecIndex(name='Index')
             else:
                 embed = RulesHandler.RuleSec(name=' '.join(arg))
+                for x in embed:
+                    await ctx.send(embed=x)
 
-            await ctx.send(embed=embed)
+            # await ctx.send(embed=embed)
 
         """
         Test Function - Used to test json 

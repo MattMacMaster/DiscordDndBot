@@ -41,6 +41,9 @@ class Response:
         "General": """
         Ex: ($Class sorcerer)
         $Class {ClassName}
+        
+        Ex: ($Subclass draconic)
+        $SubClass {SubClassName}
         """,
         "Class Spell List":
         """

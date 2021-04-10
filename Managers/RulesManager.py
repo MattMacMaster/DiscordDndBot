@@ -3,7 +3,7 @@ import discord
 import requests
 from Parser import RaceHandler
 from Parser import GeneralHandler
-
+import math
 from datetime import datetime
 import json
 
@@ -38,20 +38,29 @@ class RulesHandler:
         value = requests.get(
             'https://www.dnd5eapi.co/api/rule-sections/{}'.format(name))
         value = json.loads(value.text)
+        length = 5000
+        rounds = math.ceil(len(value['desc']) / length)
+        counter = 0
+        embeds = []
         print(value)
         if('error' not in value):
-            embed = discord.Embed(
-                title='Damage Type Information - {}'.format(value['name']),
-                colour=discord.Colour.red()
-            )
+            while(rounds > counter):
 
-            embed = GeneralHandler.Desc_Handler(
-                embed, value['desc'], name)
+                embed = discord.Embed(
+                    title='Damage Type Information - {}'.format(value['name']),
+                    colour=discord.Colour.red()
+                )
+                temp = counter + 1
+                embed = GeneralHandler.Desc_Handler(
+                    embed, value['desc'][counter*length:temp*length], name)
+                embeds.append(embed)
+                counter = counter + 1
+            return embeds
         else:
             embed = CommsManager.failedRequest(name)
-        return embed
+        return [embed]
 
-    @staticmethod
+    @ staticmethod
     def RuleIndex(name):
         name = CommsManager.paramHandler(name)
         value = requests.get(
@@ -78,7 +87,7 @@ class RulesHandler:
 
         return embed
 
-    @staticmethod
+    @ staticmethod
     def RuleSecIndex(name):
         name = CommsManager.paramHandler(name)
         value = requests.get(
