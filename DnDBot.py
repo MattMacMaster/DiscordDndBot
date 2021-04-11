@@ -110,7 +110,7 @@ class BotMain:
             embed.add_field(name='Monsters',
                             value='$Monster/help', inline=True)
             embed.add_field(name='Mechanic',
-                            value='$Mechanic/help', inline=True)
+                            value='$Mech/help', inline=True)
             embed.add_field(name='Rules', value='$Rule/help', inline=True)
             embed.add_field(name='Homebrews', value='Coming Soon', inline=True)
             embed.timestamp = datetime.utcnow()
@@ -239,10 +239,10 @@ class BotMain:
             embed.set_footer(text='MattMaster Bots: Dnd')
             await ctx.send(embed=embed)
 
-        @client.command(name='Mechanic/help')
+        @client.command(name='Mech/help')
         async def mechanics_help(ctx):
             embed = discord.Embed(
-                title='Mechanics Info Help - $Mechanic/help',
+                title='Mechanics Info Help - $Mech/help',
                 description='This Section Covers Game Mechanics - Conditions, Damage Types, and Schools',
                 colour=discord.Colour.red()
             )
@@ -496,7 +496,7 @@ class BotMain:
         Mechanics Subset 
         Condition, school, and damage type
         """
-        @client.command(name='Mechanic/Condition')
+        @client.command(name='Condition')
         async def mech_con(ctx, *arg):
             if(len(arg) == 0):
                 embed = MechanicManager.IndexConditions(name='Index')
@@ -505,7 +505,7 @@ class BotMain:
 
             await ctx.send(embed=embed)
 
-        @client.command(name='Mechanic/DamageType')
+        @client.command(name='DamageType')
         async def mech_type(ctx, *arg):
             if(len(arg) == 0):
                 embed = MechanicManager.IndexDamageType(name='Index')
@@ -514,7 +514,7 @@ class BotMain:
 
             await ctx.send(embed=embed)
 
-        @client.command(name='Mechanic/School')
+        @client.command(name='Mech/School')
         async def mech_school(ctx, *arg):
             if(len(arg) == 0):
                 embed = MechanicManager.IndexSchools(name='Index')

@@ -118,18 +118,18 @@ class Response:
     mechanic_data = {
         "Conditions":
         """
-        Ex: ($Mechanic/Condition deafened)
-        $Mechanic/Condition {name}
+        Ex: ($Condition deafened)
+        $Condition {name}
         """,
         "Damage_Types":
         """
-        Ex: ($Mechanic/DamageType force)
-        $Mechanic/DamageType {name}
+        Ex: ($DamageType force)
+        $DamageType {name}
         """,
         "Schools":
         """
-        Ex: ($Mechanic/School abjuration)
-        $Mechanic/School {name}
+        Ex: ($Mech/School abjuration)
+        $Mech/School {name}
         """
     }
     rules_data = {
