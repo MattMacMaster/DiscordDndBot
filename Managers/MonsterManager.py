@@ -11,6 +11,7 @@ import discord
 import requests
 from datetime import datetime
 import json
+import math
 
 
 class MonsterManager:
@@ -65,52 +66,56 @@ class MonsterManager:
 
             embed.add_field(
                 name='CR', value=value['challenge_rating'], inline=False)
+
             if('special_abilities' in value):
-                if(len(monster.specialHandler(
-                        value['special_abilities'])) >= 2048):
-                    embed.add_field(name='Special Abilites', value=monster.specialHandler(
-                        value['special_abilities'])[0:1024], inline=False)
-                    embed.add_field(name='Cont..', value=monster.specialHandler(
-                        value['special_abilities'])[1024:2048], inline=False)
-                    embed.add_field(name='Cont..', value=monster.specialHandler(
-                        value['special_abilities'])[2048:], inline=False)
-                elif(len(monster.specialHandler(
-                        value['special_abilities'])) >= 1024):
-                    embed.add_field(name='Actions', value=monster.specialHandler(
-                        value['special_abilities'])[0:1024], inline=False)
-                    embed.add_field(name='Cont..', value=monster.specialHandler(
-                        value['special_abilities'])[1024:], inline=False)
-                else:
-                    embed.add_field(name='Special Abilites', value=monster.specialHandler(
-                        value['special_abilities']), inline=False)
+                print(value['special_abilities'])
 
-            if(len(monster.attackHandler(value['actions'])) >= 2048):
-                embed.add_field(name='Actions', value=monster.attackHandler(
-                    value['actions'])[0:1024], inline=False)
-                embed.add_field(name='Cont..', value=monster.attackHandler(
-                    value['actions'])[1024:2048], inline=False)
-                embed.add_field(name='Cont..', value=monster.attackHandler(
-                    value['actions'])[2048:], inline=False)
-            elif(len(monster.attackHandler(value['actions'])) >= 1024):
-                embed.add_field(name='Actions', value=monster.attackHandler(
-                    value['actions'])[0:1024], inline=False)
-                embed.add_field(name='Cont..', value=monster.attackHandler(
-                    value['actions'])[1024:], inline=False)
-            else:
-                embed.add_field(name='Actions', value=monster.attackHandler(
-                    value['actions']), inline=False)
+                counter = math.ceil(
+                    len(monster.specialHandler(value['special_abilities'])) / 1024)
+                counter2 = 0
+                while(counter > counter2):
+                    if(counter2 == 0):
+                        temp = counter2 + 1
+                        embed.add_field(name='Specail Abilities', value=monster.specialHandler(
+                            value['special_abilities'])[counter2 * 1000:temp*1000], inline=False)
+                    else:
+                        temp = counter2 + 1
+                        embed.add_field(name='Cont...', value=monster.specialHandler(
+                            value['special_abilities'])[counter2 * 1000:temp*1000], inline=False)
+                    counter2 = counter2 + 1
+
+            if('actions' in value):
+                print(value['actions'])
+
+                counter = math.ceil(
+                    len(monster.attackHandler(value['actions'])) / 1024)
+                counter2 = 0
+                while(counter > counter2):
+                    if(counter2 == 0):
+                        temp = counter2 + 1
+                        embed.add_field(name='Actions', value=monster.attackHandler(
+                            value['actions'])[counter2 * 1000:temp*1000], inline=False)
+                    else:
+                        temp = counter2 + 1
+                        embed.add_field(name='Cont...', value=monster.attackHandler(
+                            value['actions'])[counter2 * 1000:temp*1000], inline=False)
+                    counter2 = counter2 + 1
+
             if('legendary_actions' in value):
-
-                if(len(monster.specialHandler(
-                        value['legendary_actions'])) >= 1024):
-                    embed.add_field(name='Legendary Actions', value=monster.specialHandler(
-                        value['legendary_actions'])[0:1024], inline=False)
-                    embed.add_field(name='Cont..', value=monster.specialHandler(
-                        value['legendary_actions'])[1024:], inline=False)
-                else:
-                    embed.add_field(name='Legendary Actions', value=monster.specialHandler(
-                        value['legendary_actions']), inline=False)
-
+                print(value['legendary_actions'])
+                counter = math.ceil(
+                    len(monster.specialHandler(value['legendary_actions'])) / 1024)
+                counter2 = 0
+                while(counter > counter2):
+                    if(counter2 == 0):
+                        temp = counter2 + 1
+                        embed.add_field(name='legendary_actions', value=monster.specialHandler(
+                            value['legendary_actions'])[counter2 * 1000:temp*1000], inline=False)
+                    else:
+                        temp = counter2 + 1
+                        embed.add_field(name='Cont...', value=monster.specialHandler(
+                            value['legendary_actions'])[counter2 * 1000:temp*1000], inline=False)
+                    counter2 = counter2 + 1
             embed.timestamp = datetime.utcnow()
             embed.set_footer(text='MattMaster Bots: Dnd')
             return embed
